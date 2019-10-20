@@ -29,7 +29,7 @@ class Question {
         nextQuestionIdToUse++;
         this.isOrganizationQuestion = orgQuestion;
     }
-    
+
     setId(id) {
         this.id = id;
     }
@@ -114,7 +114,7 @@ function loadDefaultQuestions() {
     default4.options = [constructOptionObject("His", "his"), constructOptionObject("Her", "her"), constructOptionObject("Their", "their")];
     questions.push(default4);
     var orgQuestion = new Question("Custom", "What organizations are you applying to?", "<!ORGANIZATION>");
-    orgQuestion.options = [constructOptionObject("Organization", "", "<!ORG>")];  
+    orgQuestion.options = [constructOptionObject("Organization", "", "<!ORG>")];
     questions.push(orgQuestion);
 
 }
@@ -132,7 +132,7 @@ function changeText() {
 
         reader.readAsDataURL(files[0]);
     }
-    
+
 }
 
 function changeFooterText() {
@@ -148,7 +148,7 @@ function changeFooterText() {
 
         reader.readAsDataURL(files[0]);
     }
-    
+
 }
 
 window.onclick = function (event) {
@@ -161,7 +161,7 @@ window.onclick = function (event) {
 function displayQuestions() {
     // grab the container that will hold all questions
     var container = document.getElementById(QUESTIONS_CONTAINER_ID);
-    
+
     // fill in with questions
     container.innerHTML = "";
     for (var i = 0; i < questions.length; i++) {
@@ -169,7 +169,7 @@ function displayQuestions() {
     }
 
     let list = document.getElementById(QUESTIONS_CONTAINER_ID);
-    //Sortable.create(list);
+    // Sortable.create(list);
 }
 
 /**
@@ -207,7 +207,7 @@ function getQuestionHTML(q) {
     html += (q.optional ? "" : "checked");
     html += ">" + "</p></div>";
 
-    // question box  
+    // question box
     html += [ "<div class=\"question-container\"> <b>Question:</b>" +
     getTextAreaHTML(placeholder, q.value) +
     multiple_choice_fields_html ];
@@ -221,7 +221,7 @@ function getQuestionHTML(q) {
 
     return html;
 }
-   
+
 // Note: the html needs to be nested within a question-container element in order to properly work
 function getMultipleChoiceFieldsHTML(q) {
     if (q.type !== "Radio Button" && q.type !== "Checkbox" && q.type !== "Custom") return "";
@@ -359,7 +359,7 @@ function getQuestions() {
     var updatedQuestions = [];
     var newQuestionIndex = 0;
 
-    for(var i=0; i<sortableQuestionsHTML.length; i++){      
+    for(var i=0; i<sortableQuestionsHTML.length; i++){
         var errorContainerHTML = sortableQuestionsHTML[i].getElementsByClassName("error-container");
         var questionsOuterContainer = errorContainerHTML[0].getElementsByClassName("question-outer-container");
         var newQuestion = new Question(questions[i].type, questions[i].value, questions[i].tag, questions[i].optional, questions[i].isOrganizationQuestion);
@@ -475,7 +475,7 @@ function updateQuestions() {
 
         question.optional = !questionEl.querySelector("[type='checkbox']").checked;
 
-        var multipleChoices = questionEl.querySelectorAll("[class='multiple-choice-container'");
+        var multipleChoices = questionEl.querySelectorAll("[class='multiple-choice-container']");
         for (var j = 0; j < multipleChoices.length; j++) {
             var mc = multipleChoices[j];
 
@@ -493,7 +493,7 @@ function deleteQuestion(id) {
     for (var i = 0; i < questions.length; i++) {
         if (questions[i].id == id) {
             questions.splice(i, 1);
-            // 
+            //
             break;
         }
     }

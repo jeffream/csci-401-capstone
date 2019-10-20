@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/template-editor.js" id="<%= id %>"
             letterheadImgData="<%= letterheadImage %>" footerImgData="<%= footerImage %>" saveSwitchData="<%= saveSwitch %>"></script>
-    <script src="//rubaxa.github.io/Sortable/Sortable.js"></script>
+    <script src="//sortablejs.github.io/Sortable/Sortable.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.1/trix.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.1/trix.js"></script>
 
@@ -77,7 +77,7 @@
                     <input id="submit" type="submit" name="Submit"/>
                 </form>
             </div>
-        </div>  
+        </div>
 
 
         <h2 id="custom-questions" class="section-header">Custom Questions</h2>
@@ -87,14 +87,14 @@
         <div class="flex-display all-tags-cont">
             <h2 id="tags-heading-main" class="section-header">Tags</h2>
             <div class="flex1">
-                <p id="tag-heading">&lt!TAG_NAME&gt in the letter will be replaced by the corresponding question's answer. 
+                <p id="tag-heading">&lt!TAG_NAME&gt in the letter will be replaced by the corresponding question's answer.
                     Tags can be nested in the replacement text of other questions.</p>
                 <p id="tags-heading">All Tags: </p>
                 <div id="tag-container">
-                    <% for (var q=0; q < questions.length; q++) { %>   
+                    <% for (var q=0; q < questions.length; q++) { %>
                         <% let options = questions[q].options; %>
                         <% if(options) { %>
-                            <% for (var o=0; o < options.length; o++) { %> 
+                            <% for (var o=0; o < options.length; o++) { %>
                                 <% if(options[o].tag) { %>
                                     <button class="popup"  name="tag_buttons" value ="<%= options[o].tag %>"><%= options[o].tag %>
                                         <span class="popup-text">
@@ -112,11 +112,11 @@
                             </button>
                         <% } %>
                     <% } %>
-                    <br/>   
-                </div> 
+                    <br/>
+                </div>
                 <br>
 
-            </div> 
+            </div>
         </div>
 
         <div class="error-container">
@@ -127,16 +127,18 @@
                 </div>
             </div>
         </div>
-        
+
         <br/><br/>
-        <%  if (typeof saveSwitch == "boolean") { 
+        <%  if (typeof saveSwitch == "boolean") {
             if(saveSwitch){%>
             <div class="flex-row">
+                <script>console.log("matt.TEST1")</script>
                 <button id="save-button" onclick="saveTemplate()">Save</button>
             </div>
-        <% }} else if (typeof saveSwitch == "string") { 
+        <% }} else if (typeof saveSwitch == "string") {
                 if (saveSwitch == "true"){%>
             <div class="flex-row">
+                <script>console.log("matt.TEST2")</script>
                 <button id="save-button" onclick="saveTemplate()">Save</button>
             </div>
         <% }} %>
@@ -183,17 +185,17 @@
         var theDiv = document.getElementById("letter-text-area");
         var content = document.createTextNode(val);
         theDiv.appendChild(content);
-    }); 
+    });
 </script>
 
 
 <script>
 
     var letterContent = document.getElementById("letter-text-area");
-    var firstHalf = ""; 
-    var secondHalf = ""; 
-    var letterContentCursorPos = -1; 
-    
+    var firstHalf = "";
+    var secondHalf = "";
+    var letterContentCursorPos = -1;
+
     letterContent.onclick = function () {
         // creates dummy node to find cursor position
         var target = document.createTextNode("\u0001");
@@ -201,27 +203,27 @@
         var position = letterContent.innerHTML.indexOf("\u0001");
         target.parentNode.removeChild(target);
 
-        letterContentCursorPos = position; 
-        var letterContentInnerHTML = letterContent.innerHTML; 
-        firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos); 
-        secondHalf = letterContentInnerHTML.substring(letterContentCursorPos); 
+        letterContentCursorPos = position;
+        var letterContentInnerHTML = letterContent.innerHTML;
+        firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos);
+        secondHalf = letterContentInnerHTML.substring(letterContentCursorPos);
     };
 
     letterContent.onkeyup = function () {
-        letterContentCursorPos = letterContent.innerHTML.length; 
+        letterContentCursorPos = letterContent.innerHTML.length;
     }
 
     // so you can click tags directly after typing
    $("#letter-text-area").focusout(function () {
-        var letterContentInnerHTML = letterContent.innerHTML; 
-        firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos); 
+        var letterContentInnerHTML = letterContent.innerHTML;
+        firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos);
         secondHalf = letterContentInnerHTML.substring(letterContentCursorPos);
-    }); 
+    });
 
     $(window).click(function (e) {
-        renderAllTagButtons(); 
+        renderAllTagButtons();
     });
-    
+
     function renderAllTagButtons() {
         // clear old tag buttons
         let tagsContainer = document.getElementById("tag-container");
@@ -231,15 +233,15 @@
         // create new tags buttons
         let allQuestions = document.querySelectorAll(".question-container");
         for (var i = 0; i < allQuestions.length; i++) {
-            let currQuestonEle = allQuestions[i]; 
-            let questionText = currQuestonEle.querySelector("[data-type='value']").value; 
+            let currQuestonEle = allQuestions[i];
+            let questionText = currQuestonEle.querySelector("[data-type='value']").value;
             let allTagsInQuestion = currQuestonEle.querySelectorAll("[data-type='tag']");
             for (var j = 0; j < allTagsInQuestion.length; j++) {
                 let currTagValue = allTagsInQuestion[j].value;
                 // create button
                 let tagValue = currTagValue.substring(currTagValue.lastIndexOf("!") + 1, currTagValue.lastIndexOf(">"));
                 if (tagValue) {
-                    let newButton = createTagButton(tagValue, questionText); 
+                    let newButton = createTagButton(tagValue, questionText);
                     tagsContainer.appendChild(newButton);
                 }
             }
@@ -259,37 +261,37 @@
             // if clicked and focused, add append to back
 
             if (letterContentCursorPos === -1) {
-                
+
                 var val = $(this).val();
                 var theDiv = document.getElementById("letter-text-area");
                 var content = document.createTextNode(" " + val);
                 theDiv.appendChild(content);
             } else {
-                var entire = firstHalf + "&lt;!" + tagValue + "&gt;" + secondHalf; 
-                letterContent.innerHTML = entire; 
+                var entire = firstHalf + "&lt;!" + tagValue + "&gt;" + secondHalf;
+                letterContent.innerHTML = entire;
 
-                letterContentCursorPos = -1; 
-                firstHalf = ""; 
-                secondHalf = ""; 
+                letterContentCursorPos = -1;
+                firstHalf = "";
+                secondHalf = "";
             }
             return false;
         };
 
         // create span child
-        let newSpan = createSpanChild(questionText); 
-        newButton.appendChild(newSpan); 
+        let newSpan = createSpanChild(questionText);
+        newButton.appendChild(newSpan);
         newButton.onmouseover = function() {
             newSpan.style.visibility = "visible";
         }
         newButton.onmouseout = function() {
             newSpan.style.visibility = "hidden";
         }
-        
-        return newButton; 
+
+        return newButton;
     }
 
     function createSpanChild(questionText) {
-        let newSpan = document.createElement("span"); 
+        let newSpan = document.createElement("span");
         newSpan.className = "popup-text";
         newSpan.style.visibility = "hidden";
         newSpan.style.width = "200px";
@@ -301,9 +303,8 @@
         newSpan.style.position = "absolute";
         newSpan.style.zIndex = "1";
         newSpan.style.marginLeft = "-100px";
-        newSpan.style.marginTop = "20px"; 
+        newSpan.style.marginTop = "20px";
         newSpan.innerHTML = questionText;
-        return newSpan; 
+        return newSpan;
     }
 </script>
-

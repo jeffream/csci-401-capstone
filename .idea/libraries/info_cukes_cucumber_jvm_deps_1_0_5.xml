@@ -1,0 +1,8 @@
+<component name="libraryTable">
+  <library name="info.cukes:cucumber-jvm-deps:1.0.5">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/info/cukes/cucumber-jvm-deps/1.0.5/cucumber-jvm-deps-1.0.5.jar!/" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

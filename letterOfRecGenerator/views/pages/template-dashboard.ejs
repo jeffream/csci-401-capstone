@@ -57,7 +57,7 @@
             <td class="subtitle_cont">
                 <b class="subtitle">My Recommendation Templates</b>
                 <button class="addBtn" onclick="openModal()">
-                    <img class="icon" src="/images/add_template.png" width="30" height="10">
+                    <img id="recommendation-button" class="icon" src="/images/add_template.png" width="30" height="10">
                 </button>
             </td>
         </tr>
@@ -92,7 +92,7 @@
             <td class="subtitle_cont">
                 <b class="subtitle">My Email Templates</b>
                 <button class="addBtn" onclick="openEmailModal()">
-                    <img class="icon" src="/images/add_email_template.png" width="50" height="70">
+                    <img id= "email-button" class="icon" src="/images/add_email_template.png" width="50" height="70">
                 </button>
             </td>
         </tr>
@@ -131,7 +131,7 @@
         </tr>
     </thead>
     <tbody>
-   
+
         <tr>
             <td>
                 <div class="template-name">Previous template will be replaced. Template can then be selected when previewing letter</div>
@@ -195,6 +195,7 @@
     var email_button = document.getElementById("email-button");
     email_button.innerHTML = '<img src="/images/add_email_template.png" />';
 </script>
+
 <script>
     // Get the modal
     var modal = document.getElementById('myModal');
@@ -213,7 +214,7 @@
     function closeModal() {
         modal.style.display = "none";
     }
-    
+
     function closeEmailModal() {
         modal_email.style.display = "none";
     }

@@ -34,8 +34,8 @@ UserSchema.statics.findUser = function (id, cb) {
 
 UserSchema.statics.createUser = function (id, cb) {
     User.create({id: id, 
-        linkTemplate_subject: 'Invitation to Fill Recommendation Letter Questionairre',
-        linkTemplate_body: 'Please click the following questionaire '}, cb);
+        linkTemplate_subject: 'Invitation to Fill Recommendation Letter Questionnaire',
+        linkTemplate_body: 'Please click the following questionnaire '}, cb);
 };
 
 UserSchema.statics.findOrCreate = function (id, cb) {
@@ -249,9 +249,9 @@ UserSchema.methods.getForm = function (id, cb) {
         match: {_id: id}
     }).exec(function (err, user) {
         if(user.deactivatedForms.length == 1) {
-            cb(err, user.deactivatedForms[0]); 
+            cb(err, user.deactivatedForms[0]);
         } else if (user.forms.length ==1 ){
-            cb(err, user.forms[0]);   
+            cb(err, user.forms[0]);
         } else {
             console.log("problem in getForm");
         }
