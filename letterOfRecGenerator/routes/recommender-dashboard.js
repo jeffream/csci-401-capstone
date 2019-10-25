@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
                 body: req.user.getLinkTemplateBody()
             });
         }
-    }); 
+    });
 });
 
 router.post('/', function (req, res, next) {
@@ -50,7 +50,7 @@ router.post('/', function (req, res, next) {
     var subject = req.body.subject_text;
     var body = req.body.body_text;
     body = body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/\n/gi, '<br>');
-   
+
     if (!toEmail.length) {
         res.render('pages/recommender-dashboard', {
             title: 'RECOMMENDER DASHBOARD',
@@ -61,6 +61,7 @@ router.post('/', function (req, res, next) {
 
     var currentUser = req.user;
     var userId = currentUser._id;
+
     Form.createForm(toEmail, req.user.getTemplate(req.body.templateId), userId, function (err, form) {
         if (err) {
             console.log(`error: ${err}`);
@@ -125,7 +126,7 @@ router.post('/delete', function (req, res, next) {
 
 router.post('/update', function (req, res, next) {
     var user = req.user;
-    
+
     user.update_linkTemplate_subject(req.body.subject, function (err) {
         if (err) {
             console.log("error in update_linkTemplate_subject: " + err);
@@ -143,7 +144,7 @@ router.post('/update', function (req, res, next) {
                 }
             });
         }
-    });   
+    });
 });
 
 module.exports = router;

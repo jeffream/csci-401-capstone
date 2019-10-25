@@ -47,6 +47,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "path-to-regexp": "^2.4.0",
+    "pizzip": "^3.0.6",
     "proxy-addr": "^2.0.5",
     "pstree.remy": "^1.1.7",
     "request": "^2.88.0",

@@ -3,11 +3,11 @@
 <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/archive.css"/>
     <link rel="stylesheet" type="text/css" href="/css/history.css"/>  <!-- for modal -->
     <link rel="stylesheet" type="text/css" href="/css/all.css"/>
     <link rel="stylesheet" type="text/css" href="/css/table.css"/>
     <link rel="stylesheet" type="text/css" href="/css/modal.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/archive.css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -33,235 +33,411 @@
 </div>
 
 <body>
-<header>
-    <% include ../partials/header %>
-</header>
+    <header>
+        <% include ../partials/header %>
+    </header>
 
 
-<div class = "archive">
+    <div class = "archive">
 
-<p class="title"><%= title %></p>
-<br>
-<br>
+    <p class="title"><%= title %></p>
+    <br>
+    <br>
 
-<table class="archive-table">
-    <thead>
-        <td class="center"><p class="archive-title">Archived Recommendations</p></td>
-        <button id ="button-show-hide" onclick="showTable('table1')">+</button>
-    </thead>
-</table>
-
-<div id = "table1" style="display: none;">
-<table  class="archive-table">
-    <thead>
-    <tr>
-        <td>Timestamp</td>
-        <td>Name</td>
-        <td>Organization</td>
-        <td>Template</td>
-        <td class="center">Form Status</td>
-        <td class="icons"></td>
-    </tr>
-    </thead>
-    <tbody>
-    <% if (!forms.length) { %> 
-        <tr>
-            <td colspan="6" style="text-align: center;">No Archived Recommendations</td>
-        </tr>
-    <%   } else {
-         for (var form of forms) { %>
-    <tr>
-        <% if (!form.meta.submitted) {%>
-            <td><%= form.meta.sent.toDateString()%><br><%= form.meta.sent.toLocaleTimeString('en-US')%></td>
-        <% } else { %>
-            <td><%= form.meta.submitted.toDateString()%><br><%= form.meta.sent.toLocaleTimeString('en-US')%></td>
-        <% } %>
-        <td><%= form.email %></td>
-        <td><%= form.organization %></td>
-        <td><%= form.template.name %></td>
-        <td class="center">
-                <% if (form.status == 'Sent') { %>
-                <img class="icon" src="/images/red_x.png"/>
-                <% } else { %>
-                <img class="icon" src="/images/green_checkmark.png"/>
-                <% } %>
-        </td>
-        <td class="center">
-            <img class="icon" src="/images/history.png" onclick="openHistory(<%= JSON.stringify({
-                id: form._id
-            }) %>, '<%= form.status %>')"/>
-            <img class="icon clickable" title="Preview Letter" src="/images/preview.png" onclick="openLetterPreview(<%= JSON.stringify({
-                id: form._id 
-            }) %>, '<%= form.status %>')"/>
-        </td>
-    </tr>
-    <% }} %>
-    </tbody>
-</table>
-</div>
-<br>
-<table class="archive-table">
-    <thead>
-        <td class="center"><p class="archive-title">Archived Recommendation Templates</p></td>
-        <button id ="button-show-hide" onclick="showTable('table2')">+</button>
-    </thead>
-</table>
-<div id = "table2" style="display: none;">
-<table class="archive-table">
-    <tbody>
-    <% if (!templates.length)  { %>
-        <tr>
-            <td>
-                <div class="template-name">No Existing Recommendation Template</div>
-            </td>
-        </tr>
-    <% } else {
-        for (var template of templates) { %>
-    <tr>
-        <td>
-            <div class="template-name"><%= template.name %></div>
-            <div class="image-container">
-                <img class="icon" src="/images/preview.png" onclick="editTemplate('<%= template._id %>')"/>
-                <img class="icon" src="/images/restore.png" onclick="restoreTemplate('<%= template._id %>')"/>
-            </div>
-        </td>
-    </tr>
-    <% }} %>
-    </tbody>
-</table>
-</div>
-<br>
-<table class="archive-table">
+    <table class="archive-table">
         <thead>
-        <td class="center"><p class="archive-title">Archived Email Templates</p></td>
-        <button id ="button-show-hide" onclick="showTable('table3')">+</button>
+            <td class="center"><p class="archive-title">Archived Recommendations</p></td>
+            <button id ="button-show-hide" onclick="showTable('table0-div')">+</button>
         </thead>
-</table>
-<div id="table3" style="display: none;">
-<table class="archive-table">
-    <tbody>
-    <% if (!emailtemplates.length)  { %>
-        <tr>
-            <td>
-                <div class="template-name">No Existing letter Template</div>
-            </td>
-        </tr>
-    <% } else {
-        for (var template of emailtemplates) { %>
-    <tr>
-        <td>
-            <div class="template-name"><%= template.title %></div>
-            <div class="image-container">
-                <img class="icon" src="/images/preview.png" onclick="openModal( <%= JSON.stringify(template) %>)"/>
-                <img class="icon" src="/images/restore.png" onclick="restoreEmailTemplate('<%= template._id %>')"/>
+    </table>
+    <div id="table0-div" style="display: none;">
+        <table id="table0" class="archive-table">
+            <thead>
+                <tr>
+                    <td>Timestamp</td>
+                    <td>Name</td>
+                    <td>Organization</td>
+                    <td>Template</td>
+                    <td class="center">Form Status</td>
+                    <td class="icons"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (!forms.length) { %>
+                <tr>
+                    <td colspan="6" style="text-align: center;">No Archived Recommendations</td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <div id="page0">
+            <div id="buttons0">
+                <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
+                <div id="page-numbers0"></div>
+                <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
             </div>
-        </td>
-    </tr>
-    <% }} %>
-    </tbody>
-</table>
-</div>
-</div>
-<script>
+        </div>
+    </div>
 
-     // Get the modal
-     var modal = document.getElementById('myModal');
+    <br>
 
-    // When the user clicks on the button, open the modal
-    function openModal(email) {
-        var emailNameEle = document.getElementById("email-template-name");
-        emailNameEle.innerHTML = email.title; 
+    <table class="archive-table">
+        <thead>
+            <td class="center"><p class="archive-title">Archived Recommendation Templates</p></td>
+            <button id ="button-show-hide" onclick="showTable('table1-div')">+</button>
+        </thead>
+    </table>
+    <div id = "table1-div" style="display: none;">
+        <table id="table1" class="archive-table">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (!templates.length) { %>
+                <tr>
+                    <td colspan="6" style="text-align: center;"><div class="template-name">No Archived Recommendation Templates</div></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <div id="page1">
+            <div id="buttons1">
+                <button onclick="javascript:prevPage(1)" id="button-prev1">Prev</button>
+                <div id="page-numbers1"></div>
+                <button onclick="javascript:nextPage(1)" id="button-next1">Next</button>
+            </div>
+        </div>
+    </div>
 
-        $('#modal-subject',$('#myModal')).val(email.subject);
-        $('#modal-body',$('#myModal')).val(email.body_text);
-        modal.style.display = "block";
-    }
+    <br>
 
-    // When the user clicks on <span> (x), close the modal
-    function closeModal() {
-        modal.style.display = "none";
-    }
+    <table class="archive-table">
+        <thead>
+            <td class="center"><p class="archive-title">Archived Email Templates</p></td>
+            <button id ="button-show-hide" onclick="showTable('table2-div')">+</button>
+        </thead>
+    </table>
+    <div id="table2-div" style="display: none;">
+        <table id="table2" class="archive-table">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+            <% if (!emailtemplates.length) { %>
+                <tr>
+                    <td>
+                        <div class="template-name">No Existing letter Template</div>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <div id="page2">
+            <div id="buttons2">
+                <button onclick="javascript:prevPage(2)" id="button-prev2">Prev</button>
+                <div id="page-numbers2"></div>
+                <button onclick="javascript:nextPage(2)" id="button-next2">Next</button>
+            </div>
+        </div>
+    </div>
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
+    <script>
+        var current_page = [1,1,1];
+        var records_per_page = 10;
+        var data = [
+            JSON.parse('<%- JSON.stringify(forms) %>'),
+            JSON.parse('<%- JSON.stringify(templates) %>'),
+            JSON.parse('<%- JSON.stringify(emailtemplates) %>')
+        ];
+
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // When the user clicks on the button, open the modal
+        function openModal(email) {
+            var emailNameEle = document.getElementById("email-template-name");
+            emailNameEle.innerHTML = email.title;
+
+            $('#modal-subject',$('#myModal')).val(email.subject);
+            $('#modal-body',$('#myModal')).val(email.body_text);
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        function closeModal() {
             modal.style.display = "none";
         }
-    }
 
-    function openHistory(params) {
-        // Check to see if the status is green, if not then show error dialog
-        window.location.href = getDestinationRoute('http://localhost:3000/history', params);
-    }
-
-    // When the user clicks the preview icon, take them to the letter preview page.
-    function openLetterPreview(params, status) {
-        // Check to see if the status is green, if not then show error dialog
-        if(status === 'Sent'){
-            window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
-        } else {
-            window.location.href = getDestinationRoute('http://localhost:3000/letter-preview', params);
-        }  
-    }
-
-    function editTemplate(id) {
-        $.ajax({
-            url: 'http://localhost:3000/template-editor/deactivated-edit',
-            data: {id},
-            type: 'GET',
-            complete: function (data) {
-                var params = data.responseJSON;
-                console.log('complete');
-                window.location.href = getDestinationRoute('http://localhost:3000/template-editor', params);
-            },
-            error: function () {
-                console.log('error');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
-        });
-    }
-
-    function restoreTemplate(id) {
-        $.ajax({
-            url: 'http://localhost:3000/archive/restore-template',
-            data: {id},
-            type: 'POST',
-            complete: function () {
-                console.log('complete');
-                window.location.reload(false);
-            },
-            error: function () {
-                console.log('error');
-            }
-        });
-    }
-
-    function restoreEmailTemplate(id) {
-        $.ajax({
-            url: 'http://localhost:3000/archive/restore-email-template',
-            data: {id},
-            type: 'POST',
-            complete: function () {
-                console.log('complete');
-                window.location.reload(false);
-            },
-            error: function () {
-                console.log('error');
-            }
-        });
-    }
-
-    function getDestinationRoute(address, params) {
-        return address + '?' + $.param(params);
-    }
-
-    function showTable(id){
-        var x = document.getElementById(id);
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
         }
-    }
-</script>
+
+        function openHistory(params) {
+            // Check to see if the status is green, if not then show error dialog
+            window.location.href = getDestinationRoute('http://localhost:3000/history', params);
+        }
+
+        // When the user clicks the preview icon, take them to the letter preview page.
+        function openLetterPreview(params, status) {
+            // Check to see if the status is green, if not then show error dialog
+            if(status === 'Sent'){
+                window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
+            } else {
+                window.location.href = getDestinationRoute('http://localhost:3000/letter-preview', params);
+            }
+        }
+
+        function editTemplate(id) {
+            $.ajax({
+                url: 'http://localhost:3000/template-editor/deactivated-edit',
+                data: {id},
+                type: 'GET',
+                complete: function (data) {
+                    var params = data.responseJSON;
+                    console.log('complete');
+                    window.location.href = getDestinationRoute('http://localhost:3000/template-editor', params);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+        function restoreTemplate(id) {
+            $.ajax({
+                url: 'http://localhost:3000/archive/restore-template',
+                data: {id},
+                type: 'POST',
+                complete: function () {
+                    console.log('complete');
+                    window.location.reload(false);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+        function restoreEmailTemplate(id) {
+            $.ajax({
+                url: 'http://localhost:3000/archive/restore-email-template',
+                data: {id},
+                type: 'POST',
+                complete: function () {
+                    console.log('complete');
+                    window.location.reload(false);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+        function getDestinationRoute(address, params) {
+            return address + '?' + $.param(params);
+        }
+
+        function showTable(id){
+            var x = document.getElementById(id);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        // Decrement page number
+        function prevPage(tableNumber)
+        {
+            if (current_page[tableNumber] > 1) {
+                changePage(tableNumber, current_page[tableNumber] - 1);
+            }
+        }
+
+        // Increment page number
+        function nextPage(tableNumber)
+        {
+            if (current_page[tableNumber] < numPages(tableNumber)) {
+                changePage(tableNumber, current_page[tableNumber] + 1);
+            }
+        }
+
+        // Return total number of pages
+        function numPages(tableNumber)
+        {
+            return Math.ceil(data[tableNumber].length / records_per_page);
+        }
+
+        // Change to the page number specified by the page parameter
+        function changePage(tableNumber, page)
+        {
+            // Validate page
+            if (page < 1) page = 1;
+            if (page > numPages(tableNumber)) page = numPages(tableNumber);
+
+            current_page[tableNumber] = page;
+
+            // Enable/disable buttons
+            setPageButtons(tableNumber);
+
+            if (!data[tableNumber].length) {
+                // Exit function if there are no recommendations to show
+                return;
+            }
+
+            // Clear old table
+            clearTable(tableNumber);
+
+            // Generate new table
+            generateTable(tableNumber);
+        }
+
+        function clearTable(tableNumber) {
+            var table = document.getElementById("table" + tableNumber);
+
+            for (var i = table.rows.length - 1; i > 0; i--)
+            {
+                table.deleteRow(i);
+            }
+        }
+
+        function generateTable(tableNumber) {
+            var row_count = 1;
+
+            for (var i = (current_page[tableNumber] - 1) * records_per_page;
+                    i < (current_page[tableNumber] * records_per_page)
+                    && i < data[tableNumber].length; i++) {
+                generateRow(row_count, i, tableNumber);
+                row_count++;
+            }
+        }
+
+        function generateRow(row_count, i, tableNumber) {
+            console.log(row_count);
+            if (tableNumber == 0) {
+                generateRecRow(row_count, i);
+            } else if (tableNumber == 1) {
+                generateRecTemplateRow(row_count, i);
+            } else if (tableNumber == 2) {
+                generateEmailTemplateRow(row_count, i);
+            }
+        }
+
+        function generateRecRow(row_count, i) {
+            var table = document.getElementById("table0");
+            var row = table.insertRow(row_count);
+            var cells = [row.insertCell(0)];
+
+            for (var j = 1; j < 6; j++) {
+                cells.push(row.insertCell(j));
+            }
+
+            if (!data[0][i].meta.submitted) {
+                cells[0].innerHTML =
+                    (new Date(data[0][i].meta.sent)).toDateString()
+                    +"<br>"
+                    +(new Date(data[0][i].meta.sent)).toLocaleTimeString('en-US');
+            } else {
+                cells[0].innerHTML =
+                    (new Date(data[0][i].meta.submitted)).toDateString()
+                    +"<br>"
+                    +(new Date(data[0][i].meta.sent)).toLocaleTimeString('en-US');
+            }
+
+            cells[1].innerHTML = data[0][i].email;
+            cells[2].innerHTML = data[0][i].organization;
+            cells[3].innerHTML = data[0][i].template.name;
+            if (data[0][i].status == 'Sent') {
+                cells[4].innerHTML = '<img class="icon" src="/images/red_x.png">';
+            } else {
+                cells[4].innerHTML = '<img class="icon" src="/images/green_checkmark.png">';
+            }
+            cells[4].classList.add("center");
+            cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
+                + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+                + ")'>";
+            cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' onclick='openLetterPreview("
+                + JSON.stringify({id: data[0][i]._id})
+                + ", \"" + data[0][i].status + "\")'>";
+
+            cells[5].classList.add("center");
+        }
+
+        function generateRecTemplateRow(row_count, i) {
+            var table = document.getElementById("table1");
+            var row = table.insertRow(row_count);
+            var cells = [row.insertCell(0), row.insertCell(1)];
+
+            cells[0].innerHTML = data[1][i].name;
+            cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' onclick='editTemplate(\"" + data[1][i]._id + "\")'/>";
+            cells[1].innerHTML += "<img class='icon' src='/images/restore.png' onclick='restoreTemplate(\"" + data[1][i]._id + "\")'/>";
+        }
+
+        function generateEmailTemplateRow(row_count, i) {
+            var table = document.getElementById("table2");
+            var row = table.insertRow(row_count);
+            var cells = [row.insertCell(0), row.insertCell(1)];
+
+            cells[0].innerHTML = data[2][i].title;
+            cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' onclick='openModal(" + JSON.stringify(data[2][i]) + ")'/>";
+            cells[1].innerHTML += "<img class='icon' src='/images/restore.png' onclick='restoreEmailTemplate(\"" + data[2][i]._id + "\")'/>"
+        }
+
+        function setPageButtons(tableNumber) {
+            var btn_prev = document.getElementById("button-prev" + tableNumber);
+            var btn_next = document.getElementById("button-next" + tableNumber);
+
+            if (current_page[tableNumber] == 1 || !data[tableNumber].length) {
+                btn_prev.disabled = true;
+            } else {
+                btn_prev.disabled = false;
+            }
+
+            if (current_page[tableNumber] == numPages(tableNumber) || !data[tableNumber].length) {
+                btn_next.disabled = true;
+            } else {
+                btn_next.disabled = false;
+            }
+
+            for (var i = 1; i <= numPages(tableNumber); i++) {
+                if (i == current_page[tableNumber]) {
+                    document.getElementById("page-" + tableNumber + '-' + i).disabled = true;
+                } else {
+                    document.getElementById("page-" + tableNumber + '-' + i).disabled = false;
+                }
+            }
+
+        }
+
+        function createPageButtons(tableNumber) {
+            var page_numbers = document.getElementById("page-numbers" + tableNumber);
+
+            page_numbers.innerHTML = '';
+
+            for (var i = 1; i <= numPages(tableNumber); i++) {
+                page_numbers.innerHTML +=
+                    '<button id="page-' + tableNumber + '-' + i + '" onclick="javascript:changePage('
+                        + tableNumber + ', ' + i + ')">' + i + '</button>';
+            }
+        }
+
+        createPageButtons(0, 1);
+        createPageButtons(1, 1);
+        createPageButtons(2, 1);
+
+        // Show page 1 initially
+        changePage(0, 1);
+        changePage(1, 1);
+        changePage(2, 1);
+    </script>
 </body>
 </html>

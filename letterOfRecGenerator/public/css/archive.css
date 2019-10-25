@@ -1,3 +1,13 @@
+#page0, #page1, #page2 {
+    padding: 20px;
+    display: flex;
+}
+
+#buttons0, #buttons1, #buttons2 {
+    display: flex;
+    margin: auto;
+}
+
 .archive {
     background-color: #FFFFFF;
 }
@@ -31,9 +41,18 @@
 img.icon {
     height: 25px;
     width: 25px;
+    opacity: 1.0;
+
+    margin-left: 5px;
 }
 
 img.clickable {
+    cursor: pointer;
+    transition: 0.8s;
+}
+
+img.clickable:hover {
+    opacity: 0.6;
     cursor: pointer;
 }
 
@@ -69,7 +88,7 @@ img.clickable {
 }
 
 .archive-title {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     font-weight: bold;
     float: left;
 }
@@ -84,8 +103,8 @@ img.clickable {
     height: 300px;
 }
 
-.archive-modal {   
-    margin-top: 5%; 
+.archive-modal {
+    margin-top: 5%;
 }
 
 .archive-table {

@@ -3,10 +3,10 @@
 <head>
     <title>Letter of Recommendation Generator</title>
     <link rel="stylesheet" href="/stylesheets/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/recommender-dashboard.css"/>
     <link rel="stylesheet" type="text/css" href="/css/all.css"/>
     <link rel="stylesheet" type="text/css" href="/css/table.css"/>
     <link rel="stylesheet" type="text/css" href="/css/modal.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/recommender-dashboard.css"/>
 </head>
 <body>
 <header>
@@ -51,79 +51,168 @@
                     <button id = "Save" type="button" onclick="openSaveDefaultEmailModal()" > Save </button>
                 </div>
                 <br>
-                <textarea id="body-text" name="body_text" value = "<%= body%>" ><%= body %></textarea> 
-            </div>         
+                <textarea id="body-text" name="body_text" value = "<%= body%>" ><%= body %></textarea>
+            </div>
             <input class="input-submit" type="submit" value="Send">
         </form>
     </div>
 </div>
 
 <div class="recommendations">
-<% if (templates.length) { %>
-<div class="add-btn" onclick="openModal()">+ Create Recommendation</div>
-<% } %>
-<table>
-    <thead>
-    <tr>
-        <td>Timestamp</td>
-        <td>Name</td>
-        <td>Organization</td>
-        <td>Template</td>
-        <td class="center">Form Status</td>
-        <td class="icons"></td>
-    </tr>
-    </thead>
-    <tbody>
-    <% if (!forms.length) { %> 
-    <tr>
-        <td colspan="6" style="text-align: center;">No Existing Recommendations</td>
-    </tr>
-    <%   } else {
-            for (var form of forms) { %>
-    <tr>
-        <% if (!form.meta.submitted) {%>
-            <td><%= form.meta.sent.toDateString()%><br><%= form.meta.sent.toLocaleTimeString('en-US')%></td>
-        <% } else { %>
-            <td><%= form.meta.submitted.toDateString()%><br><%= form.meta.sent.toLocaleTimeString('en-US')%></td>
-        <% } %>
-        <td><%= form.email %></td>
-        <td class="center"><%= form.organization %></td>
-        <td><%= form.template.name %></td>
-        <td class="center">
-            <% if (form.status == 'Sent') { %>
-            <img class="icon" src="/images/red_x.png"/>
-            <% } else { %>
-            <img class="icon" src="/images/green_checkmark.png"/>
-              <% } %>
-        </td>
-        <td class="center">
-            <img class="icon clickable" title="View History" src="/images/history.png" onclick="openHistory(<%= JSON.stringify({
-                id: form._id, email: form.email
-            }) %>)"/>
-            <% if (form.email_sent == false) { %>
-            <img class="icon clickable" title="Preview Email" src="/images/email_incomplete.png" onclick="openEmailPreview(<%= JSON.stringify({
-                id: form._id, email: form.email
-            }) %>, '<%= form.status %>')"/>
-            <% } else { %>
-            <img class="icon clickable" title="Preview Email" src="/images/email_complete.png" onclick="openEmailPreview(<%= JSON.stringify({
-                id: form._id, email: form.email
-            }) %>, '<%= form.status %>')"/>
+    <% if (templates.length) { %>
+        <div class="add-btn" onclick="openModal()">+ Create Recommendation</div>
+    <% } %>
+    <table id="table">
+        <thead>
+        <tr>
+            <td><a href="javascript:sortByTime()">Timestamp</a></td>
+            <td><a href="javascript:sortByName()">Name</a></td>
+            <td><a href="javascript:sortByOrg()">Organization</a></td>
+            <td><a href="javascript:sortByTemplate()">Template</a></td>
+            <td class="center"><a href="javascript:sortByStatus()">Form Status</a></td>
+            <td class="icons"></td>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+            <% if (!forms.length) { %>
+            <tr>
+                <td colspan="6" style="text-align: center;">No Existing Recommendations</td>
+            </tr>
             <% } %>
-            <img class="icon clickable" title="View Responses" src="/images/response.png" onclick="openResponses(<%= JSON.stringify({
-                id: form._id
-            }) %>, '<%= form.status %>')"/>
-            <img class="icon clickable" title="Preview Letter" src="/images/preview.png" onclick="openLetterPreview(<%= JSON.stringify({
-                id: form._id
-            }) %>, '<%= form.status %>')"/>
-            <img class="icon clickable" title="Delete Letter" src="/images/delete.png" onclick="deleteRow('<%= form._id %>')"/>
-        </td>
-    </tr>
-    <% }} %>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    <div id="page">
+        <div id="buttons">
+            <button onclick="javascript:prevPage()" id="button-prev">Prev</button>
+            <div id="page-numbers"></div>
+            <button onclick="javascript:nextPage()" id="button-next">Next</button>
+        </div>
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+    var current_page = 1;
+    var records_per_page = 10;
+    var forms = JSON.parse('<%- JSON.stringify(forms) %>');
+
+    var timeSortOrder = -1;
+    var nameSortOrder = -1;
+    var orgSortOrder = -1;
+    var templateSortOrder = -1;
+    var statusSortOrder = -1;
+
+    function sortByTime() {
+        timeSortOrder *= -1;
+
+        forms.sort(function(a, b) {
+            var timeA, timeB;
+
+            if (a.meta.submitted) {
+                timeA = a.meta.submitted;
+            } else {
+                timeA = a.meta.sent;
+            }
+
+            if (b.meta.submitted) {
+                timeB = b.meta.submitted;
+            } else {
+                timeB = b.meta.sent;
+            }
+
+            if (timeA == timeB)
+                return 0;
+            if (timeA < timeB)
+                return -1 * timeSortOrder;
+            if (timeA > timeB)
+                return 1 * timeSortOrder;
+        });
+
+        clearTable();
+        generateTable();
+    }
+
+    function sortByName() {
+        nameSortOrder *= -1;
+
+        forms.sort(function(a, b) {
+            if (a.email == b.email)
+                return 0;
+            if (a.email < b.email)
+                return -1 * nameSortOrder;
+            if (a.email > b.email)
+                return 1 * nameSortOrder;
+        });
+
+        clearTable();
+        generateTable();
+    }
+
+    function sortByOrg() {
+        orgSortOrder *= -1;
+
+        forms.sort(function(a, b) {
+            if (a.organization == b.organization)
+                return 0;
+            if (a.organization < b.organization)
+                return -1 * orgSortOrder;
+            if (a.organization > b.organization)
+                return 1 * orgSortOrder;
+        });
+
+        clearTable();
+        generateTable();
+    }
+
+    function sortByTemplate() {
+        templateSortOrder *= -1;
+
+        forms.sort(function(a, b) {
+            if (a.template.name == b.template.name)
+                return 0;
+            if (a.template.name < b.template.name)
+                return -1 * templateSortOrder;
+            if (a.template.name > b.template.name)
+                return 1 * templateSortOrder;
+        });
+
+        clearTable();
+        generateTable();
+    }
+
+    function sortByStatus() {
+        statusSortOrder *= -1;
+
+        forms.sort(function(a, b) {
+            var statusA, statusB;
+
+            if (a.status == 'Complete') {
+                statusA = 1;
+            } else if (a.status == 'Submitted') {
+                statusA = 2;
+            } else if (a.status == 'Sent') {
+                statusA = 3;
+            }
+
+            if (b.status == 'Complete') {
+                statusB = 1;
+            } else if (b.status == 'Submitted') {
+                statusB = 2;
+            } else if (b.status == 'Sent') {
+                statusB = 3;
+            }
+
+
+            if (statusA == statusB)
+                return 0;
+            if (statusA < statusB)
+                return -1 * statusSortOrder;
+            if (statusA > statusB)
+                return 1 * statusSortOrder;
+        });
+
+        clearTable();
+        generateTable();
+    }
 
     // When the user clicks on the button, open the modal
     function openModal() {
@@ -157,7 +246,7 @@
         var body = document.getElementById('body-text').value;
         $.ajax({
                 url: 'http://localhost:3000/recommender-dashboard/update',
-                data: { 
+                data: {
                     subject: subject,
                     body: body
                 },
@@ -188,8 +277,8 @@
             window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
         } else {
             window.location.href = getDestinationRoute('http://localhost:3000/letter-preview', params);
-            
-        }  
+
+        }
     }
 
     // On click for trash icon
@@ -229,12 +318,176 @@
             window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
         } else {
             window.location.href = getDestinationRoute('http://localhost:3000/email-letter-preview', params);
-        }  
+        }
     }
 
     function getDestinationRoute(address, params) {
         return address + '?' + $.param(params);
     }
+
+    // Decrement page number
+    function prevPage()
+    {
+        if (current_page > 1) {
+            changePage(current_page - 1);
+        }
+    }
+
+    // Increment page number
+    function nextPage()
+    {
+        if (current_page < numPages()) {
+            changePage(current_page + 1);
+        }
+    }
+
+    // Return total number of pages
+    function numPages()
+    {
+        var forms = JSON.parse('<%- JSON.stringify(forms) %>');
+        return Math.ceil(forms.length / records_per_page);
+    }
+
+    // Change to the page number specified by the page parameter
+    function changePage(page)
+    {
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+
+        current_page = page;
+
+        // Enable/disable buttons
+        setPageButtons();
+
+        if (!forms.length) {
+            // Exit function if there are no recommendations to show
+            return;
+        }
+
+        // Clear old table
+        clearTable();
+
+        // Generate new table
+        generateTable();
+    }
+
+    function clearTable(table) {
+        var table = document.getElementById("table");
+
+        for (var i = table.rows.length - 1; i > 0; i--)
+        {
+            table.deleteRow(i);
+        }
+    }
+
+    function generateTable() {
+        var row_count = 1;
+
+        for (var i = (current_page - 1) * records_per_page;
+                i < (current_page * records_per_page)
+                && i < forms.length; i++) {
+            generateRow(row_count, i);
+            row_count++;
+        }
+    }
+
+    function generateRow(row_count, i) {
+        var table = document.getElementById("table");
+        var row = table.insertRow(row_count);
+        var cells = [row.insertCell(0)];
+
+        for (var j = 1; j < 6; j++) {
+            cells.push(row.insertCell(j));
+        }
+
+        if (!forms[i].meta.submitted) {
+            cells[0].innerHTML =
+                (new Date(forms[i].meta.sent)).toDateString()
+                +"<br>"
+                +(new Date(forms[i].meta.sent)).toLocaleTimeString('en-US');
+        } else {
+            cells[0].innerHTML =
+                (new Date(forms[i].meta.submitted)).toDateString()
+                +"<br>"
+                +(new Date(forms[i].meta.sent)).toLocaleTimeString('en-US');
+        }
+
+        cells[1].innerHTML = forms[i].email;
+        cells[2].innerHTML = forms[i].organization;
+        cells[3].innerHTML = forms[i].template.name;
+        if (forms[i].status == 'Sent') {
+            cells[4].innerHTML = '<img class="icon" src="/images/red_x.png">';
+        } else {
+            cells[4].innerHTML = '<img class="icon" src="/images/green_checkmark.png">';
+        }
+        cells[4].classList.add("center");
+        cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
+            + JSON.stringify({id: forms[i]._id, email: forms[i].email})
+            + ")'>";
+        if (forms[i].email_sent == false) {
+            cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_incomplete.png' onclick='openEmailPreview("
+                + JSON.stringify({id: forms[i]._id, email: forms[i].email})
+                + ", \"" + forms[i].status + "\")'>";
+        } else {
+            cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_complete.png' onclick='openEmailPreview("
+                + JSON.stringify({id: forms[i]._id, email: forms[i].email})
+                + ", '" + forms[i].status + "\")'>";
+        }
+        cells[5].innerHTML += "<img class='icon clickable' title='View Responses' src='/images/response.png' onclick='openResponses("
+            + JSON.stringify({id: forms[i]._id})
+            + ", \"" + forms[i].status + "\")'>";
+        cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' onclick='openLetterPreview("
+            + JSON.stringify({id: forms[i]._id})
+            + ", \"" + forms[i].status + "\")'>";
+        cells[5].innerHTML += "<img class='icon clickable' title='Delete Letter' src='/images/delete.png' onclick='deleteRow(\""
+            + forms[i]._id + "\")'>";
+
+        cells[5].classList.add("center");
+    }
+
+    function setPageButtons() {
+        var btn_prev = document.getElementById("button-prev");
+        var btn_next = document.getElementById("button-next");
+
+        if (current_page == 1 || !forms.length) {
+            btn_prev.disabled = true;
+        } else {
+            btn_prev.disabled = false;
+        }
+
+        if (current_page == numPages() || !forms.length) {
+            btn_next.disabled = true;
+        } else {
+            btn_next.disabled = false;
+        }
+
+        for (var i = 1; i <= numPages(); i++) {
+            if (i == current_page) {
+                document.getElementById("page-" + i).disabled = true;
+            } else {
+                document.getElementById("page-" + i).disabled = false;
+            }
+        }
+
+    }
+
+    function createPageButtons() {
+        var page_numbers = document.getElementById("page-numbers");
+
+        page_numbers.innerHTML = '';
+
+        for (var i = 1; i <= numPages(); i++) {
+            page_numbers.innerHTML +=
+                '<button id="page-' + i + '" onclick="javascript:changePage('
+                    + i + ')">' + i + '</button>';
+        }
+    }
+
+    createPageButtons();
+
+    // Show page 1 initially
+    changePage(1);
 
     $("#Edit").click(function(e) {
         e.preventDefault();
