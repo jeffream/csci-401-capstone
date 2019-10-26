@@ -23,23 +23,6 @@ then run `mongod`
 ____________________________________________________________________________________________________________________________
 
 
-Restarting/Starting Sessions (old)
-+ To restart/start mongod, attach to mongod session using the above command and run `mongod --port 12345`
-+ To restart/start the project session, attach to the session using the above command and run `npm run devstart`
-
-For the last step, you may need to kill the previous process on port 3000 using the following steps:
-+ Run `sudo lsof -n -i :3000 | grep LISTEN`
-+ Using the second number (the pid) in the result, run `kill ${PID}`
-
-Afterwards, test to see if the app is properly running by accessing `68.181.97.191/login` on your browser.
-
-
-## Deployment (as of Spring 2019) (old)
-Currently, our app is hosted on a server with IP address 68.181.97.191 on port 3000, with the MongoDB instance on the same IP address but at port 12345.
-
-____________________________________________________________________________________________________________________________
-
-
 ## How to Install MongoDB
 1. Go to [this link](https://www.mongodb.com/download-center?_ga=2.34334885.546969976.1519083876-785985683.1517259025#enterprise) and download the compressed files for your respective platform.
 2. Extract the files from the downloaded archive.
@@ -109,4 +92,20 @@ ________________________________________________________________________________
       You should now be able to begin using MongoDB.
       
    
-   
+   ____________________________________________________________________________________________________________________________
+## Spring 2019
+
+Restarting/Starting Sessions (old)
++ To restart/start mongod, attach to mongod session using the above command and run `mongod --port 12345`
++ To restart/start the project session, attach to the session using the above command and run `npm run devstart`
+
+For the last step, you may need to kill the previous process on port 3000 using the following steps:
++ Run `sudo lsof -n -i :3000 | grep LISTEN`
++ Using the second number (the pid) in the result, run `kill ${PID}`
+
+Afterwards, test to see if the app is properly running by accessing `68.181.97.191/login` on your browser.
+
+
+## Deployment (old)
+Currently, our app is hosted on a server with IP address 68.181.97.191 on port 3000, with the MongoDB instance on the same IP address but at port 12345.
+
