@@ -78,7 +78,7 @@ router.post('/', function (req, res, next) {
             email_lines.push('MIME-Version: 1.0');
             email_lines.push('Subject: ' + subject);
             email_lines.push('');
-            var url = encodeURI('http://localhost:3000/form-entry/' + form.getLink());
+            var url = encodeURI('http://128.125.100.147:3000/form-entry/' + form.getLink());
             email_lines.push('<p>' + body + '<a href = "' + url + '"> link</a></p>');
 
             var email = email_lines.join('\r\n').trim();

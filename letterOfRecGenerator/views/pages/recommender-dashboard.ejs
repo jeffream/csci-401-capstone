@@ -247,7 +247,7 @@
         var subject = document.getElementById('subject').value;
         var body = document.getElementById('body-text').value;
         $.ajax({
-                url: 'http://localhost:3000/recommender-dashboard/update',
+                url: 'http://128.125.100.147:3000/recommender-dashboard/update',
                 data: {
                     subject: subject,
                     body: body
@@ -278,7 +278,7 @@
         if(status === 'Sent'){
             window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
         } else {
-            window.location.href = getDestinationRoute('http://localhost:3000/letter-preview', params);
+            window.location.href = getDestinationRoute('http://128.125.100.147:3000/letter-preview', params);
 
         }
     }
@@ -286,7 +286,7 @@
     // On click for trash icon
     function deleteRow(id) {
         $.ajax({
-            url: 'http://localhost:3000/recommender-dashboard/delete',
+            url: 'http://128.125.100.147:3000/recommender-dashboard/delete',
             data: {id},
             type: 'POST',
             complete: function () {
@@ -301,7 +301,7 @@
 
     function openHistory(params) {
         // Check to see if the status is green, if not then show error dialog
-        window.location.href = getDestinationRoute('http://localhost:3000/history', params);
+        window.location.href = getDestinationRoute('http://128.125.100.147:3000/history', params);
     }
 
     function openResponses(params) {
@@ -309,7 +309,7 @@
         if(status === 'Sent'){
             window.alert("Responses cannot be seen because the recommendee has not filled out the form!");
         }else {
-            window.location.href = getDestinationRoute('http://localhost:3000/response', params);
+            window.location.href = getDestinationRoute('http://128.125.100.147:3000/response', params);
         }
     }
 
@@ -319,7 +319,7 @@
         if(status === 'Sent'){
             window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
         } else {
-            window.location.href = getDestinationRoute('http://localhost:3000/email-letter-preview', params);
+            window.location.href = getDestinationRoute('http://128.125.100.147:3000/email-letter-preview', params);
         }
     }
 

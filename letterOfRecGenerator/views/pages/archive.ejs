@@ -336,7 +336,7 @@
 
         function openHistory(params) {
             // Check to see if the status is green, if not then show error dialog
-            window.location.href = getDestinationRoute('http://localhost:3000/history', params);
+            window.location.href = getDestinationRoute('http://128.125.100.147:3000/history', params);
         }
 
         // When the user clicks the preview icon, take them to the letter preview page.
@@ -345,19 +345,19 @@
             if(status === 'Sent'){
                 window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
             } else {
-                window.location.href = getDestinationRoute('http://localhost:3000/letter-preview', params);
+                window.location.href = getDestinationRoute('http://128.125.100.147:3000/letter-preview', params);
             }
         }
 
         function editTemplate(id) {
             $.ajax({
-                url: 'http://localhost:3000/template-editor/deactivated-edit',
+                url: 'http://128.125.100.147:3000/template-editor/deactivated-edit',
                 data: {id},
                 type: 'GET',
                 complete: function (data) {
                     var params = data.responseJSON;
                     console.log('complete');
-                    window.location.href = getDestinationRoute('http://localhost:3000/template-editor', params);
+                    window.location.href = getDestinationRoute('http://128.125.100.147:3000/template-editor', params);
                 },
                 error: function () {
                     console.log('error');
@@ -367,7 +367,7 @@
 
         function restoreTemplate(id) {
             $.ajax({
-                url: 'http://localhost:3000/archive/restore-template',
+                url: 'http://128.125.100.147:3000/archive/restore-template',
                 data: {id},
                 type: 'POST',
                 complete: function () {
@@ -382,7 +382,7 @@
 
         function restoreEmailTemplate(id) {
             $.ajax({
-                url: 'http://localhost:3000/archive/restore-email-template',
+                url: 'http://128.125.100.147:3000/archive/restore-email-template',
                 data: {id},
                 type: 'POST',
                 complete: function () {
