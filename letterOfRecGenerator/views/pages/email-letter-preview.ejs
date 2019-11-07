@@ -76,7 +76,7 @@
         };
 
         $.ajax({
-            url: 'http://128.125.100.147:3000/email-letter-preview',
+            url: 'http://localhost:3000/email-letter-preview',
             data: {
                 id: id,
                 Email: Email
@@ -84,7 +84,7 @@
             type: 'POST',
             complete: function() {
                 console.log('worked');
-                window.location.href = 'http://128.125.100.147:3000/recommender-dashboard';
+                window.location.href = 'http://localhost:3000/recommender-dashboard';
             },
             error: function () {
                 console.log('error')

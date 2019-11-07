@@ -72,7 +72,7 @@ window.onload = function () {
 
     if (id) {
         $.ajax({
-            url: 'http://128.125.100.147:3000/template-editor/template',
+            url: 'http://localhost:3000/template-editor/template',
             data: {id, saveSwitchData},
             type: 'GET',
             success: function (data) {
@@ -286,7 +286,7 @@ function saveTemplate() {
 
     if (id) {
         $.ajax({
-            url: 'http://128.125.100.147:3000/template-editor/update',
+            url: 'http://localhost:3000/template-editor/update',
             data: {
                 id: id,
                 template: template
@@ -298,7 +298,7 @@ function saveTemplate() {
             },
             success: function (data) {
                 console.log('success in SaveTemplate');
-                window.location.href = 'http://128.125.100.147:3000/template-dashboard'
+                window.location.href = 'http://localhost:3000/template-dashboard'
             },
             error: function (err){
                 console.log('error in saveTemplate:' + err);
@@ -312,7 +312,7 @@ function saveTemplate() {
     } else {
         console.log("creating template");
         $.ajax({
-            url: 'http://128.125.100.147:3000/template-editor/create',
+            url: 'http://localhost:3000/template-editor/create',
             data: {template: template},
             type: 'POST',
             complete: function () {
@@ -321,7 +321,7 @@ function saveTemplate() {
             success: function (data) {
                 id = data.id;
                 console.log('success in Creating Template');
-                window.location.href = 'http://128.125.100.147:3000/template-dashboard'
+                window.location.href = 'http://localhost:3000/template-dashboard'
             },
             error: function (err) {
                 console.log('error in saveTemplate:' + err);
