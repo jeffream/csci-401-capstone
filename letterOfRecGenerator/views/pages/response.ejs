@@ -59,7 +59,7 @@
             editedResponses.push(responseHTML[i].innerHTML.trim());
         }
         $.ajax({
-                url: 'http://localhost:3000/response/update',
+                url: 'http://128.125.100.147:80/response/update',
                 data: { 
                     editedResponses: editedResponses,
                     id: id
@@ -67,7 +67,7 @@
                 type: 'GET',
                 complete: function() {
                     console.log('worked for saveEditedAnswers')
-                    window.location.href = 'http://localhost:3000/recommender-dashboard';
+                    window.location.href = 'http://128.125.100.147:80/recommender-dashboard';
                 },
                 error: function () {
                     console.log('error in saveEditedAnswers')

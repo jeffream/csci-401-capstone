@@ -1,3 +1,3 @@
 Given(/^I am on the Letter of Recommendation Login Page$/) do
-	visit 'http://localhost:3000/login'
+	visit 'http://128.125.100.147:80/login'
 end

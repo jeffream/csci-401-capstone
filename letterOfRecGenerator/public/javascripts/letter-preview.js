@@ -20,13 +20,13 @@ var formatted;
 
 function onLoad() {
     $.ajax({
-        url: 'http://localhost:3000/letter-preview/form',
+        url: 'http://128.125.100.147:80/letter-preview/form',
         data: {id},
         type: 'GET',
         success: function (data) {
             form = data;
             $.ajax({
-                url: 'http://localhost:3000/template-editor/template',
+                url: 'http://128.125.100.147:80/template-editor/template',
                 data: {id: data.template._id,
                         saveSwitchData: true},
                 type: 'GET',
@@ -80,7 +80,7 @@ function saveEditModal() {
     editor.deleteInDirection("forward");
 
     $.ajax({
-        url: 'http://localhost:3000/letter-preview/save',
+        url: 'http://128.125.100.147:80/letter-preview/save',
         data: {
             id: id,
             letter: letterHTML
@@ -109,7 +109,7 @@ function downloadLetterOLD() {
     var datepicker = document.querySelectorAll("input[type=date]")[0]
     var date = datepicker.value
     $.ajax({
-        url: 'http://localhost:3000/letter-preview/drive',
+        url: 'http://128.125.100.147:80/letter-preview/drive',
         data: {
             id:id,
             letter: letterHTML,
@@ -118,7 +118,7 @@ function downloadLetterOLD() {
         type: 'POST',
         success: function(d){
             console.log("success in drive")
-            window.location.href = 'http://localhost:3000/recommender-dashboard';
+            window.location.href = 'http://128.125.100.147:80/recommender-dashboard';
         },
         error: function() {
             console.log("error in drive")
@@ -131,7 +131,7 @@ function saveLetter() {
     var idt = document.getElementById("id1").value;
     var date = document.getElementById("theDate").value;
     $.ajax({
-        url: 'http://localhost:3000/letter-preview/templateUpload',
+        url: 'http://128.125.100.147:80/letter-preview/templateUpload',
         data: {
             id:id,
             letter: letterHTML,
@@ -144,7 +144,7 @@ function saveLetter() {
             document.getElementById("downloadButton").style.display = "block";
             document.getElementById("saveButton").style.display = "none";
             alert('Document saved');
-            //window.location.href = 'http://localhost:3000/recommender-dashboard';
+            //window.location.href = 'http://128.125.100.147:80/recommender-dashboard';
         },
         error: function() {
             console.log("error saving letter")
@@ -155,11 +155,11 @@ function saveLetter() {
 function downloadLetter() {
     event.preventDefault();
     $.ajax({
-        url: 'http://localhost:3000/letter-preview/downloads',
+        url: 'http://128.125.100.147:80/letter-preview/downloads',
         type: 'GET',
         success: function(d) {
             console.log("letter download success");
-            window.open('http://localhost:3000/letter-preview/downloads?foo=bar&xxx=yyy');
+            window.open('http://128.125.100.147:80/letter-preview/downloads?foo=bar&xxx=yyy');
         },
         error: function() {
             console.log("letter download error");
@@ -170,14 +170,14 @@ function downloadLetter() {
 
 function test(){
     $.ajax({
-        url: 'http://localhost:3000/letter-preview/test',
+        url: 'http://128.125.100.147:80/letter-preview/test',
         data: {
             id: id
         },
         type: 'POST',
         success: function(d){
             console.log("success in drive")
-            window.location.href = 'http://localhost:3000/recommender-dashboard';
+            window.location.href = 'http://128.125.100.147:80/recommender-dashboard';
         },
         error: function() {
             console.log("error in drive")
@@ -260,7 +260,7 @@ function parseLetter(form) {
 function parseEmailLetter(body) {
 
     $.ajax({
-        url: 'http://localhost:3000/email-letter-preview/emailForm',
+        url: 'http://128.125.100.147:80/email-letter-preview/emailForm',
         data: {id},
         type: 'GET',
         success: function (data) {
@@ -335,7 +335,7 @@ function addEmailHistory() {
     };
 
     $.ajax({
-        url: 'http://localhost:3000/letter-preview/addEmailHistory',
+        url: 'http://128.125.100.147:80/letter-preview/addEmailHistory',
         data: {
             id: id,
             Email: Email
@@ -347,7 +347,7 @@ function addEmailHistory() {
         success: function (data) {
             id = data.id;
             console.log('addEmailHistory success');
-            window.location.href = 'http://localhost:3000/history'
+            window.location.href = 'http://128.125.100.147:80/history'
         },
         error: function () {
             console.log('addEmailHistory error');
