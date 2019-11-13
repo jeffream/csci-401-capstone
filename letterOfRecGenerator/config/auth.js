@@ -1,8 +1,8 @@
 var {google} = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 
-var GOOGLE_CLIENT_ID = "274852723407-v426d79gb3637uih6rk315ld5quo4agb.apps.googleusercontent.com";
-var GOOGLE_CLIENT_SECRET = "uvHdD3nN7oj20OdsX09_3teK";
+var GOOGLE_CLIENT_ID = "901758022243-s3lganllgkco92plhqd3nu5htls9lqgo.apps.googleusercontent.com";
+var GOOGLE_CLIENT_SECRET = "53uVjQJxwOZeScCV_yQrlf1H";
 var GOOGLE_CALLBACK = 'http://recommendation.usc.edu/auth/google/callback';
 
 var oauth2Client = new OAuth2(
