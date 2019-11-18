@@ -13,7 +13,7 @@ Team members:
 + Open another console/terminal window
 + Enter mongod to have mongo running
 + Open up a browser tab to `127.0.0.1:3000` (make sure port 3000 was not already occupied)
-+ Run `npm install` from `\letterOfRecGenerator` and also specifically run `npm install docxtemplater` and `npm install jszip2`
++ From `\letterOfRecGenerator`, run `npm install` and `npm update`
 
 ## How to Run on Server
 + Open console/terminal
