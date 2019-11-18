@@ -7,10 +7,23 @@ Team members:
 + Matt van Niekerk – vannieke@usc.edu
 
 ## How to Run Locally
-+ Enter letterOfRecGenerator folder
++ Open console/terminal
++ Navigate to letterOfRecGenerator folder (ex: cd path/to/letterOfRecGenerator)
 + Run `DEBUG=letterOfRecGenerator:* npm run devstart` (for debug on console) or `npm run devstart`
++ Open another console/terminal window
++ Enter mongod to have mongo running
 + Open up a browser tab to `127.0.0.1:3000` (make sure port 3000 was not already occupied)
 + Run `npm install` from `\letterOfRecGenerator` and also specifically run `npm install docxtemplater` and `npm install jszip2`
+
+## How to Run on Server
++ Open console/terminal
++ Enter in: ssh uscadmin@128.125.100.147
++ Enter password credential
++ Open another console/terminal window
++ Enter in: ssh uscadmin@128.125.100.147
++ Enter password credential
++ Enter mongod to have mongo running
++ Open up a browser tab to recommendations.usc.edu
 
 ## How to Restart Session (added Fall 2019)
 + Run `npm update` from `\letterOfRecGenerator`
