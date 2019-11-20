@@ -4,12 +4,35 @@
         <title><%= title %></title>
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/login.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
         <h1 class="title"><%= title %></h1>
-        <button class="sign-in-button" onclick="location.href='<%= url %>';">
+        <!-- <button class="sign-in-button" onclick="location.href='<%= url %>';">
             <img src="/images/google_logo.svg" height="24" width="24"/>
             <span>Sign in with Google</span>
-        </button>
+        </button> -->
+        <div class="login-page">
+            <div class="form">
+                <form class="register-form" method="post" action="/">
+                    <input type="text" name="email" placeholder="email"/>
+                    <input type="password" name="password" placeholder="password"/>
+                    <input type="password" name="passwordConf" placeholder="confirm password"/>
+                    <button onclick="location.href='<%= url %>';">create</button>
+                    <p class="message">Already registered? <a class="switch" href="#">Sign In</a></p>
+                </form>
+                <form class="login-form" method="post" action="/">
+                    <input type="text" name="email" placeholder="email"/>
+                    <input type="password" name="password" placeholder="password"/>
+                    <button onclick="location.href='<%= url %>';">login</button>
+                    <p class="message">Not registered? <a class="switch" href="#">Create an account</a></p>
+                </form>
+            </div>
+        </div>
     </body>
+    <script>
+        $('.message a').click(function(){
+            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        });
+    </script>
 </html>

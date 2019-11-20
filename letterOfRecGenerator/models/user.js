@@ -2,11 +2,23 @@ var db = require('../db');
 var Form = require("./form");
 var Template = require("./template");
 var Email = require("./email");
+var bcrypt = require("bcrypt");
 
 var Schema = db.Schema;
 
 var UserSchema = new Schema({
     id: String,
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+
     displayName: String,
     accessToken: String,
     templates: [Template.schema],
@@ -32,8 +44,20 @@ UserSchema.statics.findUser = function (id, cb) {
     });
 };
 
-UserSchema.statics.createUser = function (id, cb) {
-    User.create({id: id,
+//hashing a password before saving it to the database
+UserSchema.pre('save', function (next) {
+    var user = this;
+    bcrypt.hash(user.password, 10, function (err, hash){
+        if (err) {
+            return next(err);
+        }
+        user.password = hash;
+        next();
+    })
+});
+
+UserSchema.statics.createUser = function (userData, cb) {
+    User.create({id: userData.email, email: userData.email, password: userData.password,
         linkTemplate_subject: 'Invitation to Fill Recommendation Letter Questionnaire',
         linkTemplate_body: 'Please click the following questionnaire '}, cb);
 };
