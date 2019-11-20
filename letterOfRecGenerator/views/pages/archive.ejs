@@ -54,11 +54,11 @@
         <table id="table0" class="archive-table">
             <thead>
                 <tr>
-                    <td>Timestamp</td>
-                    <td>Name</td>
-                    <td>Organization</td>
-                    <td>Template</td>
-                    <td class="center">Form Status</td>
+                    <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
+                    <td><a href="javascript:sortByEmail(0)">Name</a></td>
+                    <td><a href="javascript:sortByOrg(0)">Organization</a></td>
+                    <td><a href="javascript:sortByTemplate(0)">Template</a></td>
+                    <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
                     <td class="icons"></td>
                 </tr>
             </thead>
@@ -91,7 +91,7 @@
         <table id="table1" class="archive-table">
             <thead>
                 <tr>
-                    <td>Name</td>
+                    <td><a href="javascript:sortByName(1)">Name</a></td>
                     <td></td>
                 </tr>
             </thead>
@@ -124,7 +124,7 @@
         <table id="table2" class="archive-table">
             <thead>
                 <tr>
-                    <td>Name</td>
+                    <td><a href="javascript:sortByTitle(2)">Name</a></td>
                     <td></td>
                 </tr>
             </thead>
@@ -155,6 +155,159 @@
             JSON.parse('<%- JSON.stringify(templates) %>'),
             JSON.parse('<%- JSON.stringify(emailtemplates) %>')
         ];
+
+        var timeSortOrder = -1;
+        var emailSortOrder = -1;
+        var orgSortOrder = -1;
+        var templateSortOrder = -1;
+        var statusSortOrder = -1;
+        var nameSortOrder = -1;
+        var titleSortOrder = -1;
+
+        function sortByTime(tableNumber) {
+            timeSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                var timeA, timeB;
+
+                if (a.meta.submitted) {
+                    timeA = a.meta.submitted;
+                } else {
+                    timeA = a.meta.sent;
+                }
+
+                if (b.meta.submitted) {
+                    timeB = b.meta.submitted;
+                } else {
+                    timeB = b.meta.sent;
+                }
+
+                if (timeA == timeB)
+                    return 0;
+                if (timeA < timeB)
+                    return -1 * timeSortOrder;
+                if (timeA > timeB)
+                    return 1 * timeSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByEmail(tableNumber) {
+            emailSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.email == b.email)
+                    return 0;
+                if (a.email < b.email)
+                    return -1 * emailSortOrder;
+                if (a.email > b.email)
+                    return 1 * emailSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByOrg(tableNumber) {
+            orgSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.organization == b.organization)
+                    return 0;
+                if (a.organization < b.organization)
+                    return -1 * orgSortOrder;
+                if (a.organization > b.organization)
+                    return 1 * orgSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByTemplate(tableNumber) {
+            templateSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.template.name == b.template.name)
+                    return 0;
+                if (a.template.name < b.template.name)
+                    return -1 * templateSortOrder;
+                if (a.template.name > b.template.name)
+                    return 1 * templateSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByStatus(tableNumber) {
+            statusSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                var statusA, statusB;
+
+                if (a.status == 'Complete') {
+                    statusA = 1;
+                } else if (a.status == 'Submitted') {
+                    statusA = 2;
+                } else if (a.status == 'Sent') {
+                    statusA = 3;
+                }
+
+                if (b.status == 'Complete') {
+                    statusB = 1;
+                } else if (b.status == 'Submitted') {
+                    statusB = 2;
+                } else if (b.status == 'Sent') {
+                    statusB = 3;
+                }
+
+
+                if (statusA == statusB)
+                    return 0;
+                if (statusA < statusB)
+                    return -1 * statusSortOrder;
+                if (statusA > statusB)
+                    return 1 * statusSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByName(tableNumber) {
+            nameSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.name == b.name)
+                    return 0;
+                if (a.name < b.name)
+                    return -1 * nameSortOrder;
+                if (a.name > b.name)
+                    return 1 * nameSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByTitle(tableNumber) {
+            titleSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.title == b.title)
+                    return 0;
+                if (a.title < b.title)
+                    return -1 * titleSortOrder;
+                if (a.title > b.title)
+                    return 1 * titleSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
 
         // Get the modal
         var modal = document.getElementById('myModal');
@@ -314,21 +467,34 @@
             var row_count = 1;
 
             for (var i = (current_page[tableNumber] - 1) * records_per_page;
-                    i < (current_page[tableNumber] * records_per_page)
-                    && i < data[tableNumber].length; i++) {
+                    i < (current_page[tableNumber] * records_per_page); i++) {
                 generateRow(row_count, i, tableNumber);
                 row_count++;
             }
         }
 
         function generateRow(row_count, i, tableNumber) {
-            console.log(row_count);
-            if (tableNumber == 0) {
-                generateRecRow(row_count, i);
-            } else if (tableNumber == 1) {
-                generateRecTemplateRow(row_count, i);
-            } else if (tableNumber == 2) {
-                generateEmailTemplateRow(row_count, i);
+            if (i < data[tableNumber].length) {
+                if (tableNumber == 0) {
+                    generateRecRow(row_count, i);
+                } else if (tableNumber == 1) {
+                    generateRecTemplateRow(row_count, i);
+                } else if (tableNumber == 2) {
+                    generateEmailTemplateRow(row_count, i);
+                }
+            } else {
+                generateBlankRow(row_count, tableNumber);
+            }
+        }
+
+        function generateBlankRow(row_count, tableNumber) {
+            var table = document.getElementById("table" + tableNumber);
+            var row = table.insertRow(row_count);
+            var cells = [];
+
+            for (var j = 0; j < 6; j++) {
+                cells.push(row.insertCell(j));
+                cells[j].innerHTML = "";
             }
         }
 
@@ -430,9 +596,9 @@
             }
         }
 
-        createPageButtons(0, 1);
-        createPageButtons(1, 1);
-        createPageButtons(2, 1);
+        createPageButtons(0);
+        createPageButtons(1);
+        createPageButtons(2);
 
         // Show page 1 initially
         changePage(0, 1);

@@ -62,14 +62,14 @@
     <% if (templates.length) { %>
         <div class="add-btn" onclick="openModal()">+ Create Recommendation</div>
     <% } %>
-    <table id="table">
+    <table id="table0">
         <thead>
         <tr>
-            <td><a href="javascript:sortByTime()">Timestamp</a></td>
-            <td><a href="javascript:sortByName()">Name</a></td>
-            <td><a href="javascript:sortByOrg()">Organization</a></td>
-            <td><a href="javascript:sortByTemplate()">Template</a></td>
-            <td class="center"><a href="javascript:sortByStatus()">Form Status</a></td>
+            <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
+            <td><a href="javascript:sortByEmail(0)">Name</a></td>
+            <td><a href="javascript:sortByOrg(0)">Organization</a></td>
+            <td><a href="javascript:sortByTemplate(0)">Template</a></td>
+            <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
             <td class="icons"></td>
         </tr>
         </thead>
@@ -81,30 +81,32 @@
             <% } %>
         </tbody>
     </table>
-    <div id="page">
-        <div id="buttons">
-            <button onclick="javascript:prevPage()" id="button-prev">Prev</button>
-            <div id="page-numbers"></div>
-            <button onclick="javascript:nextPage()" id="button-next">Next</button>
+    <div id="page0">
+        <div id="buttons0">
+            <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
+            <div id="page-numbers0"></div>
+            <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
         </div>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-    var current_page = 1;
+    var current_page = [1];
     var records_per_page = 10;
-    var forms = JSON.parse('<%- JSON.stringify(forms) %>');
+    var data = [
+        JSON.parse('<%- JSON.stringify(forms) %>')
+    ];
 
     var timeSortOrder = -1;
-    var nameSortOrder = -1;
+    var emailSortOrder = -1;
     var orgSortOrder = -1;
     var templateSortOrder = -1;
     var statusSortOrder = -1;
 
-    function sortByTime() {
+    function sortByTime(tableNumber) {
         timeSortOrder *= -1;
 
-        forms.sort(function(a, b) {
+        data[tableNumber].sort(function(a, b) {
             var timeA, timeB;
 
             if (a.meta.submitted) {
@@ -127,30 +129,30 @@
                 return 1 * timeSortOrder;
         });
 
-        clearTable();
-        generateTable();
+        clearTable(tableNumber);
+        generateTable(tableNumber);
     }
 
-    function sortByName() {
-        nameSortOrder *= -1;
+    function sortByEmail(tableNumber) {
+        emailSortOrder *= -1;
 
-        forms.sort(function(a, b) {
+        data[tableNumber].sort(function(a, b) {
             if (a.email == b.email)
                 return 0;
             if (a.email < b.email)
-                return -1 * nameSortOrder;
+                return -1 * emailSortOrder;
             if (a.email > b.email)
-                return 1 * nameSortOrder;
+                return 1 * emailSortOrder;
         });
 
-        clearTable();
-        generateTable();
+        clearTable(tableNumber);
+        generateTable(tableNumber);
     }
 
-    function sortByOrg() {
+    function sortByOrg(tableNumber) {
         orgSortOrder *= -1;
 
-        forms.sort(function(a, b) {
+        data[tableNumber].sort(function(a, b) {
             if (a.organization == b.organization)
                 return 0;
             if (a.organization < b.organization)
@@ -159,14 +161,14 @@
                 return 1 * orgSortOrder;
         });
 
-        clearTable();
-        generateTable();
+        clearTable(tableNumber);
+        generateTable(tableNumber);
     }
 
-    function sortByTemplate() {
+    function sortByTemplate(tableNumber) {
         templateSortOrder *= -1;
 
-        forms.sort(function(a, b) {
+        data[tableNumber].sort(function(a, b) {
             if (a.template.name == b.template.name)
                 return 0;
             if (a.template.name < b.template.name)
@@ -175,14 +177,14 @@
                 return 1 * templateSortOrder;
         });
 
-        clearTable();
-        generateTable();
+        clearTable(tableNumber);
+        generateTable(tableNumber);
     }
 
-    function sortByStatus() {
+    function sortByStatus(tableNumber) {
         statusSortOrder *= -1;
 
-        forms.sort(function(a, b) {
+        data[tableNumber].sort(function(a, b) {
             var statusA, statusB;
 
             if (a.status == 'Complete') {
@@ -210,8 +212,8 @@
                 return 1 * statusSortOrder;
         });
 
-        clearTable();
-        generateTable();
+        clearTable(tableNumber);
+        generateTable(tableNumber);
     }
 
     // When the user clicks on the button, open the modal
@@ -326,54 +328,53 @@
     }
 
     // Decrement page number
-    function prevPage()
+    function prevPage(tableNumber)
     {
-        if (current_page > 1) {
-            changePage(current_page - 1);
+        if (current_page[tableNumber] > 1) {
+            changePage(tableNumber, current_page[tableNumber] - 1);
         }
     }
 
     // Increment page number
-    function nextPage()
+    function nextPage(tableNumber)
     {
-        if (current_page < numPages()) {
-            changePage(current_page + 1);
+        if (current_page[tableNumber] < numPages(tableNumber)) {
+            changePage(tableNumber, current_page[tableNumber] + 1);
         }
     }
 
     // Return total number of pages
-    function numPages()
+    function numPages(tableNumber)
     {
-        var forms = JSON.parse('<%- JSON.stringify(forms) %>');
-        return Math.ceil(forms.length / records_per_page);
+        return Math.ceil(data[tableNumber].length / records_per_page);
     }
 
     // Change to the page number specified by the page parameter
-    function changePage(page)
+    function changePage(tableNumber, page)
     {
         // Validate page
         if (page < 1) page = 1;
-        if (page > numPages()) page = numPages();
+        if (page > numPages(tableNumber)) page = numPages(tableNumber);
 
-        current_page = page;
+        current_page[tableNumber] = page;
 
         // Enable/disable buttons
-        setPageButtons();
+        setPageButtons(tableNumber);
 
-        if (!forms.length) {
+        if (!data[tableNumber].length) {
             // Exit function if there are no recommendations to show
             return;
         }
 
         // Clear old table
-        clearTable();
+        clearTable(tableNumber);
 
         // Generate new table
-        generateTable();
+        generateTable(tableNumber);
     }
 
-    function clearTable(table) {
-        var table = document.getElementById("table");
+    function clearTable(tableNumber) {
+        var table = document.getElementById("table" + tableNumber);
 
         for (var i = table.rows.length - 1; i > 0; i--)
         {
@@ -381,19 +382,32 @@
         }
     }
 
-    function generateTable() {
+    function generateTable(tableNumber) {
         var row_count = 1;
 
-        for (var i = (current_page - 1) * records_per_page;
-                i < (current_page * records_per_page)
-                && i < forms.length; i++) {
-            generateRow(row_count, i);
+        for (var i = (current_page[tableNumber] - 1) * records_per_page;
+                i < (current_page[tableNumber] * records_per_page); i++) {
+            generateRow(row_count, i, tableNumber);
             row_count++;
         }
     }
 
-    function generateRow(row_count, i) {
-        var table = document.getElementById("table");
+    function generateRow(row_count, i, tableNumber) {
+        if (i < data[tableNumber].length) {
+            if (tableNumber == 0) {
+                generateRecRow(row_count, i);
+            } else if (tableNumber == 1) {
+                generateRecTemplateRow(row_count, i);
+            } else if (tableNumber == 2) {
+                generateEmailTemplateRow(row_count, i);
+            }
+        } else {
+            generateBlankRow(row_count);
+        }
+    }
+
+    function generateRecRow(row_count, i) {
+        var table = document.getElementById("table0");
         var row = table.insertRow(row_count);
         var cells = [row.insertCell(0)];
 
@@ -401,93 +415,104 @@
             cells.push(row.insertCell(j));
         }
 
-        if (!forms[i].meta.submitted) {
+        if (!data[0][i].meta.submitted) {
             cells[0].innerHTML =
-                (new Date(forms[i].meta.sent)).toDateString()
+                (new Date(data[0][i].meta.sent)).toDateString()
                 +"<br>"
-                +(new Date(forms[i].meta.sent)).toLocaleTimeString('en-US');
+                +(new Date(data[0][i].meta.sent)).toLocaleTimeString('en-US');
         } else {
             cells[0].innerHTML =
-                (new Date(forms[i].meta.submitted)).toDateString()
+                (new Date(data[0][i].meta.submitted)).toDateString()
                 +"<br>"
-                +(new Date(forms[i].meta.sent)).toLocaleTimeString('en-US');
+                +(new Date(data[0][i].meta.sent)).toLocaleTimeString('en-US');
         }
 
-        cells[1].innerHTML = forms[i].email;
-        cells[2].innerHTML = forms[i].organization;
-        cells[3].innerHTML = forms[i].template.name;
-        if (forms[i].status == 'Sent') {
+        cells[1].innerHTML = data[0][i].email;
+        cells[2].innerHTML = data[0][i].organization;
+        cells[3].innerHTML = data[0][i].template.name;
+        if (data[0][i].status == 'Sent') {
             cells[4].innerHTML = '<img class="icon" src="/images/red_x.png">';
         } else {
             cells[4].innerHTML = '<img class="icon" src="/images/green_checkmark.png">';
         }
         cells[4].classList.add("center");
         cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
-            + JSON.stringify({id: forms[i]._id, email: forms[i].email})
+            + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
             + ")'>";
-        if (forms[i].email_sent == false) {
+        if (data[0][i].email_sent == false) {
             cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_incomplete.png' onclick='openEmailPreview("
-                + JSON.stringify({id: forms[i]._id, email: forms[i].email})
-                + ", \"" + forms[i].status + "\")'>";
+                + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+                + ", \"" + data[0][i].status + "\")'>";
         } else {
             cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_complete.png' onclick='openEmailPreview("
-                + JSON.stringify({id: forms[i]._id, email: forms[i].email})
-                + ", '" + forms[i].status + "\")'>";
+                + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+                + ", '" + data[0][i].status + "\")'>";
         }
         cells[5].innerHTML += "<img class='icon clickable' title='View Responses' src='/images/response.png' onclick='openResponses("
-            + JSON.stringify({id: forms[i]._id})
-            + ", \"" + forms[i].status + "\")'>";
+            + JSON.stringify({id: data[0][i]._id})
+            + ", \"" + data[0][i].status + "\")'>";
         cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' onclick='openLetterPreview("
-            + JSON.stringify({id: forms[i]._id})
-            + ", \"" + forms[i].status + "\")'>";
+            + JSON.stringify({id: data[0][i]._id})
+            + ", \"" + data[0][i].status + "\")'>";
         cells[5].innerHTML += "<img class='icon clickable' title='Delete Letter' src='/images/delete.png' onclick='deleteRow(\""
-            + forms[i]._id + "\")'>";
+            + data[0][i]._id + "\")'>";
 
         cells[5].classList.add("center");
     }
 
-    function setPageButtons() {
-        var btn_prev = document.getElementById("button-prev");
-        var btn_next = document.getElementById("button-next");
+    function generateBlankRow(row_count) {
+        var table = document.getElementById("table0");
+        var row = table.insertRow(row_count);
+        var cells = [];
 
-        if (current_page == 1 || !forms.length) {
+        for (var j = 0; j < 6; j++) {
+            cells.push(row.insertCell(j));
+            cells[j].innerHTML = "";
+        }
+    }
+
+    function setPageButtons(tableNumber) {
+        var btn_prev = document.getElementById("button-prev" + tableNumber);
+        var btn_next = document.getElementById("button-next" + tableNumber);
+
+        if (current_page[tableNumber] == 1 || !data[tableNumber].length) {
             btn_prev.disabled = true;
         } else {
             btn_prev.disabled = false;
         }
 
-        if (current_page == numPages() || !forms.length) {
+        if (current_page[tableNumber] == numPages(tableNumber) || !data[tableNumber].length) {
             btn_next.disabled = true;
         } else {
             btn_next.disabled = false;
         }
 
-        for (var i = 1; i <= numPages(); i++) {
-            if (i == current_page) {
-                document.getElementById("page-" + i).disabled = true;
+        for (var i = 1; i <= numPages(tableNumber); i++) {
+            if (i == current_page[tableNumber]) {
+                document.getElementById("page-" + tableNumber + '-' + i).disabled = true;
             } else {
-                document.getElementById("page-" + i).disabled = false;
+                document.getElementById("page-" + tableNumber + '-' + i).disabled = false;
             }
         }
 
     }
 
-    function createPageButtons() {
-        var page_numbers = document.getElementById("page-numbers");
+    function createPageButtons(tableNumber) {
+        var page_numbers = document.getElementById("page-numbers" + tableNumber);
 
         page_numbers.innerHTML = '';
 
-        for (var i = 1; i <= numPages(); i++) {
+        for (var i = 1; i <= numPages(tableNumber); i++) {
             page_numbers.innerHTML +=
-                '<button id="page-' + i + '" onclick="javascript:changePage('
-                    + i + ')">' + i + '</button>';
+                '<button id="page-' + tableNumber + '-' + i + '" onclick="javascript:changePage('
+                    + tableNumber + ', ' + i + ')">' + i + '</button>';
         }
     }
 
-    createPageButtons();
+    createPageButtons(0);
 
     // Show page 1 initially
-    changePage(1);
+    changePage(0, 1);
 
     $("#Edit").click(function(e) {
         e.preventDefault();

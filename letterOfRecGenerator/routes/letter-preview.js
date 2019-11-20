@@ -319,6 +319,7 @@ router.post('/drive', function(req,res,next) {
 })
 
 router.get('/downloads', function(req, res) {
+    console.log("Hi its Jerry");
     var file = path.resolve('./routes/uploads', 'output.docx');
     res.download(file);
 });

@@ -31,7 +31,7 @@ function onLoad() {
                         saveSwitchData: true},
                 type: 'GET',
                 success: function (dat) {
-                    console.log('success');
+                    console.log('page load success');
                     letterHTML = createLetterPreview(form, form.letter);
                 }
             });
@@ -39,7 +39,7 @@ function onLoad() {
         error: function () {
             console.log('error');
         }
-    }); 
+    });
 }
 
 function getQueryVariable(){
@@ -52,7 +52,7 @@ function getQueryVariable(){
         }
     }*/
     document.getElementById("id1").value = "cok";
-    
+
 }
 
 function showEditModal(clicked) {
@@ -70,7 +70,7 @@ function saveEditModal() {
     var modal = document.getElementById(ADD_QUESTION_MODAL_ID);
     var element = document.querySelector(TRIX_EDITOR);
     var editor = document.querySelector(TRIX_EDITOR).editor;
-    
+
     var child = $('#trix-editor').children().first().innerHTML;
     var length = letterHTML.length
     letterHTML = element.value;
@@ -87,7 +87,7 @@ function saveEditModal() {
         },
         type: 'POST',
         success: function (data) {
-            console.log('letter saved');
+            console.log('success in saveEditModal');
         },
         error: function () {
             console.log('error in saveEditModal');
@@ -127,7 +127,6 @@ function downloadLetterOLD() {
 }
 
 function saveLetter() {
-    console.log("@@@@@@@@@@@@@@@@ HERE @@@@@@@@@@@@@@@@@@@@@@");
     event.preventDefault();
     var idt = document.getElementById("id1").value;
     var date = document.getElementById("theDate").value;
@@ -141,14 +140,14 @@ function saveLetter() {
         },
         type: 'POST',
         success: function(d){
-            console.log("success in drive")
+            console.log("letter saved successfully")
             document.getElementById("downloadButton").style.display = "block";
             document.getElementById("saveButton").style.display = "none";
             alert('Document saved');
             //window.location.href = 'http://localhost:3000/recommender-dashboard';
         },
         error: function() {
-            console.log("error in drive")
+            console.log("error saving letter")
         }
     })
 }
@@ -279,23 +278,23 @@ function parseEmailLetter(body) {
                 });
                 return response ? response.response : '';
             }));
-            
+
             for (var i = 0; i < noCapitalization.length; i++) {
-        
+
                 // Found ending punctuation that isn't the last letter in the text
                 if ((noCapitalization[i] == '.' || noCapitalization[i] == '?' || noCapitalization[i] == '!') && i != noCapitalization.length - 1) {
-        
+
                     // Make sure exclamation point is not from a tag
                     if (noCapitalization[i] == '!' && i > 0 && noCapitalization[i - 1] == '<') {
                         continue;
                     }
-        
+
                     // Look for the next alphabetical character to capitalize
                     var j = i + 1;
                     while (!((noCapitalization[j] >= 'a' && noCapitalization[j] <= 'z') || (noCapitalization[j] >= 'A' && noCapitalization[j] <= 'Z')) && j < noCapitalization.length) {
                         j++;
                     }
-        
+
                     // Found character to capitalize
                     if (j < noCapitalization.length) {
                         noCapitalization[j] = noCapitalization[j].toUpperCase();
@@ -305,7 +304,7 @@ function parseEmailLetter(body) {
 
             var parsed_letter = noCapitalization.join("");
             document.getElementById("email-body-text-area").value = parsed_letter;
-            
+
         },
         error: function () {
             console.log('error in parseLetter');
@@ -347,7 +346,7 @@ function addEmailHistory() {
         },
         success: function (data) {
             id = data.id;
-            console.log('success');
+            console.log('addEmailHistory success');
             window.location.href = 'http://localhost:3000/history'
         },
         error: function () {

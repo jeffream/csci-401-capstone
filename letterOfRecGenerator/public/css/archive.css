@@ -1,3 +1,10 @@
+#table0 td, #table1 td, #table2 td {
+    height: 60px;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+}
+
 #page0, #page1, #page2 {
     padding: 20px;
     display: flex;

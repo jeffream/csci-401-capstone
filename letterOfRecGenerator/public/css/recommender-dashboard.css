@@ -1,9 +1,16 @@
-#page {
+#table0 td {
+    height: 60px;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+}
+
+#page0 {
     padding: 20px;
     display: flex;
 }
 
-#buttons {
+#buttons0 {
     display: flex;
     margin: auto;
 }

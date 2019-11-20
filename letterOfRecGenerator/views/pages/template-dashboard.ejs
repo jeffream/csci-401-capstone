@@ -138,7 +138,7 @@
                 <br>
 
                 <!-- <form id="template-upload"  action="/template-dashboard/uploadLetterTemplate" method="POST" encType="multipart/form-data">
-                    <input type="file" name="file" id="footer-upload-file"/>
+                    <input type="file" name="file" id="template-upload-file"/>
                     <input id="submit" type="submit" name="Submit"/>
                 </form> -->
                 <script>
@@ -146,7 +146,7 @@
 				    // Form Data
 				    var formData = new FormData();
 
-				    var fileSelect = document.getElementById("footer-upload-file");
+				    var fileSelect = document.getElementById("template-upload-file");
 				    if(fileSelect.files && fileSelect.files.length == 1){
                   var file = fileSelect.files[0]
                   formData.set("file", file , file.name);
@@ -163,7 +163,7 @@
                   }
                 </script>
                 <form encType="multipart/form-data">
-                    <input type="file" id="footer-upload-file" />
+                    <input type="file" id="template-upload-file" />
                     <button type="button" onclick="sendFile()">Submit</button>
                 </form>
             </td>

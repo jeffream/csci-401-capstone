@@ -82,7 +82,7 @@ window.onload = function () {
                     savedQuestion.options = question.options;
                     questions.push(savedQuestion);
                 });
-                console.log('success');
+                console.log('success loading page');
                 displayQuestions();
                 //emphasizeTags();
             },
@@ -120,30 +120,14 @@ function loadDefaultQuestions() {
 }
 
 function changeText() {
-    var files = $('#letterhead-upload-file')[0].files;
+    var files = $('#template-upload-file')[0].files;
     if (files && files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#letterhead-preview').attr('src', e.target.result);
-            letterheadImgData = e.target.result;
-            var filename = files[0].name;
-            document.getElementById("letterhead-preview-div").innerHTML = "Uploaded File: " + filename;
-        };
-
-        reader.readAsDataURL(files[0]);
-    }
-
-}
-
-function changeFooterText() {
-    var files = $('#footer-upload-file')[0].files;
-    if (files && files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#footer-preview').attr('src', e.target.result);
+            $('#template-preview').attr('src', e.target.result);
             footerImgData = e.target.result;
             var filename = files[0].name;
-            document.getElementById("footer-preview-div").innerHTML = "Uploaded File: " + filename;
+            document.getElementById("template-preview-div").innerHTML = "Uploaded File: " + filename;
         };
 
         reader.readAsDataURL(files[0]);
@@ -313,7 +297,7 @@ function saveTemplate() {
                 console.log('complete');
             },
             success: function (data) {
-                console.log('success');
+                console.log('success in SaveTemplate');
                 window.location.href = 'http://localhost:3000/template-dashboard'
             },
             error: function (err){
@@ -336,7 +320,7 @@ function saveTemplate() {
             },
             success: function (data) {
                 id = data.id;
-                console.log('success');
+                console.log('success in Creating Template');
                 window.location.href = 'http://localhost:3000/template-dashboard'
             },
             error: function (err) {

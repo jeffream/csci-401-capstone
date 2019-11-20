@@ -28,7 +28,7 @@
             <td width="60%">
                <div>
                     <%= questions[q].question %>
-               </div> 
+               </div>
             </td>
             <td width="40%">
                 <div id="responses-container" contenteditable="true">
@@ -36,7 +36,7 @@
                                 if(questions[q].tag == responses[k].tag) { %>
                                     <%= responses[k].response %>
                                 <%}
-                            }%> 
+                            }%>
                 </div>
             </td>
         </tr>
@@ -49,7 +49,7 @@
     </div>
 </body>
 <script>
-    
+
     function saveEditedAnswers(){
 
         var id = document.getElementById("formId").innerHTML;
@@ -60,7 +60,7 @@
         }
         $.ajax({
                 url: 'http://localhost:3000/response/update',
-                data: { 
+                data: {
                     editedResponses: editedResponses,
                     id: id
                 },
@@ -79,4 +79,4 @@
         return address + '?' + $.param(params);
     }
 </script>
-</html> 
+</html>

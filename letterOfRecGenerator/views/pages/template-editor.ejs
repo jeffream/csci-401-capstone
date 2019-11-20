@@ -28,58 +28,6 @@
             </div>
         </div>
 
-      <script>
-      function sendFile(){
-      // Form Data
-      var formData = new FormData();
-
-      var fileSelect = document.getElementById("footer-upload-file");
-      if(fileSelect.files && fileSelect.files.length == 1){
-      var file = fileSelect.files[0]
-      formData.set("file", file , file.name);
-      }
-
-      // Http Request
-      var request = new XMLHttpRequest();
-      request.open('POST', "http://localhost:3000/template-dashboard/uploadLetterTemplate");
-      request.send(formData);
-
-      //Submit success
-      alert('template uploaded');
-      //location.reload();
-      }
-      </script>
-      <div class="flex-display upload-cont">
-        <h2 id="upload-footer" class="section-header">Upload Custom Template</h2>
-        <div class="upload-preview-container flex1">
-          <form encType="multipart/form-data">
-            <input type="file" id="footer-upload-file" />
-            <button type="button" onclick="sendFile()">Submit</button>
-          </form>
-        </div>
-      </div>
-
-        <div class="flex-display upload-cont">
-            <h2 id="upload-footer" class="section-header">Upload Custom Signature</h2>
-            <div class="upload-preview-container flex1">
-                <% if(locals.footerImage){ %>
-                <img id="footer-preview" src="<%= footerImage %>" alt=""/>
-                <% } else{ %>
-                <img id="footer-preview" src="#" alt=""/>
-                <% } %>
-                <div id="footer-preview-div"></div>
-           <!--      <form id="footer-upload">
-                    <input type="file" name="file" id="footer-upload-file"/>
-                    <input type="submit" name="Submit"/>
-                </form> -->
-                <form id="footer-upload" action="/template-editor/fileSignatureUpload" method="POST" encType="multipart/form-data" onsubmit="changeFooterText()">
-                    <input type="file" name="file" id="footer-upload-file"/>
-                    <input id="submit" type="submit" name="Submit"/>
-                </form>
-            </div>
-        </div>
-
-
         <h2 id="custom-questions" class="section-header">Custom Questions</h2>
         <button class="large-circle-button" onclick="addQuestion()">+ Add question</button>
         <div id="questions-container"></div>
@@ -126,6 +74,37 @@
                     <trix-editor class="trix-content" id="letter-text-area"></trix-editor>
                 </div>
             </div>
+        </div>
+
+        <script>
+        function sendFile(){
+        // Form Data
+        var formData = new FormData();
+
+        var fileSelect = document.getElementById("template-upload-file");
+        if(fileSelect.files && fileSelect.files.length == 1){
+        var file = fileSelect.files[0]
+        formData.set("file", file , file.name);
+        }
+
+        // Http Request
+        var request = new XMLHttpRequest();
+        request.open('POST', "http://localhost:3000/template-dashboard/uploadLetterTemplate");
+        request.send(formData);
+
+        //Submit success
+        alert('template uploaded');
+        //location.reload();
+        }
+        </script>
+        <div class="flex-display upload-cont">
+          <h2 id="upload-template" class="section-header">Apply Body Text to Custom Template </h2>
+          <div class="upload-preview-container flex1">
+            <form encType="multipart/form-data">
+              <input type="file" id="template-upload-file" />
+              <button type="button" onclick="sendFile()">Upload</button>
+            </form>
+          </div>
         </div>
 
         <br/><br/>

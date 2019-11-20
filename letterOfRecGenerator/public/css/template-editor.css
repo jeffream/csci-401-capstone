@@ -58,7 +58,7 @@
     flex-basis: auto;
 }
 
-#footer-preview {
+#template-preview {
     flex-basis: auto;
 }
 
@@ -460,7 +460,7 @@
     margin: 30px 30px 30px 30px; 
 }
 
-#upload-letterhead, #upload-footer {
+#upload-letterhead, #upload-template {
     /*margin-top: 50px;*/
     /*float: left;*/ 
 }
