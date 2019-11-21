@@ -4,12 +4,11 @@
         <title><%= title %></title>
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/login.css" />
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="901758022243-s3lganllgkco92plhqd3nu5htls9lqgo.apps.googleusercontent.com">
     </head>
     <body>
         <h1 class="title"><%= title %></h1>
-        <button class="sign-in-button" onclick="location.href='<%= url %>';">
-            <img src="/images/google_logo.svg" height="24" width="24"/>
-            <span>Sign in with Google</span>
-        </button>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </body>
 </html>

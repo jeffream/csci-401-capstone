@@ -9,7 +9,7 @@ var {google} = require('googleapis');
 var querystring = require('querystring');
 var url = require('url');
 var OAuth2 = google.auth.OAuth2;
-var passport = require('./config/passport');
+//var passport = require('./config/passport');
 var fileUpload = require('express-fileupload');
 var mammoth = require('mammoth');
 var opn = require('opn');
@@ -50,8 +50,8 @@ app.use(session({
     resave: true,
     saveUninitialized: false
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(fileUpload());
 
 // view engine setup
@@ -61,15 +61,15 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 
-app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'https://www.googleapis.com/auth/gmail.send'],
-    prompt: 'select_account'
-}));
+// app.get('/auth/google', passport.authenticate('google', {
+//     scope: ['profile', 'https://www.googleapis.com/auth/gmail.send'],
+//     prompt: 'select_account'
+// }));
 
-app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/login'}), function (req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/recommender-dashboard');
-});
+// app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/login'}), function (req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/recommender-dashboard');
+// });
 
 app.use('/logout', (req, res) => {
     req.logOut();
