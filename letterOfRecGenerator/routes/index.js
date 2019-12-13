@@ -1,37 +1,14 @@
 const express = require('express');
 //const User = require('../models/user');
 const router = express.Router();
+const { ensureAuthenticated } = require('../config/auth');
 
-// router.use(function (req, res, next) {
-//     res.locals.userValue = null;
-//     next();
-// });
-
-/* GET home page. */
+// Welcome Page
 router.get('/', (req, res) => res.render('welcome'));
 
-// router.get('/', function (req, res, next) {
-//     res.render('pages/index', {
-//         title: 'Express',
-//         header: 'Add user'
-//     });
-// });
+// Dashboard
+router.get('/recommender-dashboard', ensureAuthenticated, (req, res) =>
+  res.render('recommender-dashboard'));
 
-// router.post('/', function (req, res) {
-//     var user = {
-//         name: {
-//             first: req.body.fname,
-//             last: req.body.lname
-//         }
-//     };
-//
-//     User.createUser(user);
-//
-//     res.render('pages/index', {
-//         title: 'Express',
-//         header: 'Add User',
-//         userValue: user.name
-//     });
-// });
 
 module.exports = router;
