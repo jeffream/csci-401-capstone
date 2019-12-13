@@ -1,27 +1,42 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+
+const app = express();
+
+//ejs
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
+
+const PORT = process.env.PORT || 3000;
+
+//Routes
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+
+app.listen(PORT, console.log(`server started on port ${PORT}`));
 //const bcrypt = require('bcrypt')
 
 //app.use(express.json())
 
-app.set('view-engine', 'ejs')
+//app.set('view-engine', 'ejs')
 
 //const users = []
 
-app.get('/users', (req, res) => {
-  res.render('index.ejs', {name: 'Kyle' })
-})
-
-app.get('/login', (req, res) => {
-  res.render('login.ejs')
-})
-
-app.get('/register', (req, res) => {
-  res.render('register.ejs')
-})
-
-
-app.listen(3000)
+// app.get('/users', (req, res) => {
+//   res.render('index.ejs', {name: 'Kyle' })
+// })
+//
+// app.get('/login', (req, res) => {
+//   res.render('login.ejs')
+// })
+//
+// app.get('/register', (req, res) => {
+//   res.render('register.ejs')
+// })
+//
+//
+// app.listen(3000)
 
 
 
