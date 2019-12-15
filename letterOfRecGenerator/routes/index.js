@@ -11,16 +11,22 @@ const router = express.Router();
 router.get('/', (req, res) => res.render('welcome'));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) =>
   res.render('dashboard'));
 =======
+=======
+>>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 // router.get('/', function (req, res, next) {
 //     res.render('pages/index', {
 //         title: 'Express',
 //         header: 'Add user'
 //     });
 // });
+<<<<<<< HEAD
+>>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
+=======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 
 // router.post('/', function (req, res) {
