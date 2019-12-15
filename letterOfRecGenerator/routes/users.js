@@ -85,6 +85,7 @@ router.post('/register', (req, res) => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Login handle
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
@@ -102,6 +103,8 @@ router.get('/logout', (req, res) => {
 });
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
+=======
+>>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 /* GET users listing. */
 // router.get('/', function (req, res, next) {
 //     User.find(function (err, results) {
@@ -113,6 +116,9 @@ router.get('/logout', (req, res) => {
 //     });
 // });
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
+=======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
