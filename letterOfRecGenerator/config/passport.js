@@ -42,6 +42,7 @@ module.exports = function(passport) {
 
 }
 
+// Old Google Auth stuff
 
 // var passport = require('passport');
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;

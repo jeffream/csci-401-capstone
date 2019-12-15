@@ -12,6 +12,9 @@ router.get('/login', (req, res) => res.render('login'));
 //Register Page
 router.get('/register', (req, res) => res.render('register'));
 
+// Rec Dashboard page
+router.get('/recommender-dashboard', (req, res) => res.render('recommender-dashboard'));
+
 // Register handle
 router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body;
@@ -84,7 +87,7 @@ router.post('/register', (req, res) => {
 // Login handle
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/recommender-dashboard',
+    successRedirect: '/dashboard',
     failureRedirect: '/users/login',
     failureFlash: true
   })(req, res, next);

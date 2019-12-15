@@ -1,21 +1,21 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
-var nodemailer = require('nodemailer');
-var Form = require('../models/form');
-var Link = require('../models/link');
-var credentials = require('../config/auth');
-var googleAuth = require('google-auth-library');
-var {google} = require('googleapis');
-var OAuth2 = google.auth.OAuth2;
+const express = require('express');
+const app = express();
+const router = express.Router();
+const nodemailer = require('nodemailer');
+const Form = require('../models/form');
+const Link = require('../models/link');
+const credentials = require('../config/auth');
+//const googleAuth = require('google-auth-library');
+//const {google} = require('googleapis');
+//const OAuth2 = google.auth.OAuth2;
 const fs = require('fs');
-var Docxtemplater = require('docxtemplater');
-var DocxMerger = require('docx-merger');
-var Readable = require('stream').Readable;
-var path = require('path');
-var builder = require('docx-builder')
-var docx = new builder.Document();
-var dt = require('./letter-parser')
+const Docxtemplater = require('docxtemplater');
+const DocxMerger = require('docx-merger');
+const Readable = require('stream').Readable;
+const path = require('path');
+const builder = require('docx-builder')
+const docx = new builder.Document();
+const dt = require('./letter-parser')
 
 "use strict";
 
@@ -32,7 +32,7 @@ router.get('/', function (req, res, next) {
         if (err) {
             console.log(`error: ${err}`);
         } else {
-            res.render('pages/recommender-dashboard', {
+            res.render('recommender-dashboard', {
                 title: req.user.displayName,
                 templates: req.user.getTemplates(),
                 forms: forms,
@@ -44,7 +44,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var gmailClass = google.gmail('v1');
+    //var gmailClass = google.gmail('v1');
     var email_lines = [];
     var toEmail = req.body.email;
     var subject = req.body.subject_text;
@@ -52,7 +52,7 @@ router.post('/', function (req, res, next) {
     body = body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/\n/gi, '<br>');
 
     if (!toEmail.length) {
-        res.render('pages/recommender-dashboard', {
+        res.render('recommender-dashboard', {
             title: 'Recommendations',
             statusMessage: 'Please provide a valid email'
         });
