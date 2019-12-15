@@ -10,12 +10,6 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', (req, res) => res.render('welcome'));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-// Dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) =>
-  res.render('dashboard'));
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
@@ -26,9 +20,6 @@ router.get('/dashboard', ensureAuthenticated, (req, res) =>
 //         header: 'Add user'
 //     });
 // });
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======

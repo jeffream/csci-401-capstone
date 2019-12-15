@@ -83,24 +83,6 @@ router.post('/register', (req, res) => {
 
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-// Login handle
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/users/login',
-    failureFlash: true
-  })(req, res, next);
-});
-
-// Logout handle
-router.get('/logout', (req, res) => {
-  req.logout();
-  req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
-});
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
@@ -115,9 +97,6 @@ router.get('/logout', (req, res) => {
 //         }
 //     });
 // });
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
