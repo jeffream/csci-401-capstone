@@ -101,7 +101,6 @@ router.get('/logout', (req, res) => {
   res.redirect('/users/login');
 });
 =======
-=======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 /* GET users listing. */
 // router.get('/', function (req, res, next) {
