@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 
 // User model
 const User = require('../models/User');
@@ -84,6 +83,7 @@ router.post('/register', (req, res) => {
 
 });
 
+<<<<<<< HEAD
 // Login handle
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
@@ -99,5 +99,17 @@ router.get('/logout', (req, res) => {
   req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');
 });
+=======
+/* GET users listing. */
+// router.get('/', function (req, res, next) {
+//     User.find(function (err, results) {
+//         if (err) {
+//             res.send("Oops...");
+//         } else {
+//             res.send(results);
+//         }
+//     });
+// });
+>>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 
 module.exports = router;
