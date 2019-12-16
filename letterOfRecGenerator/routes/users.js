@@ -83,8 +83,6 @@ router.post('/register', (req, res) => {
 
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
@@ -103,8 +101,6 @@ router.post('/register', (req, res) => {
 //         }
 //     });
 // });
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> parent of ae7cd2e... potentially finish login with authentication, needs testing
 =======
