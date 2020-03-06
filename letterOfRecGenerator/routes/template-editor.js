@@ -4,6 +4,9 @@ var User = require('../models/user');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
+
+    console.log("TE, User Exists: ", req.user);
+
     var letterheadImg;
     var footerImg;
     var saveStatus = req.query.saveSwitch;
@@ -159,6 +162,8 @@ router.post('/fileUpload', function (req,res, next) {
 })
 
 router.post('/create', function (req, res, next) {
+
+    console.log("USER EXISTS: ", req.user);
     req.user.addTemplate(req.body.template, function (err, id) {
         if (err) {
             if(err.message == "DUPLICATE NAME") {

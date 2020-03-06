@@ -23,7 +23,23 @@ var UserSchema = new Schema({
         type: db.Schema.Types.ObjectId,
         ref: 'Form'
     }],
-    emailhistory: [Email.schema]
+    emailhistory: [Email.schema],
+    name: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: Date,
+      default: Date.now
+    }
 });
 
 UserSchema.statics.findUser = function (id, cb) {

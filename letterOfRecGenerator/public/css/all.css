@@ -1,14 +1,17 @@
 .title {
     background-color: #FFFFFF;
-    font-size: 25px;
+    font-size: 30px;
     margin: 0;
-    padding: 20px 35px;
+    padding: 20px 50px;
 }
 
 body {
     background-color: #F2F2F2;
-    max-width: 1200px;
+}
+
+.body {
     margin: 0 auto;
+    max-width: 992px;
 }
 
 .background{

@@ -1,0 +1,45 @@
+#about-table td {
+    height: 60px;
+}
+
+#description {
+  padding-right: 60px;
+  padding-left: 60px;
+  font-size: 20px;
+}
+
+.title {
+  padding-top: 60px;
+}
+
+#vid-box {
+  padding: 0px;
+}
+
+#vid1 {
+  float: left;
+  padding-left: 70px;
+  padding-bottom: 200px;
+}
+
+#vid2 {
+  float: right;
+  padding-right: 70px;
+  padding-bottom: 200px;
+}
+
+#subtitle1 {
+  font-style: italic;
+  font-size: 16px;
+  float: left;
+  padding-left: 70px;
+  padding-bottom: 20px;
+}
+
+#subtitle2 {
+  font-style: italic;
+  font-size: 16px;
+  float: right;
+  padding-right: 230px;
+  padding-bottom: 20px;
+}

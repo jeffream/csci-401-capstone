@@ -1,36 +1,55 @@
-.container {
-    font-family: Book Antiqua;
-    font-weight: lighter;
-    vertical-align: middle; 
-    line-height: 40px;
-    background-color: #990000;
-    height: 60px;
-    width: 100%;
+header #lrg a {
+    font-family: adobe-caslon-pro, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-top: 12px;
 }
 
+header #lrg a:hover {
+    color: white !important;
+}
+
+.container {
+    width: 100%;
+    background-color: #990000;
+}
+
+.container-content {
+    /* font-family: Book Antiqua; */
+    /* font-weight: lighter; */
+    font-weight: 200;
+    /* vertical-align: middle; */
+    line-height: 40px;
+    height: 60px;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+/* #logout{
+    float: right;
+    margin-right: 30px;
+} */
+
 #usc-logo{
-    float:left;
+    float: right;
     height: 100%;
     margin-left: 10px;
 }
 
-
-a{
+header a{
     font-size: 15px;
-    color:#FFCC00;
+    color: white;
+    font-weight: 200;
     margin-left: 10px;
     margin-right: 10px;
     text-decoration: none;
     margin-top: 10px;
     float:left;
+    vertical-align: bottom;
 }
 
-a:hover {
-    color: #FFE16B;
+header a:hover {
+    color: #FFCC00;
 }
-
-#logout{
-    float: right;
-    margin-right: 30px;
-} 
-

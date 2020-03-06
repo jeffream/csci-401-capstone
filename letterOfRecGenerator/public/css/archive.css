@@ -5,6 +5,10 @@
     white-space: nowrap; */
 }
 
+#table0, #table1, #table2 {
+    margin-left: 50px;
+}
+
 #page0, #page1, #page2 {
     padding: 20px;
     display: flex;
@@ -77,19 +81,19 @@ img.clickable:hover {
     transform: translate(-50%, -50%);
 }
 
-#button-show-hide {
+#button-show-hide0, #button-show-hide1, #button-show-hide2 {
     float: right;
     background-color: #FFCC00;
     border: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     opacity: 1.0;
     transition: 0.6s;
-    margin-right: 20px;
+    margin: 10px 50px 0px 0px;
     width: 25px;
     height: 25px;
 }
 
-#button-show-hide:hover {
+#button-show-hide0:hover, #button-show-hide1:hover, #button-show-hide2:hover {
     opacity: 0.6;
     cursor: pointer;
 }
@@ -115,6 +119,6 @@ img.clickable:hover {
 }
 
 .archive-table {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
+    display: in-line;
+    width: 817px;
 }

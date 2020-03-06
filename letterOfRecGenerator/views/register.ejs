@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://use.typekit.net/ebq4wgm.css">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="/css/login.css" />
+  <head>
+      <a href="https://www.usc.edu" target="_blank">
+          <img id ="usc-logo" src="/images/usc_logo_big.png" alt="University of Southern California" style="height:100px;"/>
+      </a>
+  </head>
+  <div class="login-page">
+    <div class="form">
+      <p align="center" class="title">Letter of Recommendation</p>
+      <% include ./partials/messages %>
+      <form  class="login-form" action="/users/register" method="POST">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          placeholder="Username"
+          value="<%= typeof name != 'undefined' ? name : '' %>"
+        />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Enter Email"
+          value="<%= typeof email != 'undefined' ? email : '' %>"
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="Create Password"
+          value="<%= typeof password != 'undefined' ? password : '' %>"
+        />
+        <input
+          type="password"
+          id="password2"
+          name="password2"
+          class="form-control"
+          placeholder="Confirm Password"
+          value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+        />
+        <button type="submit">Register</button>
+      </form>
+      <p class="message">Have An Account? <a href="/users/login">Login</a></p>
+      </div>
+    </div>
+  </div>
+</html>

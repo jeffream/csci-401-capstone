@@ -7,184 +7,180 @@
     <link rel="stylesheet" type="text/css" href="/css/template-dashboard.css"/>
     <link rel="stylesheet" type="text/css" href="/css/table.css"/>
     <link rel="stylesheet" type="text/css" href="/css/modal.css"/>
+    <style type="text/css">
+
+    </style>
 </head>
 <body>
 <header>
     <% include ../partials/header %>
 </header>
-<p class="title"><%= title %></p>
+<div class="templates body">
+    <p class="title"><%= title %></p>
 
-<div class="templates">
-
-<div id="myModal" class="modal">
-    <div class="modal-content template-modal">
-        <div class="close-container">
-            <span class="close" onclick="closeModal()">&times;</span>
+    <div id="myModal" class="modal">
+        <div class="modal-content template-modal">
+            <div class="close-container">
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <p class="modal-title">Create a New Recommendation Template</p>
+            <form class="input-form" method="GET" action="/template-editor">
+                <div class="template-name-cont">
+                    <label class="input-label"> Template Name: </label>
+                    <input class="input-text" type="text" name="title" autofocus>
+                </div>
+                <input class="input-submit" type="submit" value="Create">
+            </form>
         </div>
-        <p class="modal-title">Create A New Recommendation Template</p>
-        <form class="input-form" method="GET" action="/template-editor">
-            <div class="template-name-cont">
-                <label class="input-label"> Template Name: </label>
-                <input class="input-text" type="text" name="title">
-            </div>
-            <input class="input-submit" type="submit" value="Create">
-        </form>
     </div>
-</div>
 
-<div id="myModal_email" class="modal">
-    <div class="modal-content template-modal">
-        <div class="close-container">
-            <span class="close" onclick="closeEmailModal()">&times;</span>
+    <!-- <div id="myModal_email" class="modal">
+        <div class="modal-content template-modal">
+            <div class="close-container">
+                <span class="close" onclick="closeEmailModal()">&times;</span>
+            </div>
+            <p class="modal-title">Create a New Email Template</p>
+            <form class="input-form" method="GET" action="/email-template-editor">
+                <div class="template-name-cont">
+                    <label class="input-label"> Template Name: </label>
+                    <input class="input-text" type="text" name="title" autofocus>
+                </div>
+                <input class="input-submit" type="submit" value="Create">
+            </form>
         </div>
-        <p class="modal-title">Create A New Email Template</p>
-        <form class="input-form" method="GET" action="/email-template-editor">
-            <div class="template-name-cont">
-                <label class="input-label"> Template Name: </label>
-                <input class="input-text" type="text" name="title">
-            </div>
-            <input class="input-submit" type="submit" value="Create">
-        </form>
-    </div>
-</div>
+    </div> -->
 
-<br>
-<br>
+    <br>
+    <br>
 
-<table>
-    <thead>
-        <tr>
-            <td class="subtitle_cont">
-                <b class="subtitle">My Recommendation Templates</b>
-                <button class="addBtn" onclick="openModal()">
-                    <img id="recommendation-button" class="icon" src="/images/add_template.png" width="30" height="10">
-                </button>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-    <% if (!templates.length)  { %>
-    <tr>
-        <td>
-            <div class="template-name">No Existing Recommendation Template</div>
-        </td>
-    </tr>
-    <% } else {
-            for (var template of templates) { %>
-    <tr>
-        <td>
-            <div class="template-name"><%= template.name %></div>
-            <div class="image-container">
-                <img class="icon" src="/images/pencil.png" onclick="editTemplate('<%= template._id %>')"/>
-                <img class="icon" src="/images/delete.png" onclick="deleteRow('<%= template._id %>')"/>
-            </div>
-        </td>
-    </tr>
-    <%      }
-       }  %>
-    </tbody>
-</table>
-<br>
-
-<table class="table-cont">
-    <thead>
-        <tr>
-            <td class="subtitle_cont">
-                <b class="subtitle">My Email Templates</b>
-                <button class="addBtn" onclick="openEmailModal()">
-                    <img id= "email-button" class="icon" src="/images/add_email_template.png" width="50" height="70">
-                </button>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-    <% if (!emailtemplates.length)  { %>
+    <table id="templates-table0">
+        <thead>
+            <tr>
+                <td class="subtitle_cont">
+                    <b class="subtitle">Recommendation Templates</b>
+                </td>
+                <td>
+                    <div class="add-btn" onclick="openModal()">+ Create Template</div>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+        <% if (!templates.length)  { %>
         <tr>
             <td>
-                <div class="template-name">No Existing Email Template</div>
+                <div class="template-name">No Existing Recommendation Template</div>
             </td>
         </tr>
-
-    <% } else {
-        for (var template of emailtemplates) {
-    %>
-    <tr >
-        <td>
-            <div class="template-name"><%= template.title %></div>
-            <div class="image-container">
-                <img class="icon" src="/images/pencil.png" onclick="editEmailTemplate('<%= template._id %>')"/>
-                <img class="icon" src="/images/delete.png" onclick="deleteEmailRow('<%= template._id %>')"/>
-            </div>
-        </td>
-    </tr>
-    <% }} %>
-    </tbody>
-</table>
-
-<br>
-<table class="table-cont">
-    <thead>
-        <tr>
-            <td class="subtitle_cont">
-                <b class="subtitle">My Letter Template</b>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td>
-                <div class="template-name">Previous template will be replaced. Template can then be selected when previewing letter</div>
-                <br>
-
-                <!-- <form id="template-upload"  action="/template-dashboard/uploadLetterTemplate" method="POST" encType="multipart/form-data">
-                    <input type="file" name="file" id="template-upload-file"/>
-                    <input id="submit" type="submit" name="Submit"/>
-                </form> -->
-                <script>
-				  function sendFile(){
-				    // Form Data
-				    var formData = new FormData();
-
-				    var fileSelect = document.getElementById("template-upload-file");
-				    if(fileSelect.files && fileSelect.files.length == 1){
-                  var file = fileSelect.files[0]
-                  formData.set("file", file , file.name);
-                  }
-
-                  // Http Request
-                  var request = new XMLHttpRequest();
-                  request.open('POST', "http://localhost:3000/template-dashboard/uploadLetterTemplate");
-                  request.send(formData);
-
-                  //Submit success
-                  alert('template uploaded');
-                  location.reload();
-                  }
-                </script>
-                <form encType="multipart/form-data">
-                    <input type="file" id="template-upload-file" />
-                    <button type="button" onclick="sendFile()">Submit</button>
-                </form>
-            </td>
-        </tr>
-        <% if (letterTemplate == '') { %>
-        <td>
-            <div class="template-name">No Existing Letter Template</div>
-        </td>
-        <% } else { %>
-        <td>
-            <div class="template-name">Letter Template Uploaded</div>
-        </td>
         <% } %>
-        <tr>
+        </tbody>
+    </table>
+    <div id="templates-page0">
+        <div id="templates-buttons0">
+            <button onclick="javascript:prevPage(0)" id="templates-button-prev0">Prev</button>
+            <div id="templates-page-numbers0"></div>
+            <button onclick="javascript:nextPage(0)" id="templates-button-next0">Next</button>
+        </div>
+    </div>
+    <br>
+
+    <!-- <table id="templates-table1" class="table-cont">
+        <thead>
+            <tr>
+                <td class="subtitle_cont">
+                    <b class="subtitle">Email Templates</b>
+                </td>
+                <td>
+                    <button class="addBtn" onclick="openEmailModal()">
+                        <img id= "email-button" class="icon" src="/images/add_email_template.png" width="50" height="70">
+                    </button>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+        <% if (!emailtemplates.length)  { %>
+            <tr>
+                <td>
+                    <div class="template-name">No Existing Email Template</div>
+                </td>
+            </tr>
+
+        <% } %>
+
+
+        </tbody>
+    </table> -->
+    <!-- <div id="templates-page1">
+        <div id="templates-buttons1">
+            <button onclick="javascript:prevPage(1)" id="templates-button-prev1">Prev</button>
+            <div id="templates-page-numbers1"></div>
+            <button onclick="javascript:nextPage(1)" id="templates-button-next1">Next</button>
+        </div>
+    </div> -->
+
+    <br>
+    <!-- <table class="table-cont">
+        <thead>
+            <tr>
+                <td class="subtitle_cont">
+                    <b class="subtitle">Letter Template</b>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    <div class="template-name">Previous template will be replaced. Template can then be selected when previewing letter</div>
+                    <br> -->
+
+                    <!-- <form id="template-upload"  action="/template-dashboard/uploadLetterTemplate" method="POST" encType="multipart/form-data">
+                        <input type="file" name="file" id="template-upload-file"/>
+                        <input id="submit" type="submit" name="Submit"/>
+                    </form> -->
+                    <!-- <script>
+    				  function sendFile(){
+    				    // Form Data
+    				    var formData = new FormData();
+
+    				    var fileSelect = document.getElementById("template-upload-file");
+    				    if(fileSelect.files && fileSelect.files.length == 1){
+                      var file = fileSelect.files[0]
+                      formData.set("file", file , file.name);
+                      }
+
+                      // Http Request
+                      var request = new XMLHttpRequest();
+                      request.open('POST', "http://localhost:3000/template-dashboard/uploadLetterTemplate");
+                      request.send(formData);
+
+                      //Submit success
+                      alert('template uploaded');
+                      location.reload();
+                      }
+                    </script>
+                    <form encType="multipart/form-data">
+                        <input type="file" id="template-upload-file" />
+                        <button type="button" onclick="sendFile()">Submit</button>
+                    </form>
+                </td>
+            </tr>
+            <% if (letterTemplate == '') { %>
             <td>
-                <div class="template-name"></div>
-                <div class="image-container"></div>
+                <div class="template-name">No Existing Letter Template</div>
             </td>
-        </tr>
-    </tbody>
-</table>
+            <% } else { %>
+            <td>
+                <div class="template-name">Letter Template Uploaded</div>
+            </td>
+            <% } %>
+            <tr>
+                <td>
+                    <div class="template-name"></div>
+                    <div class="image-container"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
 
 </div>
 </body>
@@ -192,11 +188,17 @@
 <script type="text/javascript">
     var recommendation_button = document.getElementById("recommendation-button");
     recommendation_button.innerHTML = '<img src="/images/add_template.png" />';
-    var email_button = document.getElementById("email-button");
-    email_button.innerHTML = '<img src="/images/add_email_template.png" />';
+    // var email_button = document.getElementById("email-button");
+    // email_button.innerHTML = '<img src="/images/add_email_template.png" />';
 </script>
 
 <script>
+    var current_page = [1,1];
+    var records_per_page = 5;
+    var data = [
+        JSON.parse('<%- JSON.stringify(templates) %>'),
+        JSON.parse('<%- JSON.stringify(emailtemplates) %>')
+    ];
     // Get the modal
     var modal = document.getElementById('myModal');
     var modal_email = document.getElementById('myModal_email');
@@ -292,5 +294,158 @@
     function getDestinationRoute(address, params) {
         return address + '?' + $.param(params);
     }
+
+    // Decrement page number
+    function prevPage(tableNumber)
+    {
+        if (current_page[tableNumber] > 1) {
+            changePage(tableNumber, current_page[tableNumber] - 1);
+        }
+    }
+
+    // Increment page number
+    function nextPage(tableNumber)
+    {
+        if (current_page[tableNumber] < numPages(tableNumber)) {
+            changePage(tableNumber, current_page[tableNumber] + 1);
+        }
+    }
+
+    // Return total number of pages
+    function numPages(tableNumber)
+    {
+        return Math.ceil(data[tableNumber].length / records_per_page);
+    }
+
+    // Change to the page number specified by the page parameter
+    function changePage(tableNumber, page)
+    {
+        // Validate page
+        if (page < 1) page = 1;
+        if (page > numPages(tableNumber)) page = numPages(tableNumber);
+
+        current_page[tableNumber] = page;
+
+        // Enable/disable buttons
+        setPageButtons(tableNumber);
+
+        if (!data[tableNumber].length) {
+            // Exit function if there are no recommendations to show
+            return;
+        }
+
+        // Clear old table
+        clearTable(tableNumber);
+
+        // Generate new table
+        generateTable(tableNumber);
+    }
+
+    function clearTable(tableNumber) {
+        var table = document.getElementById("templates-table" + tableNumber);
+
+        for (var i = table.rows.length - 1; i > 0; i--)
+        {
+            table.deleteRow(i);
+        }
+    }
+
+    function generateTable(tableNumber) {
+        var row_count = 1;
+
+        for (var i = (current_page[tableNumber] - 1) * records_per_page;
+                i < (current_page[tableNumber] * records_per_page); i++) {
+            generateRow(row_count, i, tableNumber);
+            row_count++;
+        }
+    }
+
+    function generateRow(row_count, i, tableNumber) {
+        if (i < data[tableNumber].length) {
+            if (tableNumber == 0) {
+                generateRecTemplateRow(row_count, i);
+            } else if (tableNumber == 1) {
+                generateEmailTemplateRow(row_count, i);
+            }
+        } else {
+            generateBlankRow(row_count, tableNumber);
+        }
+    }
+
+    function generateBlankRow(row_count, tableNumber) {
+        var table = document.getElementById("templates-table" + tableNumber);
+        var row = table.insertRow(row_count);
+        var cells = [];
+
+        for (var j = 0; j < 2; j++) {
+            cells.push(row.insertCell(j));
+            cells[j].innerHTML = "";
+        }
+    }
+
+    function generateRecTemplateRow(row_count, i) {
+        var table = document.getElementById("templates-table0");
+        var row = table.insertRow(row_count);
+        var cells = [row.insertCell(0), row.insertCell(1)];
+
+        cells[0].innerHTML = data[0][i].name;
+        cells[1].innerHTML =  "<img class='icon' src='/images/pencil.png' onclick='editTemplate(\"" + data[0][i]._id + "\")'/>";
+        cells[1].innerHTML += "<img class='icon' src='/images/delete.png' onclick='deleteRow(\"" + data[0][i]._id + "\")'/>";
+    }
+
+    function generateEmailTemplateRow(row_count, i) {
+        var table = document.getElementById("templates-table1");
+        var row = table.insertRow(row_count);
+        var cells = [row.insertCell(0), row.insertCell(1)];
+
+        cells[0].innerHTML = data[1][i].title;
+        cells[1].innerHTML =  "<img class='icon' src='/images/pencil.png' onclick='editEmailTemplate(" + JSON.stringify(data[1][i]) + ")'/>";
+        cells[1].innerHTML += "<img class='icon' src='/images/delete.png' onclick='deleteEmailRow(\"" + data[1][i]._id + "\")'/>"
+    }
+
+    function setPageButtons(tableNumber) {
+        var btn_prev = document.getElementById("templates-button-prev" + tableNumber);
+        var btn_next = document.getElementById("templates-button-next" + tableNumber);
+
+        if (current_page[tableNumber] == 1 || !data[tableNumber].length) {
+            btn_prev.disabled = true;
+        } else {
+            btn_prev.disabled = false;
+        }
+
+        if (current_page[tableNumber] == numPages(tableNumber) || !data[tableNumber].length) {
+            btn_next.disabled = true;
+        } else {
+            btn_next.disabled = false;
+        }
+
+        for (var i = 1; i <= numPages(tableNumber); i++) {
+            if (i == current_page[tableNumber]) {
+                document.getElementById("templates-page-" + tableNumber + '-' + i).disabled = true;
+            } else {
+                document.getElementById("templates-page-" + tableNumber + '-' + i).disabled = false;
+            }
+        }
+
+    }
+
+    function createPageButtons(tableNumber) {
+        var page_numbers = document.getElementById("templates-page-numbers" + tableNumber);
+
+        page_numbers.innerHTML = '';
+
+        for (var i = 1; i <= numPages(tableNumber); i++) {
+            page_numbers.innerHTML +=
+                '<button id="templates-page-' + tableNumber + '-' + i + '" onclick="javascript:changePage('
+                    + tableNumber + ', ' + i + ')">' + i + '</button>';
+        }
+    }
+
+    createPageButtons(0);
+    // createPageButtons(1);
+
+    // Show page 1 initially
+    changePage(0, 1);
+    // changePage(1, 1);
 </script>
 </html>

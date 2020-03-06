@@ -1,3 +1,8 @@
+#rec-header {
+    display: flex;
+    background-color: white;
+}
+
 #table0 td {
     height: 60px;
     /* overflow: hidden;
@@ -27,18 +32,24 @@
 }
 
 .add-btn {
-    background-color: #FFFFFF;
+    background-color: #990000;
+    color: white;
     cursor: pointer;
-    display: table-cell;
+    /* display: table-cell; */
     font-size: 15px;
     height: 20px;
-    width:213px;
-    border: 0.1px solid black;
+    width:180px;
+    /* border: 0.1px solid black; */
     position: relative;
     float: right;
     right: 8px;
-    padding: 5px;
+    padding: 9px 0px 5px;
     text-align: center;
+    margin-top: 20px;
+}
+
+.add-btn:hover {
+    color: #FFCC00;
 }
 
 /* The Close Button */

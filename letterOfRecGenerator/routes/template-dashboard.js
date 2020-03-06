@@ -9,9 +9,9 @@ router.get('/', function (req, res, next) {
     if(!fs.existsSync(currLetterTemplate)){
         currLetterTemplate = '';
     }
-    
+
     res.render('pages/template-dashboard', {
-        title: 'TEMPLATE DASHBOARD',
+        title: 'Templates',
         templates: req.user.getTemplates(),
         emailtemplates: req.user.getEmailTemplates(),
         letterTemplate: currLetterTemplate
@@ -25,7 +25,7 @@ router.post('/delete', function (req, res, next) {
             console.log(err);
         } else {
             res.render('pages/template-dashboard', {
-                title: 'TEMPLATE DASHBOARD',
+                title: 'Templates',
                 templates: req.user.getTemplates(),
                 emailtemplates: req.user.getEmailTemplates(),
             });
@@ -40,7 +40,7 @@ router.post('/delete-email', function (req, res, next) {
             console.log(err);
         } else {
             res.render('pages/template-dashboard', {
-                title: 'TEMPLATE DASHBOARD',
+                title: 'Templates',
                 templates: req.user.getTemplates(),
                 emailtemplates: req.user.getEmailTemplates(),
             });

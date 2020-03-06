@@ -9,7 +9,16 @@ var {google} = require('googleapis');
 var querystring = require('querystring');
 var url = require('url');
 var OAuth2 = google.auth.OAuth2;
-var passport = require('./config/passport');
+
+const passport = require('passport');
+
+// Passport Config
+require('./config/passport')(passport);
+
+//Email stuff
+//const exphbs = require('express-handlebars');
+const nodemailer = require('nodemailer');
+
 var fileUpload = require('express-fileupload');
 var mammoth = require('mammoth');
 var opn = require('opn');
@@ -17,6 +26,7 @@ var downloadsFolder = require('downloads-folder');
 var docx = require('docx');
 var fs = require('fs');
 var request = require('request');
+const flash = require('connect-flash');
 
 var createTemplate = require('./routes/template-editor');
 var createEmailTemplate = require('./routes/email-template-editor');
@@ -33,6 +43,8 @@ var archive = require('./routes/archive');
 var response = require('./routes/response');
 var emailLetterPreview = require('./routes/email-letter-preview');
 var docxVar = require('./routes/docx');
+var about = require('./routes/about');
+
 
 var app = express();
 
@@ -50,33 +62,55 @@ app.use(session({
     resave: true,
     saveUninitialized: false
 }));
+
+//Connect Flash
+app.use(flash());
+
+//Global Vars
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+})
+
+// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(fileUpload());
 
 // view engine setup
+
+//app.use(expressLayouts);
+//app.engine('handlebars', exphbs());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 
-app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'https://www.googleapis.com/auth/gmail.send'],
-    prompt: 'select_account'
-}));
 
-app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/login'}), function (req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/recommender-dashboard');
-});
+
+// go to google auth login
+// app.get('/auth/google', passport.authenticate('google', {
+//     scope: ['profile', 'https://www.googleapis.com/auth/gmail.send'],
+//     prompt: 'select_account'
+// }));
+
+// send to rec dashboard if login succeeds
+// app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/login'}), function (req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/recommender-dashboard');
+// });
 
 app.use('/logout', (req, res) => {
     req.logOut();
     res.redirect('/login');
 });
 
+// Routes
 app.use('/', index);
+app.use('/users', users);
 app.use('/template-editor', isAuthenticated, createTemplate);
 app.use('/email-template-editor',isAuthenticated, createEmailTemplate);
 app.use('/form-completed', formCompleted);
@@ -86,11 +120,11 @@ app.use('/email-letter-preview', emailLetterPreview);
 app.use('/login', login);
 app.use('/recommender-dashboard', isAuthenticated, recommenderDashboard);
 app.use('/template-dashboard', isAuthenticated, templateDashboard);
-app.use('/users', isAuthenticated, users);
 app.use('/history', history);
 app.use('/archive', archive);
 app.use('/response', response);
 app.use('/docx', docxVar);
+app.use('/about', isAuthenticated, about);
 
 
 

@@ -16,12 +16,12 @@
 /* Modal Content/Box */
 .modal-content {
     background-color: #FFFFFF;
-    margin-left: auto; 
-    margin-right: auto; 
+    margin-left: auto;
+    margin-right: auto;
     /*margin: 15% auto;*/ /* 15% from the top and centered */
     padding: 40px 50px;
     width: 60%; /* Could be more or less, depending on screen size */
-    border-radius: 10px;
+    border-radius: 0;
     /*height: 230px; */
 }
 
@@ -29,13 +29,13 @@
     /*color: #EB5757;*/
     font-size: 20px;
     /*margin: 0;*/
-    font-weight: bold; 
-    margin: 0px 0px 20px 0px; 
+    font-weight: bold;
+    margin: 0px 0px 20px 0px;
 
 }
 
 .modal-submit {
-    background-color: #FF473A;
+    background-color: #990000;
     font-size: 20px;
     margin-top: 20px;
     width: 200px;
@@ -48,10 +48,10 @@
     clear: both;
     float: left;
     margin-right: 30px;
-    font-size: 15px;
+    font-size: 18px;
     margin-top: 10px;
-    width: 150px; 
-    
+    width: 150px;
+
 }
 
 .template-name-cont {
@@ -64,8 +64,8 @@
     font-size: 15px;
     line-height: 20px;
     flex: 1;
-    padding: 3px 15px; 
-    height: 30px; 
+    padding: 3px 15px;
+    height: 30px;
 
     /*border: 0.5px solid grey;
     border-radius: 4px;*/

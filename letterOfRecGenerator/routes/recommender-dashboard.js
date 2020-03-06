@@ -44,63 +44,139 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var gmailClass = google.gmail('v1');
-    var email_lines = [];
-    var toEmail = req.body.email;
-    var subject = req.body.subject_text;
-    var body = req.body.body_text;
-    body = body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/\n/gi, '<br>');
 
-    if (!toEmail.length) {
-        res.render('pages/recommender-dashboard', {
-            title: 'RECOMMENDER DASHBOARD',
-            statusMessage: 'Please provide a valid email'
+  var currentUser = req.user;
+  var userId = currentUser._id;
+  var subject = req.body.subject_text;
+  var toEmail = req.body.email;
+  var body = req.body.body_text;
+
+  if (!toEmail.length) {
+      res.render('pages/recommender-dashboard', {
+          title: 'Recommendations',
+          statusMessage: 'Please provide a valid email'
+      });
+      return;
+  }
+
+  Form.createForm(toEmail, req.user.getTemplate(req.body.templateId), userId, function (err, form) {
+    if (err) {
+        console.log(`error: ${err}`);
+    } else {
+        req.user.addForm(form, function (err) {
+            if (err) {
+                console.log(`error: ${err}`);
+                return;
+            }
         });
-        return;
-    }
 
-    var currentUser = req.user;
-    var userId = currentUser._id;
+    var url = encodeURI('http://localhost:3000/form-entry/' + form.getLink());
 
-    Form.createForm(toEmail, req.user.getTemplate(req.body.templateId), userId, function (err, form) {
-        if (err) {
-            console.log(`error: ${err}`);
-        } else {
-            req.user.addForm(form, function (err) {
-                if (err) {
-                    console.log(`error: ${err}`);
-                    return;
-                }
-            });
-
-            email_lines.push('To: ' + toEmail);
-            email_lines.push('Content-type: text/html;charset=iso-8859-1');
-            email_lines.push('MIME-Version: 1.0');
-            email_lines.push('Subject: ' + subject);
-            email_lines.push('');
-            var url = encodeURI('http://localhost:3000/form-entry/' + form.getLink());
-            email_lines.push('<p>' + body + '<a href = "' + url + '"> link</a></p>');
-
-            var email = email_lines.join('\r\n').trim();
-            var base64EncodedEmail = new Buffer(email).toString('base64');
-            base64EncodedEmail = base64EncodedEmail.replace(/\+/g, '-').replace(/\//g, '_');
-
-            var auth = new googleAuth();
-            var oauth2Client = new OAuth2(credentials.clientId, credentials.clientSecret, credentials.clientCallback);
-            oauth2Client.setCredentials(req.user.accessToken);
-
-            gmailClass.users.messages.send({
-                access_token: req.user.accessToken,
-                userId: 'me',
-                resource: {
-                    raw: base64EncodedEmail
-                }
-            });
-
-            res.redirect('/recommender-dashboard');
-        }
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+          user: 'letterofrecgenerator@gmail.com', // generated ethereal user
+          pass: 'birzyx-jehmyn-6qewDo'  // generated ethereal password
+      },
+      tls:{
+        rejectUnauthorized:false
+      }
     });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Letter of Rec Generator" <letterofrecgenerator@gmail.com>', // sender address
+        to: req.body.email, // list of receivers
+        subject: req.body.subject_text, // Subject line
+        text: req.body.body_text + ' ' + url, // plain text body
+        html: '<p>' + req.body.body_text + ' ' + url + '</p>'// html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        res.render('contact', {msg:'Email has been sent'});
+    });
+
+    res.redirect('/recommender-dashboard');
+    }
+  });
 });
+//
+//
+//     var gmailClass = google.gmail('v1');
+//     var email_lines = [];
+//     var toEmail = req.body.email;
+//     var subject = req.body.subject_text;
+//     var body = req.body.body_text;
+//
+//     body = body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/\n/gi, '<br>');
+//
+//     if (!toEmail.length) {
+//         res.render('pages/recommender-dashboard', {
+//             title: 'Recommendations',
+//             statusMessage: 'Please provide a valid email'
+//         });
+//         return;
+//     }
+//
+//     var currentUser = req.user;
+//     var userId = currentUser._id;
+//
+//     console.log(currentUser)
+//     console.log(userId)
+//
+//     Form.createForm(toEmail, req.user.getTemplate(req.body.templateId), userId, function (err, form) {
+//         if (err) {
+//             console.log(`error: ${err}`);
+//         } else {
+//             req.user.addForm(form, function (err) {
+//                 if (err) {
+//                     console.log(`error: ${err}`);
+//                     return;
+//                 }
+//             });
+//
+//             email_lines.push('To: ' + toEmail);
+//             email_lines.push('Content-type: text/html;charset=iso-8859-1');
+//             email_lines.push('MIME-Version: 1.0');
+//             email_lines.push('Subject: ' + subject);
+//             email_lines.push('');
+//             var url = encodeURI('http://localhost:3000/form-entry/' + form.getLink());
+//             email_lines.push('<p>' + body + '<a href = "' + url + '"> link</a></p>');
+//
+//             var email = email_lines.join('\r\n').trim();
+//             var base64EncodedEmail = new Buffer(email).toString('base64');
+//             base64EncodedEmail = base64EncodedEmail.replace(/\+/g, '-').replace(/\//g, '_');
+//
+//
+//
+//
+//             var auth = new googleAuth();
+//             var oauth2Client = new OAuth2(credentials.clientId, credentials.clientSecret, credentials.clientCallback);
+//             oauth2Client.setCredentials(req.user.accessToken);
+//
+//             // sending email
+//             gmailClass.users.messages.send({
+//                 access_token: req.user.accessToken,
+//                 userId: 'me',
+//                 resource: {
+//                     raw: base64EncodedEmail
+//                 }
+//             });
+//
+//             res.redirect('/recommender-dashboard');
+//         }
+//     });
+// });
 
 router.post('/delete', function (req, res, next) {
     var user = req.user;

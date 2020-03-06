@@ -12,80 +12,83 @@
 <header>
     <% include ../partials/header %>
 </header>
-<p class="title">RECOMMENDATIONS</p>
-<div id = "DefaultEmailModal" Class="modal">
-    <div class="modal-content">
-        <div class="close-container">
-            <span class="close" onclick="closeSaveModal()">&times;</span>
-        </div>
-        <p class="modal-title">Save it as a default template?</p>
-        <br>
-        <br>
-        <button id = "yes" onclick="saveDefaultTemplate()"> Yes </button>
-        <button id = "no" onclick="closeSaveModal()"> No </button>
+<div class="body">
+    <div id="rec-header">
+        <p class="title">Recommendations</p>
+        <% if (templates.length) { %>
+            <div class="add-btn" onclick="openModal()">+ Create Recommendation</div>
+        <% } %>
     </div>
-</div>
-
-<div id="myModal" class="modal">
-    <div id="recommendations-modal" class="modal-content">
-        <div class="close-container">
-            <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <p class="modal-title">Send Email</p>
-        <form class="input-form" method="POST" action="/recommender-dashboard">
-            <div class="input-container">
-                <input class="input-text" type="text" name="email" placeholder="Enter email address">
-                <select class="input-dropdown" name="templateId">
-                    <% for (var template of templates) { %>
-                    <option value=<%= template._id %>><%= template.name %></option>
-                    <% } %>
-                </select>
+    <div id = "DefaultEmailModal" Class="modal">
+        <div class="modal-content">
+            <div class="close-container">
+                <span class="close" onclick="closeSaveModal()">&times;</span>
             </div>
+            <p class="modal-title">Save it as a default template?</p>
             <br>
             <br>
-            <div class="email-container">
+            <button id = "yes" onclick="saveDefaultTemplate()"> Yes </button>
+            <button id = "no" onclick="closeSaveModal()"> No </button>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div id="recommendations-modal" class="modal-content">
+            <div class="close-container">
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <p class="modal-title">Send Email</p>
+            <form class="input-form" method="POST" action="/recommender-dashboard">
                 <div class="input-container">
-                    <p class="subject-text"> Subject: </p>
-                    <input class="input-text" id="subject" type="text" name="subject_text" value="<%= subject%>" >
-                    <!-- <button id = "Edit"> Edit </button> -->
-                    <button id = "Save" type="button" onclick="openSaveDefaultEmailModal()" > Save </button>
+                    <input class="input-text" type="text" name="email" placeholder="Enter email address" autofocus>
+                    <select class="input-dropdown" name="templateId">
+                        <% for (var template of templates) { %>
+                        <option value=<%= template._id %>><%= template.name %></option>
+                        <% } %>
+                    </select>
                 </div>
                 <br>
-                <textarea id="body-text" name="body_text" value = "<%= body%>" ><%= body %></textarea>
-            </div>
-            <input class="input-submit" type="submit" value="Send">
-        </form>
+                <br>
+                <div class="email-container">
+                    <div class="input-container">
+                        <p class="subject-text"> Subject: </p>
+                        <input class="input-text" id="subject" type="text" name="subject_text" value="<%= subject%>" >
+                        <!-- <button id = "Edit"> Edit </button> -->
+                        <button id = "Save" type="button" onclick="openSaveDefaultEmailModal()" > Save </button>
+                    </div>
+                    <br>
+                    <textarea id="body-text" name="body_text" value = "<%= body%>" ><%= body %></textarea>
+                </div>
+                <input class="input-submit" type="submit" value="Send">
+            </form>
+        </div>
     </div>
-</div>
 
-<div class="recommendations">
-    <% if (templates.length) { %>
-        <div class="add-btn" onclick="openModal()">+ Create Recommendation</div>
-    <% } %>
-    <table id="table0">
-        <thead>
-        <tr>
-            <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
-            <td><a href="javascript:sortByEmail(0)">Name</a></td>
-            <td><a href="javascript:sortByOrg(0)">Organization</a></td>
-            <td><a href="javascript:sortByTemplate(0)">Template</a></td>
-            <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
-            <td class="icons"></td>
-        </tr>
-        </thead>
-        <tbody id="table-body">
-            <% if (!forms.length) { %>
+    <div class="recommendations">
+        <table id="table0">
+            <thead>
             <tr>
-                <td colspan="6" style="text-align: center;">No Existing Recommendations</td>
+                <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
+                <td><a href="javascript:sortByEmail(0)">Name</a></td>
+                <td><a href="javascript:sortByOrg(0)">Organization</a></td>
+                <td><a href="javascript:sortByTemplate(0)">Template</a></td>
+                <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
+                <td class="icons"></td>
             </tr>
-            <% } %>
-        </tbody>
-    </table>
-    <div id="page0">
-        <div id="buttons0">
-            <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
-            <div id="page-numbers0"></div>
-            <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
+            </thead>
+            <tbody id="table-body">
+                <% if (!forms.length) { %>
+                <tr>
+                    <td colspan="6" style="text-align: center;">No Existing Recommendations</td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <div id="page0">
+            <div id="buttons0">
+                <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
+                <div id="page-numbers0"></div>
+                <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
+            </div>
         </div>
     </div>
 </div>

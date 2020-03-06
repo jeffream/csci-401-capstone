@@ -37,115 +37,116 @@
         <% include ../partials/header %>
     </header>
 
+    <div class="body">
+        <div class = "archive">
 
-    <div class = "archive">
+        <p class="title"><%= title %></p>
+        <br>
+        <br>
 
-    <p class="title"><%= title %></p>
-    <br>
-    <br>
-
-    <table class="archive-table">
-        <thead>
-            <td class="center"><p class="archive-title">Archived Recommendations</p></td>
-            <button id ="button-show-hide" onclick="showTable('table0-div')">+</button>
-        </thead>
-    </table>
-    <div id="table0-div" style="display: none;">
-        <table id="table0" class="archive-table">
+        <table class="archive-table">
             <thead>
-                <tr>
-                    <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
-                    <td><a href="javascript:sortByEmail(0)">Name</a></td>
-                    <td><a href="javascript:sortByOrg(0)">Organization</a></td>
-                    <td><a href="javascript:sortByTemplate(0)">Template</a></td>
-                    <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
-                    <td class="icons"></td>
-                </tr>
+                <td class="center"><p class="archive-title">Archived Recommendations</p></td>
+                <button id ="button-show-hide0" onclick="showTable(0)">+</button>
             </thead>
-            <tbody>
-                <% if (!forms.length) { %>
-                <tr>
-                    <td colspan="6" style="text-align: center;">No Archived Recommendations</td>
-                </tr>
+        </table>
+        <div id="table0-div" style="display: none;">
+            <table id="table0" class="archive-table">
+                <thead>
+                    <tr>
+                        <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
+                        <td><a href="javascript:sortByEmail(0)">Name</a></td>
+                        <td><a href="javascript:sortByOrg(0)">Organization</a></td>
+                        <td><a href="javascript:sortByTemplate(0)">Template</a></td>
+                        <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
+                        <td class="icons"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (!forms.length) { %>
+                    <tr>
+                        <td colspan="6" style="text-align: center;">No Archived Recommendations</td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <div id="page0">
+                <div id="buttons0">
+                    <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
+                    <div id="page-numbers0"></div>
+                    <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+       <table class="archive-table">
+            <thead>
+                <td class="center"><p class="archive-title">Archived Recommendation Templates</p></td>
+                <button id ="button-show-hide1" onclick="showTable(1)">+</button>
+            </thead>
+        </table>
+        <div id = "table1-div" style="display: none;">
+            <table id="table1" class="archive-table">
+                <thead>
+                    <tr>
+                        <td><a href="javascript:sortByName(1)">Name</a></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (!templates.length) { %>
+                    <tr>
+                        <td colspan="6" style="text-align: center;"><div class="template-name">No Archived Recommendation Templates</div></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <div id="page1">
+                <div id="buttons1">
+                    <button onclick="javascript:prevPage(1)" id="button-prev1">Prev</button>
+                    <div id="page-numbers1"></div>
+                    <button onclick="javascript:nextPage(1)" id="button-next1">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+    <!--    <table class="archive-table">
+            <thead>
+                <td class="center"><p class="archive-title">Archived Email Templates</p></td>
+                <button id ="button-show-hide2" onclick="showTable(2)">+</button>
+            </thead>
+        </table>
+        <div id="table2-div" style="display: none;">
+            <table id="table2" class="archive-table">
+                <thead>
+                    <tr>
+                        <td><a href="javascript:sortByTitle(2)">Name</a></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                <% if (!emailtemplates.length) { %>
+                    <tr>
+                        <td>
+                            <div class="template-name">No Existing letter Template</div>
+                        </td>
+                    </tr>
                 <% } %>
-            </tbody>
-        </table>
-        <div id="page0">
-            <div id="buttons0">
-                <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
-                <div id="page-numbers0"></div>
-                <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
+                </tbody>
+            </table>
+            <div id="page2">
+                <div id="buttons2">
+                    <button onclick="javascript:prevPage(2)" id="button-prev2">Prev</button>
+                    <div id="page-numbers2"></div>
+                    <button onclick="javascript:nextPage(2)" id="button-next2">Next</button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <br>
-
-    <table class="archive-table">
-        <thead>
-            <td class="center"><p class="archive-title">Archived Recommendation Templates</p></td>
-            <button id ="button-show-hide" onclick="showTable('table1-div')">+</button>
-        </thead>
-    </table>
-    <div id = "table1-div" style="display: none;">
-        <table id="table1" class="archive-table">
-            <thead>
-                <tr>
-                    <td><a href="javascript:sortByName(1)">Name</a></td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (!templates.length) { %>
-                <tr>
-                    <td colspan="6" style="text-align: center;"><div class="template-name">No Archived Recommendation Templates</div></td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
-        <div id="page1">
-            <div id="buttons1">
-                <button onclick="javascript:prevPage(1)" id="button-prev1">Prev</button>
-                <div id="page-numbers1"></div>
-                <button onclick="javascript:nextPage(1)" id="button-next1">Next</button>
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <table class="archive-table">
-        <thead>
-            <td class="center"><p class="archive-title">Archived Email Templates</p></td>
-            <button id ="button-show-hide" onclick="showTable('table2-div')">+</button>
-        </thead>
-    </table>
-    <div id="table2-div" style="display: none;">
-        <table id="table2" class="archive-table">
-            <thead>
-                <tr>
-                    <td><a href="javascript:sortByTitle(2)">Name</a></td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-            <% if (!emailtemplates.length) { %>
-                <tr>
-                    <td>
-                        <div class="template-name">No Existing letter Template</div>
-                    </td>
-                </tr>
-            <% } %>
-            </tbody>
-        </table>
-        <div id="page2">
-            <div id="buttons2">
-                <button onclick="javascript:prevPage(2)" id="button-prev2">Prev</button>
-                <div id="page-numbers2"></div>
-                <button onclick="javascript:nextPage(2)" id="button-next2">Next</button>
-            </div>
-        </div>
-    </div>
+    </div> -->
 
     <script>
         var current_page = [1,1,1];
@@ -399,12 +400,15 @@
             return address + '?' + $.param(params);
         }
 
-        function showTable(id){
-            var x = document.getElementById(id);
-            if (x.style.display === "none") {
-                x.style.display = "block";
+        function showTable(tableNumber){
+            var tableDiv = document.getElementById('table' + tableNumber + '-div');
+            var button = document.getElementById('button-show-hide' + tableNumber);
+            if (tableDiv.style.display === "none") {
+                tableDiv.style.display = "block";
+                button.innerHTML = '–';
             } else {
-                x.style.display = "none";
+                tableDiv.style.display = "none";
+                button.innerHTML = '+';
             }
         }
 
@@ -492,9 +496,16 @@
             var row = table.insertRow(row_count);
             var cells = [];
 
-            for (var j = 0; j < 6; j++) {
-                cells.push(row.insertCell(j));
-                cells[j].innerHTML = "";
+            if (tableNumber == 0) {
+                for (var j = 0; j < 6; j++) {
+                    cells.push(row.insertCell(j));
+                    cells[j].innerHTML = "";
+                }
+            } else {
+                for (var j = 0; j < 2; j++) {
+                    cells.push(row.insertCell(j));
+                    cells[j].innerHTML = "";
+                }
             }
         }
 
@@ -598,12 +609,12 @@
 
         createPageButtons(0);
         createPageButtons(1);
-        createPageButtons(2);
+        // createPageButtons(2);
 
         // Show page 1 initially
         changePage(0, 1);
         changePage(1, 1);
-        changePage(2, 1);
+        // changePage(2, 1);
     </script>
 </body>
 </html>

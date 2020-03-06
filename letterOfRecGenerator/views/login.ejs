@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://use.typekit.net/ebq4wgm.css">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="/css/login.css" />
+  <head>
+      <a href="https://www.usc.edu" target="_blank">
+          <img id ="usc-logo" src="/images/usc_logo_big.png" alt="University of Southern California" style="height:100px;"/>
+      </a>
+
+  </head>
+    <div class="login-page">
+      <% include ./partials/messages %>
+      <div class="form">
+        <p align="center" class="title">Letter of Recommendation</p>
+        <form class="login-form" action="/users/login" method="POST">
+          <input type="email" id="email" name="email" class="form-control" placeholder="email"/>
+          <input type="password" id="password" name="password" class="form-control" placeholder="password"/>
+          <button type="submit">Sign in</button>
+          <p class="message">Not registered? <a href="/users/register">Create an account</a></p>
+        </form>
+      </div>
+    </div>
+</html>

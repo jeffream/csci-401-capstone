@@ -118,10 +118,10 @@ FormSchema.methods.setOrganization = function (organization) {
 };
 
 /**
- * Happens when student submits his/her response. 
+ * Happens when student submits his/her response.
  * Receives the response, updates the response in the form,
  * check if there are multiple organizations, and if there are,
- * create duplicates with seperate organization names and 
+ * create duplicates with separate organization names and
  * add the form._id to the correct owner (user).
  * @param id - id of form
  * @param responseData - responseData collected from the submitted response
@@ -140,10 +140,10 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
         } else {
             var responses = [];
 
-            form['template']['questions'].forEach(function (question) {  
-    
+            form['template']['questions'].forEach(function (question) {
+
                 var response = responseData[question.number - 1];
-                /* If the question has a organizationFlag that is true, 
+                /* If the question has a organizationFlag that is true,
                 attempt to extract the organizations (seperated with , )
                 and make additional Forms with the different organization names */
                 //If response is empty
@@ -180,7 +180,7 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
                         for (let k = 0; k < numOrganizations; k++) {
                             fieldsByForm[k] = {
                                 num: k,
-                                fields: [] // 
+                                fields: [] //
                             };
                         }
 
@@ -205,7 +205,7 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
                                 responses.push({
                                     tag: allFieldsInForm[k].fieldTag,
                                     response: allFieldsInForm[k].response
-                                }); 
+                                });
                             }
                         }
                 } else { // checkbox (?)
@@ -238,7 +238,7 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
                 // if there is more than one organization, then duplicate form
                     // for each other org, duplicate the form
                     for (let orgIndex = 1; orgIndex < totalForms; orgIndex++) {
-                        /* Here we create duplicate forms and then add the form._id to the 
+                        /* Here we create duplicate forms and then add the form._id to the
                         owner of the original form, which is the user. */
                         var promise = Form.create({
                             email: savedForm.email,
@@ -272,7 +272,7 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
                                                 if (duplicateResponse[j].tag === allFieldsInForm[k].fieldTag) {
                                                     duplicateResponse[j].response = allFieldsInForm[k].response;
                                                 }
-                                            }  
+                                            }
                                         }
                                     }
 
@@ -294,7 +294,7 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
                     } else {
                         if(savedFormIdArr.length > 0){
                             for(let i=0; i < savedFormIdArr.length; i++) {
-                                user.forms.push(savedFormIdArr[i]);                            
+                                user.forms.push(savedFormIdArr[i]);
                             }
                             user.save();
                         }
@@ -302,7 +302,7 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
                 });
             }, function(err) {
                 console.log("promise error: " + err);
-            });  
+            });
         }
         cb(err);
     });
@@ -345,7 +345,7 @@ FormSchema.methods.addEmailHistory_Form = function (email, cb) {
     var newTemplate = this.emailhistory[this.emailhistory.length - 1];
     this.save(function (err, id) {
         cb(err, newTemplate.getId());
-    })    
+    })
 };
 
 FormSchema.methods.getFormattedQuestions = function (id, cb) {
@@ -353,7 +353,7 @@ FormSchema.methods.getFormattedQuestions = function (id, cb) {
 
     var formattedQuestions = [];
     this.template.questions.forEach(function (question) {
-        if (question.type === "Radio Button" || question.type === "Text") {  
+        if (question.type === "Radio Button" || question.type === "Text") {
             formattedQuestions.push({tag: question.tag, question: question.question});
         } else if (question.type === "Custom") { // custom
                 var customQuestion = question.question;
@@ -362,7 +362,7 @@ FormSchema.methods.getFormattedQuestions = function (id, cb) {
                     customQuestion += question.options[i].option;
                     formattedQuestions.push({tag: question.options[i].tag, question: customQuestion})
                     customQuestion = question.question; //Reupdate to original question
-                }  
+                }
         } else { // checkbox
             var checkboxQuestion = question.question;
             for(let i = 0; i < question.options.length; i++) {

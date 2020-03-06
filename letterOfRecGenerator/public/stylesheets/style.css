@@ -1,10 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@font-face {
+	font-family: 'National';
+	src: url('../fonts/NationalWeb-Regular.eot');
+	src: local(':)'),
+	url('../fonts/NationalWeb-Regular.woff') format('woff'),
+	url('../fonts/NationalWeb-Regular.ttf') format('truetype'),
+	url('../fonts/NationalWeb-Regular.svg') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}
 
 body {
-  font: 14px "Montserrat", Helvetica, Arial, sans-serif;
+  font-family: National;
   margin: 0px;
 }
 
 a {
-  color: #00B7FF;
+  color: #990000;
+  text-decoration: none;
 }
