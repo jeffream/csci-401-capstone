@@ -41,6 +41,8 @@ router.post('/login', function (req, res, next) {
     })
     (req, res);
 
+    res.redirect('recommender-dashboard');
+
 });
 
 // Logout handle
