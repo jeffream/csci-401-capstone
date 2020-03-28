@@ -7,28 +7,28 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy   = passportJWT.Strategy;
 const User = require('../models/user');
 
-passport.use(new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'password'
-    },
-    function (email, password, cb) {
+passport.use(
+  new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+    // Match user
+    User.findOne({
+      email: email
+    }).then(user => {
+      if (!user) {
+        return done(null, false, { message: 'That email is not registered' });
+      }
 
-        //Assume there is a DB module pproviding a global UserModel
-        return User.findOne({email, password})
-            .then(user => {
-                if (!user) {
-                    return cb(null, false, {message: 'Incorrect email or password.'});
-                }
-
-                return cb(null, user, {
-                    message: 'Logged In Successfully'
-                });
-            })
-            .catch(err => {
-                return cb(err);
-            });
-    }
-));
+      // Match password
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+        if (isMatch) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: 'Password incorrect' });
+        }
+      });
+    });
+  })
+);
 
 passport.use(new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
