@@ -16,10 +16,10 @@ router.get('/login', (req, res) => res.render('login'));
 router.post('/login', function (req, res, next) {
 
     passport.authenticate('local', {
-      session: false
-      // successRedirect: '/recommender-dashboard',
-      // failureRedirect: '/auth/login',
-      // failureFlash: true
+      session: false,
+      successRedirect: '/recommender-dashboard',
+      failureRedirect: '/auth/login',
+      failureFlash: true
     }, (err, user, info) => {
         console.log(err);
         if (err || !user) {
@@ -40,9 +40,6 @@ router.post('/login', function (req, res, next) {
         });
     })
     (req, res);
-
-    res.redirect('../routes/recommender-dashboard');
-
 });
 
 // Logout handle
