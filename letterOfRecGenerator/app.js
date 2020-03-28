@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const app = express();
-const User = require('./model/user');
+const User = require('./models/user');
 
 mongoose.connect('mongodb://127.0.0.1:27017/passport-jwt', { useMongoClient : true });
 mongoose.connection.on('error', error => console.log(error) );
