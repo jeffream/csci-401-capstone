@@ -16,6 +16,10 @@ app.use( bodyParser.urlencoded({ extended : false }) );
 const routes = require('./routes/routes');
 const secureRoute = require('./routes/secure-routes');
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 app.use('/', routes);
 //We plugin our jwt strategy as a middleware so only verified users can access this route
 app.use('/user', passport.authenticate('jwt', { session : false }), secureRoute );
