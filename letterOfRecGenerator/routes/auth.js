@@ -34,7 +34,7 @@ router.post('/login', function (req, res, next) {
                 res.send(err);
             }
 
-            const token = jwt.sign(user.email, 'jwt_secret', {expiresIn: '24h'});
+            const token = jwt.sign(user.email, 'jwt_secret', {expiresIn: '60s'});
 
             return res.json({user, token});
         });
