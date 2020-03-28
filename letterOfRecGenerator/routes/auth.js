@@ -41,7 +41,7 @@ router.post('/login', function (req, res, next) {
     })
     (req, res);
 
-    res.redirect('recommender-dashboard');
+    res.redirect('../routes/recommender-dashboard');
 
 });
 
