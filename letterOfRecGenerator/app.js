@@ -10,6 +10,7 @@ mongoose.connection.on('error', error => console.log(error) );
 mongoose.Promise = global.Promise;
 
 require('./config/auth');
+hi
 
 app.use( bodyParser.urlencoded({ extended : false }) );
 
