@@ -130,7 +130,7 @@ app.use('/form-entry', formEntry);
 app.use('/letter-preview', letterPreview);
 app.use('/email-letter-preview', emailLetterPreview);
 //app.use('/login', login);
-app.use('/recommender-dashboard', isAuthenticated, recommenderDashboard);
+app.use('/recommender-dashboard', recommenderDashboard);
 app.use('/template-dashboard', isAuthenticated, templateDashboard);
 app.use('/history', history);
 app.use('/archive', archive);
