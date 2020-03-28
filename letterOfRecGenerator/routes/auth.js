@@ -33,8 +33,8 @@ router.post('/login', function (req, res, next) {
             const token = jwt.sign(user.email, 'jwt_secret');
             return res.json({user, token});
         });
-        res.redirect('../routes/recommender-dashboard');
     })
+    res.redirect('../routes/recommender-dashboard')
     (req, res);
 });
 
