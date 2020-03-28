@@ -130,7 +130,7 @@ app.use('/form-entry', formEntry);
 app.use('/letter-preview', letterPreview);
 app.use('/email-letter-preview', emailLetterPreview);
 //app.use('/login', login);
-app.use('/recommender-dashboard', passport.authenticate('jwt', {session: false}), recommenderDashboard);
+app.use('/recommender-dashboard', isAuthenticated, recommenderDashboard);
 app.use('/template-dashboard', isAuthenticated, templateDashboard);
 app.use('/history', history);
 app.use('/archive', archive);
@@ -167,10 +167,27 @@ app.use(function (err, req, res, next) {
 
 // authenticate function
 function isAuthenticated(req, res, next) {
-    if (req.user) {
-        return next();
-    }
-    res.redirect('/login');
+  var token = req.cookies["id"];
+  var sign = config[env].signature;
+
+  jwt.verify(token, sign, function (err, decoded) {
+      if (err || !decoded) {
+          console.log("invalid token");
+          res.send(403);
+      }
+      else if (decoded && (!decoded.access || decoded.access == "unauthenticated")) {
+          console.log("unauthenticated token");
+          res.send(403);
+      }
+      else if (decoded && decoded.access == "authenticated") {
+          console.log("valid token")
+          next();
+      }
+      else {
+          console.log("something suspicious")
+          res.send(403);
+      }
+  });
 }
 
 
