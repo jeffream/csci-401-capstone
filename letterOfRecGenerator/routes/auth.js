@@ -34,7 +34,7 @@ router.post('/login', function (req, res, next) {
             return res.json({user, token});
         });
     })
-    res.redirect('../routes/recommender-dashboard');
+    res.redirect('../recommender-dashboard');
     (req, res);
 });
 
