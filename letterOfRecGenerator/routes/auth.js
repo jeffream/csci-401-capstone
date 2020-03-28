@@ -16,12 +16,9 @@ router.get('/login', (req, res) => res.render('login'));
 router.post('/login', function (req, res, next) {
 
     passport.authenticate('local', {
-      session: false,
-      successRedirect: '/recommender-dashboard',
-      failureRedirect: '/auth/login',
-      failureFlash: true
+      session: false
     }, (err, user, info) => {
-        console.log(err);
+        console.log('is there an error: ', err);
         if (err || !user) {
             return res.status(400).json({
                 message: info ? info.message : 'Login failed',
@@ -33,9 +30,7 @@ router.post('/login', function (req, res, next) {
             if (err) {
                 res.send(err);
             }
-
             const token = jwt.sign(user.email, 'jwt_secret');
-
             return res.json({user, token});
         });
     })
