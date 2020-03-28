@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET user profile. */
-router.get('/profile', function(req, res, next) {
+router.get('/recommender-dashboard', function(req, res, next) {
     res.send(req.user);
 });
 
