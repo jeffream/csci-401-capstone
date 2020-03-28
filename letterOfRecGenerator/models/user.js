@@ -7,8 +7,10 @@ var Schema = db.Schema;
 
 var UserSchema = new Schema({
     id: String,
+    username: String, 
     displayName: String,
     accessToken: String,
+    username: String,
     templates: [Template.schema],
     deactivatedTemplates: [Template.schema],
     deactivatedEmailTemplates: [Email.schema],
@@ -55,22 +57,9 @@ UserSchema.statics.findUser = function (id, cb) {
     });
 };
 
-UserSchema.statics.findUser2 = function (id) {
-      // db.model('User').findOne({'_id': id}).then(user => {
-      //
-      //   console.log('UserID is: ', id);
-      //   if (user) {
-      //     console.log('That user does exist boiiii!');
-      //     return this.model('User', new User(user).exec(cb);
-      //   }
-      //   else {
-      //     console.log('That user does not exist ya big idiot');
-      //   }
-      // });
-};
-
 UserSchema.statics.createUser = function (id, cb) {
-    User.create({id: id,
+    User.create({
+        id: id,
         linkTemplate_subject: 'Invitation to Fill Recommendation Letter Questionnaire',
         linkTemplate_body: 'Please click the following questionnaire '}, cb);
 };

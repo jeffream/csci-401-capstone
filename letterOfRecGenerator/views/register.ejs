@@ -8,7 +8,7 @@
     <div class="form">
     <p align="center" class="title">Letter of Recommendation</p>
     <% include ./partials/messages %>
-    <form  class="login-form" action="/users/register" method="POST">
+    <form  class="login-form" action="/auth/register" method="POST">
         <input
           type="text"
           id="name"
@@ -43,7 +43,7 @@
         />
         <button type="submit">Register</button>
     </form>
-    <p class="message">Have An Account? <a href="/users/login">Login</a></p>
+    <p class="message">Have An Account? <a href="/auth/login">Login</a></p>
     </div>
   </div>
 </html>

@@ -4,26 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+// Passport Config
+const passport = require('passport');
+require('./config/passport');
+//require('./config/passport')(passport); <-- similar line to above, see which one to use
+//var LocalStrategy = require('passport-local').Strategy;
+
+// Other variables
 var session = require('express-session');
 var {google} = require('googleapis');
 var querystring = require('querystring');
 var url = require('url');
 var OAuth2 = google.auth.OAuth2;
-
-var LocalStrategy = require('passport-local').Strategy;
-
-const passport = require('passport');
-
-// Passport Config
-require('./config/passport')(passport);
-
-//Email stuff
-//const exphbs = require('express-handlebars');
+const cors = require('cors');
 const nodemailer = require('nodemailer');
-
-//CORS
-//const cors = require('cors');
-
 var fileUpload = require('express-fileupload');
 var mammoth = require('mammoth');
 var opn = require('opn');
@@ -32,15 +27,12 @@ var docx = require('docx');
 var fs = require('fs');
 var request = require('request');
 const flash = require('connect-flash');
-//const expressLayouts = require('express-ejs-layouts');
+
 
 var app = express();
 
-// handle CORS policy
-// app.options('*', cors());
-// app.use(cors());
 
-// Add headers for CORS
+// Set headers
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -61,38 +53,28 @@ app.use(function (req, res, next) {
 });
 
 
-var createTemplate = require('./routes/template-editor');
-var createEmailTemplate = require('./routes/email-template-editor');
-var formCompleted = require('./routes/form-completed');
-var formEntry = require('./routes/form-entry');
-var index = require('./routes/login');
-var letterPreview = require('./routes/letter-preview');
-var login = require('./routes/login');
-var recommenderDashboard = require('./routes/recommender-dashboard');
-var templateDashboard = require('./routes/template-dashboard');
-var users = require('./routes/users');
-var history = require('./routes/history');
-var archive = require('./routes/archive');
-var response = require('./routes/response');
-var emailLetterPreview = require('./routes/email-letter-preview');
-var docxVar = require('./routes/docx');
-var about = require('./routes/about');
-
-
 // Middleware for authentication & express
-app.use(logger('common'));
+app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ <-- see if replacing this function breaks anything
+//     extended: true,
+//     limit: '50mb'
+// }));
 app.use(bodyParser.urlencoded({
-    extended: true,
-    limit: '50mb'
+    extended: false,
 }));
 app.use(session({
     secret: 'anything',
     resave: true,
     saveUninitialized: false
 }));
+
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Connect Flash
 app.use(flash());
@@ -105,59 +87,49 @@ app.use((req, res, next) => {
   next();
 })
 
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-// passport.use(new LocalStrategy(user.authenticate()));
-// passport.serializeUser(function(user, done) {
-//     console.log('serializing user: ');
-//     console.log(user);
-//     done(null, user._id);
-//   });
-// ADDeD
-
-app.use(fileUpload());
 
 // view engine setup
-
-// app.use(expressLayouts);
-// app.engine('handlebars', exphbs());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 
+// file upload handler
+app.use(fileUpload());
 
 
-// go to google auth login
-// app.get('/auth/google', passport.authenticate('google', {
-//     scope: ['profile', 'https://www.googleapis.com/auth/gmail.send'],
-//     prompt: 'select_account'
-// }));
+// Routes Variables
+var createTemplate = require('./routes/template-editor');
+var createEmailTemplate = require('./routes/email-template-editor');
+var formCompleted = require('./routes/form-completed');
+var formEntry = require('./routes/form-entry');
+var index = require('./routes/login');
+var letterPreview = require('./routes/letter-preview');
+//var login = require('./routes/login');
+var recommenderDashboard = require('./routes/recommender-dashboard');
+var templateDashboard = require('./routes/template-dashboard');
+var users = require('./routes/users');
+var history = require('./routes/history');
+var archive = require('./routes/archive');
+var response = require('./routes/response');
+var emailLetterPreview = require('./routes/email-letter-preview');
+var docxVar = require('./routes/docx');
+var about = require('./routes/about');
+var auth = require('./routes/auth');
 
-// send to rec dashboard if login succeeds
-// app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/login'}), function (req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/recommender-dashboard');
-// });
-
-app.use('/logout', (req, res) => {
-    req.logOut();
-    res.redirect('/login');
-});
 
 // Routes
 app.use('/', index);
-app.use('/users', users);
+app.use('/users', passport.authenticate('jwt', {session: false}), users);
+app.use('/auth', auth);
 app.use('/template-editor', isAuthenticated, createTemplate);
 app.use('/email-template-editor',isAuthenticated, createEmailTemplate);
 app.use('/form-completed', formCompleted);
 app.use('/form-entry', formEntry);
 app.use('/letter-preview', letterPreview);
 app.use('/email-letter-preview', emailLetterPreview);
-app.use('/login', login);
+//app.use('/login', login);
 app.use('/recommender-dashboard', isAuthenticated, recommenderDashboard);
 app.use('/template-dashboard', isAuthenticated, templateDashboard);
 app.use('/history', history);
@@ -175,8 +147,11 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-
-
+// logout handler
+app.use('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/login');
+});
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -190,12 +165,11 @@ app.use(function (err, req, res, next) {
     res.render('pages/error');
 });
 
-
+// authenticate function
 function isAuthenticated(req, res, next) {
     if (req.user) {
         return next();
     }
-    return next(); // added this to test
     res.redirect('/login');
 }
 
