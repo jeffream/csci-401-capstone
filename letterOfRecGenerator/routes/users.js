@@ -3,10 +3,10 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send(req.user);
+  res.send('User is: ', req.user);
 });
 
-/* GET user profile. */
+/* GET user dashboard */
 router.get('/recommender-dashboard', function(req, res, next) {
     res.send(req.user);
 });
