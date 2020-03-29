@@ -168,9 +168,8 @@ app.use(function (err, req, res, next) {
 // authenticate function
 function isAuthenticated(req, res, next) {
   var token = req.cookies["id"];
-  var sign = config[env].signature;
 
-  jwt.verify(token, sign, function (err, decoded) {
+  jwt.verify(token, 'jwt_secret', function (err, decoded) {
       if (err || !decoded) {
           console.log("invalid token");
           res.send(403);
