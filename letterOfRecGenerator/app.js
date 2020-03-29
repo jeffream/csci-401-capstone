@@ -27,6 +27,8 @@ var docx = require('docx');
 var fs = require('fs');
 var request = require('request');
 const flash = require('connect-flash');
+const jwt = require('jsonwebtoken');
+
 
 
 var app = express();
