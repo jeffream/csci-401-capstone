@@ -169,7 +169,7 @@ app.use(function (err, req, res, next) {
 
 // authenticate function
 function isAuthenticated(req, res, next) {
-  var token = req.cookies["id"];
+  var token = req.user.token;
 
   jwt.verify(token, 'jwt_secret', function (err, decoded) {
       if (err || !decoded) {
