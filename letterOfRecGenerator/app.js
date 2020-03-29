@@ -171,8 +171,12 @@ app.use(function (err, req, res, next) {
 function isAuthenticated(req, res, next) {
 
   jwt.verify(req.token, 'jwt_secret', function (err, decoded) {
-      if (err || !decoded) {
-          console.log("invalid token");
+      if (err) {
+          console.log("error with token or secret entered");
+          res.send(403);
+      }
+      else if (!decoded) {
+          console.log("token not decoded");
           res.send(403);
       }
       else if (decoded && (!decoded.access || decoded.access == "unauthenticated")) {
