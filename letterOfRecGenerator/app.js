@@ -123,8 +123,8 @@ var auth = require('./routes/auth');
 
 // Routes
 app.use('/', index);
-app.use('/users', passport.authenticate('jwt', {session: false}), users);
 app.use('/auth', auth);
+app.use('/users', passport.authenticate('jwt', {session: false}), users);
 app.use('/template-editor', isAuthenticated, createTemplate);
 app.use('/email-template-editor',isAuthenticated, createEmailTemplate);
 app.use('/form-completed', formCompleted);
@@ -139,7 +139,6 @@ app.use('/archive', archive);
 app.use('/response', response);
 app.use('/docx', docxVar);
 app.use('/about', isAuthenticated, about);
-
 
 
 // catch 404 and forward to error handler

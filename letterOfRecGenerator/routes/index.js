@@ -8,7 +8,6 @@ router.use(function (req, res, next) {
     next();
 });
 
-//router.get('/', (req, res) => res.render('welcome'));
 
 //Get Rec Dashboard page
 router.get('/recommender-dashboard', ensureAuthenticated, (req, res) =>
