@@ -170,28 +170,33 @@ app.use(function (err, req, res, next) {
 // authenticate function
 function isAuthenticated(req, res, next) {
 
-  jwt.verify(req.token, 'jwt_secret', function (err, decoded) {
-      if (err) {
-          console.log("error with token or secret entered");
-          res.send(403);
-      }
-      else if (!decoded) {
-          console.log("token not decoded");
-          res.send(403);
-      }
-      else if (decoded && (!decoded.access || decoded.access == "unauthenticated")) {
-          console.log("unauthenticated token");
-          res.send(403);
-      }
-      else if (decoded && decoded.access == "authenticated") {
-          console.log("valid token")
-          next();
-      }
-      else {
-          console.log("something suspicious")
-          res.send(403);
-      }
-  });
+  passport.authenticate('jwt', { session: false }),
+      function(req, res) {
+          res.send(req.user);
+      };
+
+  // jwt.verify(req.token, 'jwt_secret', function (err, decoded) {
+  //     if (err) {
+  //         console.log("error with token or secret entered");
+  //         res.send(403);
+  //     }
+  //     else if (!decoded) {
+  //         console.log("token not decoded");
+  //         res.send(403);
+  //     }
+  //     else if (decoded && (!decoded.access || decoded.access == "unauthenticated")) {
+  //         console.log("unauthenticated token");
+  //         res.send(403);
+  //     }
+  //     else if (decoded && decoded.access == "authenticated") {
+  //         console.log("valid token")
+  //         next();
+  //     }
+  //     else {
+  //         console.log("something suspicious")
+  //         res.send(403);
+  //     }
+  // });
 }
 
 
