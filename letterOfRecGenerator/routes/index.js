@@ -23,6 +23,8 @@ router.get('/recommender-dashboard', ensureAuthenticated, (req, res) =>
   //     console.log('Error finding User.');
   //   } else {
 
+
+
       res.render('pages/recommender-dashboard' {
         req.user: user
       })
