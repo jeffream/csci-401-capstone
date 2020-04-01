@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 // Passport Config
 const passport = require('passport');
-require('./config/passport');
+require('./config/passport'); 
 //require('./config/passport')(passport); <-- similar line to above, see which one to use
 //var LocalStrategy = require('passport-local').Strategy;
 
