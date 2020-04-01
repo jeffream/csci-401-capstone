@@ -18,6 +18,8 @@ var docx = new builder.Document();
 var dt = require('./letter-parser')
 //var User = require('../models/user');
 
+const verify = require('./verifyToken');
+
 "use strict";
 
 router.use(function (req, res, next) {
@@ -28,7 +30,7 @@ router.use(function (req, res, next) {
 /**
  * data needed to render recommender-dashboard
  */
-router.get('/', function (req, res, next) {
+router.get('/', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);

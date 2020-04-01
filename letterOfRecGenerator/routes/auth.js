@@ -19,8 +19,7 @@ router.post('/login', function (req, res, next) {
 
   // Authenticate User
     passport.authenticate('local', {
-      session: false,
-      successRedirect: '/recommender-dashboard'
+      session: false
     }, (err, user, info) => {
         console.log('is there an error: ', err);
         if (err || !user) {

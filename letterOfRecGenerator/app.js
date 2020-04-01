@@ -110,7 +110,6 @@ var formCompleted = require('./routes/form-completed');
 var formEntry = require('./routes/form-entry');
 var index = require('./routes/login');
 var letterPreview = require('./routes/letter-preview');
-//var login = require('./routes/login');
 var recommenderDashboard = require('./routes/recommender-dashboard');
 var templateDashboard = require('./routes/template-dashboard');
 var users = require('./routes/users');
