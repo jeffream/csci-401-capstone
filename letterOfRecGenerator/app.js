@@ -175,7 +175,7 @@ function isAuthenticated(req, res, next) {
 //  const token = authHeader && authHeader.split(' ')[1]
   const token = req.body.accessToken;
 
-  console.log('Token: ', token)
+  console.log('Req body: ', req.body);
 
   if(token == null) return res.sendStatus(401)
 
