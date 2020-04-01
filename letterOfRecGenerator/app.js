@@ -168,14 +168,14 @@ app.use(function (err, req, res, next) {
 // authenticate function
 function isAuthenticated(req, res, next) {
 
-  const authHeader = req.headers['Authorization']
+  const authHeader = req.header['Authorization']
 
-  console.log('Auth Header: ', authHeader)
+  // console.log('Auth Header: ', authHeader)
 
 //  const token = authHeader && authHeader.split(' ')[1]
-  const token = req.body.accessToken;
+  const token = req.header('auth-token');
 
-  console.log('Req body: ', req.body);
+  console.log('Token: ', token);
 
   if(token == null) return res.sendStatus(401)
 

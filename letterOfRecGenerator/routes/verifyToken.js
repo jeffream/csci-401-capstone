@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = function (req, res, next) {
 
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
+  const token = req.header('auth-token');
 
   if(token == null) return res.sendStatus(401)
 
