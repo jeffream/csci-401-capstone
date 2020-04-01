@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -169,28 +171,19 @@ app.use(function (err, req, res, next) {
 // authenticate function
 function isAuthenticated(req, res, next) {
 
-  jwt.verify(req.token, 'jwt_secret', function (err, decoded) {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+
+  if(token == null) return res.sendStatus(401)
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) {
           console.log("error with token or secret entered");
-          res.send(403);
+          res.sendStatus(403);
       }
-      else if (!decoded) {
-          console.log("token not decoded");
-          res.send(403);
-      }
-      else if (decoded && (!decoded.access || decoded.access == "unauthenticated")) {
-          console.log("unauthenticated token");
-          res.send(403);
-      }
-      else if (decoded && decoded.access == "authenticated") {
-          console.log("valid token")
-          next();
-      }
-      else {
-          console.log("something suspicious")
-          res.send(403);
-      }
-  });
+      req.user = user
+      next()
+  })
 }
 
 

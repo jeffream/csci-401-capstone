@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const router  = express.Router();
 
@@ -15,6 +17,7 @@ router.get('/login', (req, res) => res.render('login'));
 /* POST login. */
 router.post('/login', function (req, res, next) {
 
+  // Authenticate User
     passport.authenticate('local', {
       session: false
     }, (err, user, info) => {
@@ -30,11 +33,11 @@ router.post('/login', function (req, res, next) {
             if (err) {
                 res.send(err);
             }
-            const token = jwt.sign(user.email, 'jwt_secret');
-            return res.json({user, token});
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            return res.json({ accessToken: token });
         });
     })
-    //res.redirect('../recommender-dashboard');
+    res.redirect('../recommender-dashboard');
     (req, res);
 });
 
