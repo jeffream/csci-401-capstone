@@ -168,12 +168,11 @@ app.use(function (err, req, res, next) {
 // authenticate function
 function isAuthenticated(req, res, next) {
 
-  const authHeader = req.header['Authorization']
+  const authHeader = req.header['Authorization'];
 
-  // console.log('Auth Header: ', authHeader)
-
+//  console.log('Auth Header: ', authHeader)
 //  const token = authHeader && authHeader.split(' ')[1]
-  const token = req.header('auth-token');
+  const token = req.header['auth-token'];
 
   console.log('Token: ', token);
 
