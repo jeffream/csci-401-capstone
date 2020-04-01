@@ -34,7 +34,7 @@ router.post('/login', function (req, res, next) {
                 res.send(err);
             }
             console.log('In login: ', process.env.ACCESS_TOKEN_SECRET);
-            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            const token = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
             res.json({ accessToken: token });
         });
     })
