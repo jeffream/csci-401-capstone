@@ -125,8 +125,7 @@ var auth = require('./routes/auth');
 // Routes
 app.use('/', index);
 app.use('/auth', auth);
-app.use('/users', passport.authenticate('jwt', {session: false}), users);
-app.use('/recommender-dashboard', recommenderDashboard);
+app.use('/recommender-dashboard', isAuthenticated, recommenderDashboard);
 app.use('/template-editor', isAuthenticated, createTemplate);
 app.use('/email-template-editor',isAuthenticated, createEmailTemplate);
 app.use('/form-completed', formCompleted);
@@ -171,6 +170,8 @@ function isAuthenticated(req, res, next) {
 
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
+
+  console.log('IN VERIFY: ', token)
 
   if(token == null) return res.sendStatus(401)
 
