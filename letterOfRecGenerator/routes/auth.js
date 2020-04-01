@@ -37,7 +37,7 @@ router.post('/login', function (req, res, next) {
             return res.json({ accessToken: token });
         });
     })
-    res.redirect('../recommender-dashboard');
+    //res.redirect('../recommender-dashboard');
     (req, res);
 });
 
