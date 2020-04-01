@@ -38,7 +38,6 @@ router.post('/login', function (req, res, next) {
             res.header('Authorization', 'Bearer ' + token);
         });
     })
-    (req, res);
 });
 
 // Logout handle
