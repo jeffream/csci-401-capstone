@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 // Passport Config
 const passport = require('passport');
-require('./config/passport'); 
+require('./config/passport');
 //require('./config/passport')(passport); <-- similar line to above, see which one to use
 //var LocalStrategy = require('passport-local').Strategy;
 
@@ -134,7 +134,6 @@ app.use('/form-completed', formCompleted);
 app.use('/form-entry', formEntry);
 app.use('/letter-preview', letterPreview);
 app.use('/email-letter-preview', emailLetterPreview);
-//app.use('/login', login);
 app.use('/template-dashboard', isAuthenticated, templateDashboard);
 app.use('/history', history);
 app.use('/archive', archive);

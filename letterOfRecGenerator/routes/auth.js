@@ -19,7 +19,8 @@ router.post('/login', function (req, res, next) {
 
   // Authenticate User
     passport.authenticate('local', {
-      session: false
+      session: false,
+      successRedirect: recommender-dashboard
     }, (err, user, info) => {
         console.log('is there an error: ', err);
         if (err || !user) {
@@ -35,8 +36,7 @@ router.post('/login', function (req, res, next) {
             }
             console.log('In login: ', process.env.ACCESS_TOKEN_SECRET);
             const token = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
-            res.redirect('../recommender-dashboard');
-            //res.json({ accessToken: token });
+            res.json({ accessToken: token });
         });
     })
     (req, res);
