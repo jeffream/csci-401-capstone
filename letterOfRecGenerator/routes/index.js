@@ -2,6 +2,7 @@ var express = require('express');
 var User = require('../models/user');
 var router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
+const verify = require('./verifyToken');
 
 router.use(function (req, res, next) {
     res.locals.userValue = null;
@@ -10,7 +11,7 @@ router.use(function (req, res, next) {
 
 
 //Get Rec Dashboard page
-router.get('/recommender-dashboard', ensureAuthenticated, (req, res) =>
+router.get('/recommender-dashboard', verify, (req, res) =>
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -94,45 +95,6 @@ router.post('/template-editor', ensureAuthenticated, (req, res) =>
   // });
 );
 
-router.get('/template-editor/create', ensureAuthenticated, (req, res) =>
-
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
-
-      res.render('pages/template-dashboard' {
-        user: req.user
-      })
-  //   }
-  // });
-);
-
-router.post('/template-editor/create', ensureAuthenticated, (req, res) =>
-
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
-
-      res.render('pages/template-dashboard' {
-        user: req.user
-      })
-  //   }
-  // });
-);
 
 // Get Home Page
 router.get('/', function (req, res, next) {
