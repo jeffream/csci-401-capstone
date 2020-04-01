@@ -124,8 +124,11 @@ var auth = require('./routes/auth');
 
 // Routes
 app.use('/', index);
+console.log('CP 1');
 app.use('/auth', auth);
+console.log('CP 2');
 app.use('/recommender-dashboard', isAuthenticated, recommenderDashboard);
+console.log('CP 3');
 app.use('/template-editor', isAuthenticated, createTemplate);
 app.use('/email-template-editor',isAuthenticated, createEmailTemplate);
 app.use('/form-completed', formCompleted);
