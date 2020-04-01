@@ -169,9 +169,12 @@ app.use(function (err, req, res, next) {
 function isAuthenticated(req, res, next) {
 
   const authHeader = req.headers['authorization']
+
+  console.log('Auth Header: ', authHeader)
+
   const token = authHeader && authHeader.split(' ')[1]
 
-  console.log('IN VERIFY: ', token)
+  console.log('Token: ', token)
 
   if(token == null) return res.sendStatus(401)
 
