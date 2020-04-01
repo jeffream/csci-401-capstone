@@ -172,7 +172,8 @@ function isAuthenticated(req, res, next) {
 
   console.log('Auth Header: ', authHeader)
 
-  const token = authHeader && authHeader.split(' ')[1]
+//  const token = authHeader && authHeader.split(' ')[1]
+  const token = req.accessToken;
 
   console.log('Token: ', token)
 
