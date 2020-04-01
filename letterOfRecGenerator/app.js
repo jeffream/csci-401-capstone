@@ -126,7 +126,7 @@ var auth = require('./routes/auth');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/users', passport.authenticate('jwt', {session: false}), users);
-app.use('/recommender-dashboard', isAuthenticated, recommenderDashboard);
+app.use('/recommender-dashboard', recommenderDashboard);
 app.use('/template-editor', isAuthenticated, createTemplate);
 app.use('/email-template-editor',isAuthenticated, createEmailTemplate);
 app.use('/form-completed', formCompleted);
