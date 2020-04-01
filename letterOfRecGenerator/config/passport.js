@@ -31,22 +31,22 @@ passport.use(
   })
 );
 
-passport.use(new JWTStrategy({
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'jwt_secret'
-    },
-    function (jwtPayload, cb) {
-
-    //find the user in db if needed
-    return User.findOneById(jwtPayload.id)
-        .then(user => {
-            return cb(null, user);
-        })
-        .catch(err => {
-            return cb(err);
-        });
-    }
-));
+// passport.use(new JWTStrategy({
+//       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+//       secretOrKey: 'jwt_secret'
+//     },
+//     function (jwtPayload, cb) {
+//
+//     //find the user in db if needed
+//     return User.findOneById(jwtPayload.id)
+//         .then(user => {
+//             return cb(null, user);
+//         })
+//         .catch(err => {
+//             return cb(err);
+//         });
+//     }
+// ));
 
 passport.serializeUser(function(user, done) {
   done(null, user);
