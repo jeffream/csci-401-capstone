@@ -35,8 +35,7 @@ router.post('/login', function (req, res, next) {
             }
             console.log('In login: ', process.env.ACCESS_TOKEN_SECRET);
             const token = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
-            res.setHeader('Authorization', 'Bearer '+ token);
-            next();
+            res.header('Authorization', token).send(token);
         });
     })
     (req, res);

@@ -168,7 +168,7 @@ app.use(function (err, req, res, next) {
 // authenticate function
 function isAuthenticated(req, res, next) {
 
-  const authHeader = req.headers['authorization']
+  const authHeader = req.headers['Authorization']
 
   console.log('Auth Header: ', authHeader)
 
