@@ -7,6 +7,8 @@ module.exports = function isAuthenticated(req, res, next) {
 
   if(token == null) return res.sendStatus(401)
 
+  console.log('IN VERIFY: ', token)
+
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) {
           console.log("error with token or secret entered");
