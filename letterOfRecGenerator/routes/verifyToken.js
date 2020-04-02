@@ -8,8 +8,7 @@ module.exports = function (req, res, next) {
   console.log('SESSION IS: ', parsed);
   console.log('SESSION ID: ', req.sessionID);
   var obj = JSON.parse(parsed);
-  var tokenIndex = parsed.search('token');
-  console.log('TOKEN: ', obj.token);
+  var token = obj.token;
 
 
 
