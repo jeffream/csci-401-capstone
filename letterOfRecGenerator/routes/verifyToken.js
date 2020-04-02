@@ -4,7 +4,7 @@ module.exports = function (req, res, next) {
 
   //const token = req.header('auth-token');
   console.log('REQ headers IS: ', req.headers);
-  console.log('REQ SESSION IS: ', req.sessions);
+  console.log('REQ SESSION IS: ', req.sessionStore);
 
   if(token == null) return res.sendStatus(401)
 
