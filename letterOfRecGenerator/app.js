@@ -165,29 +165,4 @@ app.use(function (err, req, res, next) {
     res.render('pages/error');
 });
 
-// authenticate function
-function isAuthenticated(req, res, next) {
-
-  const authHeader = req.header['Authorization'];
-  console.log('REQ COOKIE IS: ', req.cookie);
-
-//  console.log('Auth Header: ', authHeader)
-//  const token = authHeader && authHeader.split(' ')[1]
-//  const token = req.header['auth-token'];
-
-  console.log('Token: ', req.cookie.token);
-
-  if(token == null) return res.sendStatus(401)
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) {
-          console.log("error with token or secret entered");
-          res.sendStatus(403);
-      }
-      req.user = user
-      next()
-  })
-}
-
-
 module.exports = app;
