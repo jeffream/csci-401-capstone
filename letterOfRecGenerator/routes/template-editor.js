@@ -1,10 +1,11 @@
 var express = require('express');
 var User = require('../models/user');
 var passport = require('passport');
+const verify = require('./verifyToken');
 
 var router = express.Router();
 
-router.get('/', function (req, res, next) {
+router.get('/', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);

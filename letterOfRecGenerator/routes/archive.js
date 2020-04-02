@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 //var User = require('../models/user');
 var Form = require('../models/form');
+const verify = require('./verifyToken');
 
-router.get('/', function (req, res, next) {
+router.get('/', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);

@@ -126,18 +126,18 @@ var auth = require('./routes/auth');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/recommender-dashboard', recommenderDashboard);
-app.use('/template-editor', isAuthenticated, createTemplate);
-app.use('/email-template-editor',isAuthenticated, createEmailTemplate);
+app.use('/template-editor', createTemplate);
+app.use('/email-template-editor',createEmailTemplate);
 app.use('/form-completed', formCompleted);
 app.use('/form-entry', formEntry);
 app.use('/letter-preview', letterPreview);
 app.use('/email-letter-preview', emailLetterPreview);
-app.use('/template-dashboard', isAuthenticated, templateDashboard);
+app.use('/template-dashboard', templateDashboard);
 app.use('/history', history);
 app.use('/archive', archive);
 app.use('/response', response);
 app.use('/docx', docxVar);
-app.use('/about', isAuthenticated, about);
+app.use('/about', about);
 
 
 // catch 404 and forward to error handler

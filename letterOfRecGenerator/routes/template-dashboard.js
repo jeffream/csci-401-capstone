@@ -3,9 +3,10 @@ var router = express.Router();
 var db = require('../db')
 var fs = require('fs')
 var User = require('../models/user');
+const verify = require('./verifyToken');
 
 /* GET Templates page. */
-router.get('/', function (req, res, next) {
+router.get('/', verify, function (req, res, next) {
     var currLetterTemplate = __dirname + '/uploads/' + 'letterTemplate';
     if(!fs.existsSync(currLetterTemplate)){
         currLetterTemplate = '';
@@ -36,7 +37,7 @@ router.get('/', function (req, res, next) {
     // });
 });
 
-router.post('/delete', function (req, res, next) {
+router.post('/delete', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -64,7 +65,7 @@ router.post('/delete', function (req, res, next) {
   // });
 });
 
-router.post('/delete-email', function (req, res, next) {
+router.post('/delete-email', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -92,7 +93,7 @@ router.post('/delete-email', function (req, res, next) {
   // });
 });
 
-router.post('/uploadLetterTemplate', function(req,res,next){
+router.post('/uploadLetterTemplate', verify, function(req,res,next){
     console.log(req.files.file);
     // console.log(req)
     var file = req.files.file;
