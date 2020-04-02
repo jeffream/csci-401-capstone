@@ -36,7 +36,11 @@ router.post('/login', function (req, res, next) {
             const token = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
             user.accessToken = token;
             res.render('pages/recommender-dashboard', {
-                templates: user.getTemplates()
+              title: user.displayName,
+              templates: user.getTemplates(),
+              forms: forms,
+              subject: user.getLinkTemplateSubject(),
+              body: user.getLinkTemplateBody()
             });
           //  res.json({ accessToken: token });
         });
