@@ -169,13 +169,13 @@ app.use(function (err, req, res, next) {
 function isAuthenticated(req, res, next) {
 
   const authHeader = req.header['Authorization'];
-  console.log('REQ IS: ', req);
+  console.log('REQ COOKIE IS: ', req.cookie);
 
 //  console.log('Auth Header: ', authHeader)
 //  const token = authHeader && authHeader.split(' ')[1]
 //  const token = req.header['auth-token'];
 
-  console.log('Token: ', token);
+  console.log('Token: ', req.cookie.token);
 
   if(token == null) return res.sendStatus(401)
 
