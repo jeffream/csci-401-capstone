@@ -46,27 +46,21 @@ router.get('/', verify, function (req, res, next) {
 
   console.log("User RD is: ", req.user);
 
-  res.render('pages/recommender-dashboard', {
-      title: req.user.displayName,
-      templates: req.user.getTemplates(),
-      //forms: forms,
-      subject: req.user.getLinkTemplateSubject(),
-      body: req.user.getLinkTemplateBody()
-  });
+  var user = req.user;
 
-      // req.user.getForms(function (err, forms) {
-      //     if (err) {
-      //         console.log(`error: ${err}`);
-      //     } else {
-      //         res.render('pages/recommender-dashboard', {
-      //             title: req.user.displayName,
-      //             templates: req.user.getTemplates(),
-      //             forms: forms,
-      //             subject: req.user.getLinkTemplateSubject(),
-      //             body: req.user.getLinkTemplateBody()
-      //         });
-      //     }
-      // });
+  user.getForms(function (err, forms) {
+      if (err) {
+          console.log(`error: ${err}`);
+      } else {
+          res.render('pages/recommender-dashboard', {
+              title: user.displayName,
+              templates: user.getTemplates(),
+              forms: forms,
+              subject: user.getLinkTemplateSubject(),
+              body: user.getLinkTemplateBody()
+          });
+      }
+  });
   //   }
   // });
 });
