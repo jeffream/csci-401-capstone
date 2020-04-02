@@ -4,11 +4,10 @@ module.exports = function (req, res, next) {
 
   //const token = req.header('auth-token');
   const seshID = req.sessionID;
-  parsed = req.sessionStore.sessions[seshID].['token'];
-  console.log('TOKEN IS: ', parsed);
-  console.log('SESSION STORE IS: ', req.sessionStore.sessions);
+  parsed = req.sessionStore.sessions[seshID];
+  console.log('SESSION IS: ', parsed);
   console.log('SESSION ID: ', req.sessionID);
-  const token = req.sessionStore['token'];
+  const token = parsed['token'];
 
   if(token == null) return res.sendStatus(401)
 
