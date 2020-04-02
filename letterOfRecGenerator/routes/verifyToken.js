@@ -7,8 +7,9 @@ module.exports = function (req, res, next) {
   parsed = req.sessionStore.sessions[seshID];
   console.log('SESSION IS: ', parsed);
   console.log('SESSION ID: ', req.sessionID);
+  var obj = JSON.parse(parsed);
   var tokenIndex = parsed.search('token');
-  console.log('TOKEN INDEX: ', tokenIndex);
+  console.log('TOKEN: ', obj.token);
 
 
 
