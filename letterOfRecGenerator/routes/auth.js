@@ -5,6 +5,7 @@ const router  = express.Router();
 
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const
 
 
 // Get Register page
@@ -36,7 +37,7 @@ router.post('/login', function (req, res, next) {
             const token = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
             user.accessToken = token;
             res.render('pages/recommender-dashboard', {
-                user: user
+                templates: user.getTemplates()
             });
           //  res.json({ accessToken: token });
         });
