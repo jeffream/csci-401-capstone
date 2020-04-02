@@ -38,7 +38,7 @@ router.post('/login', function (req, res, next) {
             res.render('pages/recommender-dashboard', {
               title: user.displayName,
               templates: user.getTemplates(),
-              forms: forms,
+              forms: user.getForms(),
               subject: user.getLinkTemplateSubject(),
               body: user.getLinkTemplateBody()
             });
