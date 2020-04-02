@@ -16,7 +16,7 @@ var path = require('path');
 var builder = require('docx-builder');
 var docx = new builder.Document();
 var dt = require('./letter-parser');
-//var User = require('../models/user');
+var User = require('../models/user');
 
 const verify = require('./verifyToken');
 
