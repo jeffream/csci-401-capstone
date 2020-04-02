@@ -7,8 +7,8 @@ module.exports = function (req, res, next) {
   parsed = req.sessionStore.sessions[seshID];
   console.log('SESSION IS: ', parsed);
   console.log('SESSION ID: ', req.sessionID);
-  const token = parsed['token'];
-  console.log('TOKEN IS: ', token);
+  const obj = parsed.toJSON();
+  console.log('TOKEN IS: ', obj.token);
 
 
   if(token == null) return res.sendStatus(401)
