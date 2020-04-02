@@ -3,12 +3,13 @@ const jwt = require('jsonwebtoken');
 module.exports = function (req, res, next) {
 
   //const token = req.header('auth-token');
-  const seshID = req.sessionID;
+  var seshID = req.sessionID;
   parsed = req.sessionStore.sessions[seshID];
   console.log('SESSION IS: ', parsed);
   console.log('SESSION ID: ', req.sessionID);
-  const obj = parsed.toJSON();
-  console.log('TOKEN IS: ', obj.token);
+  var tokenIndex = parsed.search('token');
+  console.log('TOKEN INDEX: ', tokenIndex);
+
 
 
   if(token == null) return res.sendStatus(401)
