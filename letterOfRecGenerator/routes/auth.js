@@ -5,6 +5,8 @@ const router  = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 var User = require('../models/user');
+const bcrypt = require('bcryptjs');
+
 
 // Get Login page
 router.get('/login', (req, res) => res.render('login'));
