@@ -55,7 +55,7 @@ router.get('/', verify, function (req, res, next) {
   // });
 });
 
-router.post('/', function (req, res, next) {
+router.post('/', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -139,7 +139,7 @@ router.post('/', function (req, res, next) {
 });
 
 
-router.post('/delete', function (req, res, next) {
+router.post('/delete', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -174,7 +174,7 @@ router.post('/delete', function (req, res, next) {
   // });
 });
 
-router.post('/update', function (req, res, next) {
+router.post('/update', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
