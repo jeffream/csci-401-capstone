@@ -80,7 +80,7 @@ router.get('/', verify, function (req, res, next) {
     // });
 });
 
-router.get('/edit', function (req, res, next) {
+router.get('/edit', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -125,7 +125,7 @@ router.get('/edit', function (req, res, next) {
   // });
 });
 
-router.get('/deactivated-edit', function (req, res, next) {
+router.get('/deactivated-edit', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -170,7 +170,7 @@ router.get('/deactivated-edit', function (req, res, next) {
   // });
 });
 
-router.get('/template', function (req, res, next) {
+router.get('/template', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -206,7 +206,7 @@ router.get('/template', function (req, res, next) {
   // });
 });
 
-router.post('/fileUpload', function (req,res, next) {
+router.post('/fileUpload', verify, function (req,res, next) {
     console.log(req.files.file);
     var file = req.files.file;
     var headerPathP = __dirname + '/uploads/' + 'uploaded.pdf';
@@ -218,7 +218,7 @@ router.post('/fileUpload', function (req,res, next) {
 
 })
 
-router.post('/create', function (req, res, next) {
+router.post('/create', verify, function (req, res, next) {
 
     // Searching through session info to find User ID number
     var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -251,7 +251,7 @@ router.post('/create', function (req, res, next) {
       });
 });
 
-router.post('/update', function (req, res, next) {
+router.post('/update', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -278,7 +278,7 @@ router.post('/update', function (req, res, next) {
   // });
 });
 
-router.post('/uploadLetterTemplate', function(req,res,next){
+router.post('/uploadLetterTemplate', verify, function(req,res,next){
 
     console.log(req.files.file);
     // console.log(req)

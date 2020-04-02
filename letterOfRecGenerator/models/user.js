@@ -7,7 +7,7 @@ var Schema = db.Schema;
 
 var UserSchema = new Schema({
     id: String,
-    username: String, 
+    username: String,
     displayName: String,
     accessToken: String,
     username: String,
