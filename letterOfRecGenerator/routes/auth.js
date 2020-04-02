@@ -36,7 +36,7 @@ router.post('/login', function (req, res, next) {
             const token = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
             user.accessToken = token;
             res.cookie('token', token);
-            res.redirect('./recommender-dashboard');
+            res.redirect('../routes/recommender-dashboard');
           //  res.json({ accessToken: token });
         });
     })
