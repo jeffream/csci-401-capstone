@@ -4,7 +4,7 @@ module.exports = function (req, res, next) {
 
   //const token = req.header('auth-token');
   const seshID = req.sessionID;
-  parsed = req.sessionStore.sessions[seshID].token;
+  parsed = req.sessionStore.sessions[seshID]['token'];
   console.log('TOKEN IS: ', parsed);
   console.log('SESSION STORE IS: ', req.sessionStore.sessions);
   console.log('SESSION ID: ', req.sessionID);
