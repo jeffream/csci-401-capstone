@@ -35,13 +35,7 @@ router.post('/login', function (req, res, next) {
             console.log('In login: ', process.env.ACCESS_TOKEN_SECRET);
             const token = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
             user.accessToken = token;
-            res.render('pages/recommender-dashboard', {
-              title: user.displayName,
-              templates: user.getTemplates(),
-              forms: user.getForms(),
-              subject: user.getLinkTemplateSubject(),
-              body: user.getLinkTemplateBody()
-            });
+            res.redirect('../recommender-dashboard');
           //  res.json({ accessToken: token });
         });
     })
