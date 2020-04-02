@@ -5,7 +5,6 @@ const router  = express.Router();
 
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const
 
 
 // Get Register page
