@@ -38,9 +38,9 @@ router.get('/', verify, function (req, res, next) {
                   user: req.user
               });
           } else {
-              letterheadImg = user.getDeactivatedTemplate(req.query.id).letterheadImg;
-              footerImg = user.getDeactivatedTemplate(req.query.id).footerImg;
-              questions = user.getDeactivatedTemplate(req.query.id).getQuestions();
+              letterheadImg = req.user.getDeactivatedTemplate(req.query.id).letterheadImg;
+              footerImg = req.user.getDeactivatedTemplate(req.query.id).footerImg;
+              questions = req.user.getDeactivatedTemplate(req.query.id).getQuestions();
               res.render('pages/template-editor', {
                   title: 'VIEWING ARCHIVED TEMPLATE',
                   templateName: req.query.title,
@@ -220,33 +220,20 @@ router.post('/fileUpload', verify, function (req,res, next) {
 
 router.post('/create', verify, function (req, res, next) {
 
-    // Searching through session info to find User ID number
-    var sessionString = JSON.stringify(req.sessionStore.sessions);
-    var id_index = sessionString.search('id') + 7;
-    var id_index_lastNum = id_index + 24;
-    var userID = sessionString.slice(id_index, id_index_lastNum);
-
-    User.findUser(userID, function (err, user) {
-      if (err) {
-        console.log('Error finding User.');
-      } else {
-
-        user.addTemplate(req.body.template, function (err, id) {
-            console.log("IN ADD TEMPLATE");
-            if (err) {
-                if(err.message == "DUPLICATE NAME") {
-                    console.log("error is duplicate name");
-                    res.status(500).send({error: 'Duplicate Name'});
-                }
-            } else {
-              console.log('Successful')
-                res.json({
-                    success: "Created Successfully",
-                    status: 200,
-                    id: id
-                });
+    req.user.addTemplate(req.body.template, function (err, id) {
+        console.log("IN ADD TEMPLATE");
+        if (err) {
+            if(err.message == "DUPLICATE NAME") {
+                console.log("error is duplicate name");
+                res.status(500).send({error: 'Duplicate Name'});
             }
-          });
+        } else {
+          console.log('Successful')
+            res.json({
+                success: "Created Successfully",
+                status: 200,
+                id: id
+            });
         }
       });
 });
