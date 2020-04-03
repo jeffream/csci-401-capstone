@@ -50,10 +50,17 @@ router.get('/', verify, function (req, res, next) {
       //     body: req.user.linkTemplate_body
       // });
 
+
+
       user.getForms(function (err, forms) {
           if (err) {
               console.log(`error: ${err}`);
           } else {
+
+            console.log('IN GET FORMS');
+            console.log('TITLE: ', user.displayName);
+            console.log('Templates: ', user.getTemplates());
+
               res.render('pages/recommender-dashboard', {
                   title: user.displayName,
                   templates: user.getTemplates(),
