@@ -66,10 +66,6 @@ router.post('/', verify, function (req, res, next) {
       console.log('Error finding User.');
     } else {
       console.log('Got em! (in RD): ', user.email);
-    }
-  });
-
-
 
       var currentUser = req.user;
       var userId = currentUser._id;
@@ -135,8 +131,8 @@ router.post('/', verify, function (req, res, next) {
         res.redirect('/recommender-dashboard');
         }
       });
-  //   }
-  // });
+    }
+  });
 });
 
 
