@@ -67,7 +67,7 @@ router.post('/', verify, function (req, res, next) {
     } else {
       console.log('Got em! (in RD): ', user.email);
 
-      var currentUser = req.user;
+      var currentUser = user;
       var userId = currentUser._id;
       var subject = req.body.subject_text;
       var toEmail = req.body.email;
@@ -81,11 +81,11 @@ router.post('/', verify, function (req, res, next) {
           return;
       }
 
-      Form.createForm(toEmail, req.user.getTemplate(req.body.templateId), userId, function (err, form) {
+      Form.createForm(toEmail, user.getTemplate(req.body.templateId), userId, function (err, form) {
         if (err) {
             console.log(`error: ${err}`);
         } else {
-            req.user.addForm(form, function (err) {
+            user.addForm(form, function (err) {
                 if (err) {
                     console.log(`error: ${err}`);
                     return;
