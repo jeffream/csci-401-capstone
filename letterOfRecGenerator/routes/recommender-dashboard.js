@@ -42,16 +42,6 @@ router.get('/', verify, function (req, res, next) {
     } else {
       console.log('Got em! (in RD): ', user.email);
 
-      // res.render('pages/recommender-dashboard', {
-      //     title: req.user.displayName,
-      //     templates: req.user.templates,
-      //     forms: req.user.forms,
-      //     subject: req.user.linkTemplate_subject,
-      //     body: req.user.linkTemplate_body
-      // });
-
-
-
       user.getForms(function (err, forms) {
           if (err) {
               console.log(`error: ${err}`);
