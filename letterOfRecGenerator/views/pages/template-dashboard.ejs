@@ -194,8 +194,13 @@
 <script>
     var current_page = [1,1];
     var records_per_page = 5;
+
+    var string = <%- JSON.stringify(templates) %>;
+    var string2 = JSON.stringify(string);
+    console.log('STRING IS: ', typeof(string2));
+
     var data = [
-        JSON.parse(<%- JSON.stringify(templates) %>)
+      JSON.parse(string2)
     ];
 
     console.log('Data is: ', data);
