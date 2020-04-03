@@ -46,10 +46,10 @@ router.get('/', verify, function (req, res, next) {
   //     } else {
   //         res.render('pages/recommender-dashboard', {
   //             title: req.user.displayName,
-  //             templates: req.user.templates,
-  //             forms: req.user.forms,
-  //             subject: req.user.linkTemplate_subject,
-  //             body: req.user.linkTemplate_body
+  //             templates: req.user.getTemplates(),
+  //             forms: forms,
+  //             subject: req.user.getLinkTemplateSubject(),
+  //             body: req.user.getLinkTemplateBody()
   //         });
   //     }
   // });
@@ -57,17 +57,18 @@ router.get('/', verify, function (req, res, next) {
 
 router.post('/', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
   //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
-  //     console.log('Got em! (in RD): ', user.email);
+  var id = req.user._id;
+  console.log('ID IS: ', id);
+  //
+  User.findUser(id, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+      console.log('Got em! (in RD): ', user.email);
+    }
+  });
+
 
 
       var currentUser = req.user;
