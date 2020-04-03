@@ -150,7 +150,7 @@ app.use(function (req, res, next) {
 // logout handler
 app.use('/logout', (req, res) => {
     req.logOut();
-    res.redirect('/login');
+    res.redirect('/auth/login');
 });
 
 // error handler
