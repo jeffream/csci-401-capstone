@@ -213,7 +213,7 @@ router.post('/fileUpload', verify, function (req,res, next) {
 
 })
 
-router.post('/create', function (req, res, next) {
+router.post('/create', verify, function (req, res, next) {
 
   // get UserID
   var userID = req.user._id;
