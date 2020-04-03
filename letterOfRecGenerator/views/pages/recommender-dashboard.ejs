@@ -102,7 +102,7 @@
     //   JSON.parse(<%- JSON.stringify(forms) %>)
     // ];
     var data = [
-      JSON.parse(JSON.stringify(forms))
+      JSON.parse(JSON.stringify(<%- forms %>))
     ];
     //var data = JSON.parse(forms)
     console.log(data);
