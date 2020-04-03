@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken');
 module.exports = function (req, res, next) {
 
   var seshID = req.sessionID;
-  parsed = req.sessionStore.sessions[seshID];
+  string = JSON.stringify(req.sessionStore.sessions[seshID]);
   //console.log('SESSION IS: ', parsed);
   //console.log('SESSION ID: ', req.sessionID);
-  var obj = JSON.parse(parsed);
+  var obj = JSON.parse(string);
   var token = obj.token;
 
   if(token == null) return res.sendStatus(401)
