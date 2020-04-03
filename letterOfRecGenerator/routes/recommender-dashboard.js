@@ -58,11 +58,12 @@ router.get('/', verify, function (req, res, next) {
           } else {
 
             console.log('IN GET FORMS');
-            console.log('TITLE: ', user.displayName);
+            console.log('TempSubject: ', user.getLinkTemplateSubject());
             console.log('Templates: ', user.getTemplates());
+            console.log('TempBody: ', user.getLinkTemplateBody());
 
               res.render('pages/recommender-dashboard', {
-                  title: user.displayName,
+                  title: user._id,
                   templates: user.getTemplates(),
                   forms: forms,
                   subject: user.getLinkTemplateSubject(),
