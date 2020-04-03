@@ -32,11 +32,10 @@ router.use(function (req, res, next) {
  */
 router.get('/', verify, function (req, res, next) {
 
-  //
-  var id = req.user._id;
-  console.log('ID IS: ', id);
-  //
-  User.findUser(id, function (err, user) {
+  // get UserID
+  var userID = req.user._id;
+
+  User.findUser(userID, function (err, user) {
     if (err) {
       console.log('Error finding User.');
     } else {
@@ -67,11 +66,10 @@ router.get('/', verify, function (req, res, next) {
 
 router.post('/', verify, function (req, res, next) {
 
-  //
-  var id = req.user._id;
-  console.log('ID IS: ', id);
+  // get User ID
+  var userID = req.user._id;
 
-  User.findUser(id, function (err, user) {
+  User.findUser(userID, function (err, user) {
     if (err) {
       console.log('Error finding User.');
     } else {
@@ -149,7 +147,6 @@ router.post('/', verify, function (req, res, next) {
 router.post('/delete', verify, function (req, res, next) {
 
   var userID = req.user._id;
-  console.log('ID IS: ', userID);
 
   User.findUser(userID, function (err, user) {
     if (err) {
@@ -183,7 +180,6 @@ router.post('/delete', verify, function (req, res, next) {
 router.post('/update', verify, function (req, res, next) {
 
   var userID = req.user._id;
-  console.log('ID IS: ', userID);
 
   User.findUser(userID, function (err, user) {
     if (err) {

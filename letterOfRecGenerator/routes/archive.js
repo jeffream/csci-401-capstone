@@ -8,7 +8,6 @@ router.get('/', verify, function (req, res, next) {
 
   // find User ID
   var userID = req.user._id;
-  console.log('ID IS: ', id);
 
   User.findUser(userID, function (err, user) {
     if (err) {
@@ -35,7 +34,6 @@ router.post('/restore-template', function (req, res, next) {
 
   // find User ID
   var userID = req.user._id;
-  console.log('ID IS: ', id);
 
   User.findUser(userID, function (err, user) {
     if (err) {
@@ -67,7 +65,6 @@ router.post('/restore-email-template', function (req, res, next) {
 
   // find User ID
   var userID = req.user._id;
-  console.log('ID IS: ', id);
 
   User.findUser(userID, function (err, user) {
     if (err) {
