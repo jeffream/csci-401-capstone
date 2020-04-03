@@ -119,7 +119,7 @@ router.post('/register', (req, res) => {
 
 // Logout handle
 router.get('/logout', (req, res) => {
-  req.logout();
+  req.logOut();
   req.flash('success_msg', 'You are logged out');
   res.redirect('/auth/login');
 });
