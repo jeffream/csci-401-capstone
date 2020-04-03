@@ -7,16 +7,15 @@ var router = express.Router();
 
 router.get('/', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
+
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+      console.log('Got em! (in RD): ', user.email);
+
 
       var letterheadImg;
       var footerImg;
@@ -24,9 +23,9 @@ router.get('/', verify, function (req, res, next) {
       var questions;
       if (req.query.id) {
           if(saveStatus=="true"){
-              letterheadImg = req.user.getTemplate(req.query.id).letterheadImg;
-              footerImg = req.user.getTemplate(req.query.id).footerImg;
-              questions = req.user.getTemplate(req.query.id).getQuestions();
+              letterheadImg = user.getTemplate(req.query.id).letterheadImg;
+              footerImg = user.getTemplate(req.query.id).footerImg;
+              questions = user.getTemplate(req.query.id).getQuestions();
               res.render('pages/template-editor', {
                   title: 'EDITING TEMPLATE',
                   templateName: req.query.title,
@@ -38,9 +37,9 @@ router.get('/', verify, function (req, res, next) {
                   user: req.user
               });
           } else {
-              letterheadImg = req.user.getDeactivatedTemplate(req.query.id).letterheadImg;
-              footerImg = req.user.getDeactivatedTemplate(req.query.id).footerImg;
-              questions = req.user.getDeactivatedTemplate(req.query.id).getQuestions();
+              letterheadImg = user.getDeactivatedTemplate(req.query.id).letterheadImg;
+              footerImg = user.getDeactivatedTemplate(req.query.id).footerImg;
+              questions = user.getDeactivatedTemplate(req.query.id).getQuestions();
               res.render('pages/template-editor', {
                   title: 'VIEWING ARCHIVED TEMPLATE',
                   templateName: req.query.title,
@@ -76,71 +75,68 @@ router.get('/', verify, function (req, res, next) {
                             tag: "<!ORG>"}]
           });
         }
-    //   }
-    // });
+      }
+    });
 });
 
 router.get('/edit', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
 
-    if (req.query.id) {
-        var templateName = req.user.getTemplate(req.query.id).getName();
-        var questions = req.user.getTemplate(req.query.id).getQuestions();
-        res.json({
-            title: templateName,
-            id: req.query.id,
-            saveSwitch: true,
-            questions: questions
-        });
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
     } else {
-        res.json({
-            title: null,
-            id: null,
-            saveSwitch: true,
-            questions: [{ question: "What is your first name?",
-                            tag: "<!FNAME>"},
-                        { question: "What is your last name?",
-                            tag: "<!LNAME>"},
-                        { question: "What is your preferred personal pronoun (subject)?",
-                            tag: "<!SUB_PRONOUN>"},
-                        { question: "What is your preferred personal pronoun (object)",
-                            tag: "<!OBJ_PRONOUN>"},
-                        { question: "What is your preferred possessive pronoun?",
-                            tag: "<!POS_PRONOUN>"},
-                        { question: "What organizations are you applying to?",
-                            tag: "<!ORG>"}]
-        });
+      console.log('Got em! (in RD): ', user.email);
+
+      if (req.query.id) {
+          var templateName = user.getTemplate(req.query.id).getName();
+          var questions = user.getTemplate(req.query.id).getQuestions();
+          res.json({
+              title: templateName,
+              id: req.query.id,
+              saveSwitch: true,
+              questions: questions
+          });
+      } else {
+          res.json({
+              title: null,
+              id: null,
+              saveSwitch: true,
+              questions: [{ question: "What is your first name?",
+                              tag: "<!FNAME>"},
+                          { question: "What is your last name?",
+                              tag: "<!LNAME>"},
+                          { question: "What is your preferred personal pronoun (subject)?",
+                              tag: "<!SUB_PRONOUN>"},
+                          { question: "What is your preferred personal pronoun (object)",
+                              tag: "<!OBJ_PRONOUN>"},
+                          { question: "What is your preferred possessive pronoun?",
+                              tag: "<!POS_PRONOUN>"},
+                          { question: "What organizations are you applying to?",
+                              tag: "<!ORG>"}]
+          });
+        }
       }
-  //   }
-  // });
+  });
 });
 
 router.get('/deactivated-edit', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
+
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+      console.log('Got em! (in RD): ', user.email);
+
 
       if (req.query.id) {
-          var templateName = req.user.getDeactivatedTemplate(req.query.id).getName();
-          var questions = req.user.getDeactivatedTemplate(req.query.id).getQuestions();
+          var templateName = user.getDeactivatedTemplate(req.query.id).getName();
+          var questions = user.getDeactivatedTemplate(req.query.id).getQuestions();
           res.json({
               title: templateName,
               id: req.query.id,
@@ -166,44 +162,43 @@ router.get('/deactivated-edit', verify, function (req, res, next) {
                               tag: "<!ORG>"}]
           });
       }
-  //   }
-  // });
+    }
+  });
 });
 
 router.get('/template', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
+
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+      console.log('Got em! (in RD): ', user.email);
+
 
       if(req.query.saveSwitchData == "true") {
           res.json({
-              letter: req.user.getTemplate(req.query.id).getText(),
-              questions: req.user.getTemplate(req.query.id).getQuestions(),
-              letterheadImg: req.user.getTemplate(req.query.id).getLetterheadImg(),
-              footerImg: req.user.getTemplate(req.query.id).getFooterImg(),
+              letter: user.getTemplate(req.query.id).getText(),
+              questions: user.getTemplate(req.query.id).getQuestions(),
+              letterheadImg: user.getTemplate(req.query.id).getLetterheadImg(),
+              footerImg: user.getTemplate(req.query.id).getFooterImg(),
               saveSwitch: req.query.saveSwitchData,
-              questions: req.user.getTemplate(req.query.id).getQuestions()
+              questions: user.getTemplate(req.query.id).getQuestions()
           });
       } else {
           res.json({
-              letter: req.user.getDeactivatedTemplate(req.query.id).getText(),
-              questions: req.user.getDeactivatedTemplate(req.query.id).getQuestions(),
-              letterheadImg: req.user.getDeactivatedTemplate(req.query.id).getLetterheadImg(),
-              footerImg: req.user.getDeactivatedTemplate(req.query.id).getFooterImg(),
+              letter: user.getDeactivatedTemplate(req.query.id).getText(),
+              questions: user.getDeactivatedTemplate(req.query.id).getQuestions(),
+              letterheadImg: user.getDeactivatedTemplate(req.query.id).getLetterheadImg(),
+              footerImg: user.getDeactivatedTemplate(req.query.id).getFooterImg(),
               saveSwitch: req.query.saveSwitchData,
-              questions: req.user.getDeactivatedTemplate(req.query.id).getQuestions()
+              questions: user.getDeactivatedTemplate(req.query.id).getQuestions()
           });
       }
-  //   }
-  // });
+    }
+  });
 });
 
 router.post('/fileUpload', verify, function (req,res, next) {
@@ -220,7 +215,16 @@ router.post('/fileUpload', verify, function (req,res, next) {
 
 router.post('/create', verify, function (req, res, next) {
 
-    req.user.addTemplate(req.body.template, function (err, id) {
+  // get UserID
+  var userID = req.user._id;
+
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+      console.log('Got em! (in RD): ', user.email);
+
+    user.addTemplate(req.body.template, function (err, id) {
         console.log("IN ADD TEMPLATE");
         if (err) {
             if(err.message == "DUPLICATE NAME") {
@@ -236,22 +240,22 @@ router.post('/create', verify, function (req, res, next) {
             });
         }
       });
+    }
+  });
 });
 
 router.post('/update', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
 
-      req.user.updateTemplate(req.body.id, req.body.template, function (err, template) {
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+      console.log('Got em! (in RD): ', user.email);
+
+      user.updateTemplate(req.body.id, req.body.template, function (err, template) {
           if (err) {
               console.log(err);
           } else {
@@ -261,8 +265,8 @@ router.post('/update', verify, function (req, res, next) {
               });
           }
       });
-  //   }
-  // });
+    }
+  });
 });
 
 router.post('/uploadLetterTemplate', verify, function(req,res,next){
