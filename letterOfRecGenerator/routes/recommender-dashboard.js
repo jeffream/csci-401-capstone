@@ -46,9 +46,10 @@ router.get('/', verify, function (req, res, next) {
               console.log(`error: ${err}`);
           } else {
 
+            var temp = user.getTemplates();
             console.log('IN GET FORMS');
             console.log('TempSubject: ', user.getLinkTemplateSubject());
-            console.log('Templates: ', user.getTemplates());
+            console.log('Templates: ', temp[0]);
             console.log('TempBody: ', user.getLinkTemplateBody());
 
               res.render('pages/recommender-dashboard', {

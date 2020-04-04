@@ -39,6 +39,8 @@ router.post('/login', function (req, res, next) {
             res.set({
               'Authorization': token
             });
+            // res.header()
+            // res.setHeader()
             res.redirect('../recommender-dashboard');
         });
     })
