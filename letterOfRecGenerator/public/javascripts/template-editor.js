@@ -588,6 +588,8 @@ function validate(template) {
     clearErrors();
     var isValid = true;
 
+    console.log('TEMPLATE IS: ', template);
+
     if (isNotValid(template.name)) {
         var textField = document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID);
         addError(textField, 0, 'template name is required');
