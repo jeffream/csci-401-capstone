@@ -377,7 +377,7 @@ function saveTemplate() {
 }
 
 function getQuestions() {
-    var dbQuestions = [];
+    var dbQuestions = {};
     var questionNumber = 1;
 
     var sortableQuestionsHTML = document.getElementById(QUESTIONS_CONTAINER_ID).getElementsByClassName("sortable-questions");
