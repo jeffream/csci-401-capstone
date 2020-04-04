@@ -8,13 +8,6 @@ module.exports = function (req, res, next) {
   string = req.sessionStore.sessions[seshID];
   //console.log('STRING V IS: ', typeof(string));
 
-
-  // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-
   var obj;
   var token;
 
@@ -22,10 +15,10 @@ module.exports = function (req, res, next) {
 
     var sessionString = JSON.stringify(req.sessionStore.sessions);
     var tokenIndex = sessionString.search('token') + 10;
-    console.log('SESH STRING: ', sessionString);
+    //console.log('SESH STRING: ', sessionString);
     var endIndex = sessionString.search('}"}') - 2;
     token = sessionString.slice(tokenIndex, endIndex);
-    console.log('Token is: ', token);
+    //console.log('Token is: ', token);
 
   } else {
     obj = JSON.parse(string);
