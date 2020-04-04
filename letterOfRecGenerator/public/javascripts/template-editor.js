@@ -322,6 +322,7 @@ function saveTemplate() {
           data: {
             //template: template
             questions: getQuestions(),
+            _id: data.id,
             name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
             text: letter,
 
