@@ -9,8 +9,26 @@ module.exports = function (req, res, next) {
   console.log('STRING V IS: ', typeof(string));
   //console.log('SESSION IS: ', parsed);
   //console.log('SESSION ID: ', req.sessionID);
-  var obj = JSON.parse(string);
-  var token = obj.token;
+
+  // Searching through session info to find User ID number
+  // var sessionString = JSON.stringify(req.sessionStore.sessions);
+  // var id_index = sessionString.search('id') + 7;
+  // var id_index_lastNum = id_index + 24;
+  // var userID = sessionString.slice(id_index, id_index_lastNum);
+
+  var obj;
+  var token;
+
+  if(string == undefined) {
+
+    var sessionString = JSON.stringify(req.sessionStore.sessions);
+    var tokenIndex = sessionString.search('token');
+    console.log('TOKEN INDEX IS: ', tokenIndex);
+
+  } else {
+    obj = JSON.parse(string);
+    token = obj.token;
+  }
 
   if(token == null) return res.sendStatus(401)
 
