@@ -216,7 +216,7 @@ router.post('/create', verify, function (req, res, next) {
       console.log('Error finding User.');
     } else {
 
-      console.log('BODY IS: ', req.body);
+      console.log('BODY IS: ', typeof(req.body));
 
       var body = JSON.parse(req.body);
       console.log('NEW BODY IS: ', body);
