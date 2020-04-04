@@ -218,6 +218,7 @@ router.post('/create', verify, function (req, res, next) {
 
       var string = JSON.stringify(req.body);
       console.log('REQ BODY IS: ', typeof(req.body));
+      console.log('REQ STRING IS: ', string);
       var body = JSON.parse(string);
       console.log('NEW BODY TYPE IS: ', typeof(req.body));
       console.log('NEW BODY IS: ', body);
