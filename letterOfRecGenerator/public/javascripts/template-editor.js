@@ -321,10 +321,6 @@ function saveTemplate() {
           url: 'http://128.125.100.147:80/template-editor/create',
           data: {
             template: template
-            // questions: getQuestions(),
-            // _id: data.id,
-            // name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
-            // text: letter
           },
           type: 'POST',
           complete: function () {
