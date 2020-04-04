@@ -223,7 +223,7 @@ router.post('/create', verify, function (req, res, next) {
       console.log('NEW BODY TYPE IS: ', typeof(req.body));
       console.log('NEW BODY IS: ', body);
 
-      user.addTemplate(body.template, function (err, id) {
+      user.addTemplate(req.body, function (err, id) {
           console.log("IN ADD TEMPLATE");
           if (err) {
               if(err.message == "DUPLICATE NAME") {
