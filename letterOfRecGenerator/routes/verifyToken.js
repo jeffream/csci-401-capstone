@@ -25,8 +25,6 @@ module.exports = function (req, res, next) {
     token = obj.token;
   }
 
-  console.log('USER IN VERFIY: ', user);
-
   if(token == null) return res.sendStatus(401)
 
   // Verify token and pass on user
@@ -36,6 +34,7 @@ module.exports = function (req, res, next) {
           res.sendStatus(403);
       }
       req.user = user
+      console.log('USER IN VERFIY: ', user);
       next()
   })
 };
