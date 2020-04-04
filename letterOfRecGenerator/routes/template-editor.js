@@ -14,8 +14,6 @@ router.get('/', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
-
 
       var letterheadImg;
       var footerImg;
@@ -88,7 +86,6 @@ router.get('/edit', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
 
       if (req.query.id) {
           var templateName = user.getTemplate(req.query.id).getName();
@@ -131,8 +128,6 @@ router.get('/deactivated-edit', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
-
 
       if (req.query.id) {
           var templateName = user.getDeactivatedTemplate(req.query.id).getName();
@@ -175,8 +170,6 @@ router.get('/template', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
-
 
       if(req.query.saveSwitchData == "true") {
           res.json({
@@ -222,9 +215,9 @@ router.post('/create', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
 
       console.log('BODY IS: ', req.body);
+      console.log('TEMP IS: ', req.body.template);
 
       user.addTemplate(req.body.template, function (err, id) {
           console.log("IN ADD TEMPLATE");
