@@ -13,7 +13,8 @@ router.get('/', verify, function (req, res, next) {
   var temps = req.user.templates;
   var temp = temps[0];
 
-  console.log('TEMP IS: ', req.user.templates);
+  console.log('TEMPLATES EDIT IS: ', temps);
+  console.log('TEMP EDIT IS: ', temp);
 
   User.findUser(userID, function (err, user) {
     if (err) {
