@@ -34,6 +34,7 @@ module.exports = function (req, res, next) {
           res.sendStatus(403);
       }
       req.user = user
+      user.accessToken = token;
       console.log('USER IN VERFIY: ', user);
       next()
   })
