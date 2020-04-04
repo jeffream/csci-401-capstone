@@ -216,9 +216,8 @@ router.post('/create', verify, function (req, res, next) {
       console.log('Error finding User.');
     } else {
 
-      console.log('BODY IS: ', typeof(req.body));
-
-      var body = JSON.parse(req.body);
+      var string = JSON.stringify(req.body);
+      var body = JSON.parse(string);
       console.log('NEW BODY IS: ', body);
 
       user.addTemplate(req.body.template, function (err, id) {
