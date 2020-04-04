@@ -3,12 +3,11 @@ const jwt = require('jsonwebtoken');
 module.exports = function (req, res, next) {
 
   var seshID = req.sessionID;
-  console.log('seshID: ', seshID);
-  console.log('Sessions: ', req.sessionStore);
+  // console.log('seshID: ', seshID);
+  // console.log('Sessions: ', req.sessionStore);
   string = req.sessionStore.sessions[seshID];
-  console.log('STRING V IS: ', typeof(string));
-  //console.log('SESSION IS: ', parsed);
-  //console.log('SESSION ID: ', req.sessionID);
+  //console.log('STRING V IS: ', typeof(string));
+
 
   // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -22,8 +21,9 @@ module.exports = function (req, res, next) {
   if(string == undefined) {
 
     var sessionString = JSON.stringify(req.sessionStore.sessions);
-    var tokenIndex = sessionString.search('token');
-    console.log('TOKEN INDEX IS: ', tokenIndex);
+    var tokenIndex = sessionString.search('token') + 7;
+    console.log('SESH STRING: ', sessionString);
+    //var endIndex = sessionString.search()
 
   } else {
     obj = JSON.parse(string);
