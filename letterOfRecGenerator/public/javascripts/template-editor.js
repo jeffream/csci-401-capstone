@@ -273,9 +273,6 @@ function saveTemplate() {
         questions: getQuestions()
     };
 
-    //var user = findUser()
-    //console.log('User is: ', user);
-
     if (!validate(template)) {
         window.scrollTo(errorScrollCoordinates.x, errorScrollCoordinates.y);
         emphasizeTags();
@@ -291,8 +288,6 @@ function saveTemplate() {
     }
 
     if (id) {
-
-        //
 
         $.ajax({
             url: 'http://128.125.100.147:80/template-editor/update',
@@ -325,7 +320,10 @@ function saveTemplate() {
       $.ajax({
           url: 'http://128.125.100.147:80/template-editor/create',
           data: {
-            template
+            //template: template
+            name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
+            text: letter,
+            questions: getQuestions()
           },
           type: 'POST',
           complete: function () {
