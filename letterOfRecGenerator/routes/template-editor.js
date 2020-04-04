@@ -217,7 +217,9 @@ router.post('/create', verify, function (req, res, next) {
     } else {
 
       console.log('BODY IS: ', req.body);
-      console.log('TEMP IS: ', req.body.template);
+
+      var body = JSON.parse(req.body);
+      console.log('NEW BODY IS: ', body);
 
       user.addTemplate(req.body.template, function (err, id) {
           console.log("IN ADD TEMPLATE");
