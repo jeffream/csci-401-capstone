@@ -15,8 +15,6 @@ router.get('/', verify, function (req, res, next) {
     var temps = req.user.templates;
     var temp = temps[0];
 
-    console.log('TEMP Dash IS: ', temp);
-
     res.render('pages/template-dashboard', {
         title: 'Templates',
         templates: req.user.templates,

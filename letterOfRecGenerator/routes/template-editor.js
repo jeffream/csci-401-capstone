@@ -10,12 +10,6 @@ router.get('/', verify, function (req, res, next) {
   // get UserID
   var userID = req.user._id;
 
-  var temps = req.user.templates;
-  var temp = temps[0];
-
-  console.log('TEMPLATES EDIT IS: ', temps);
-  console.log('TEMP EDIT IS: ', temp);
-
   User.findUser(userID, function (err, user) {
     if (err) {
       console.log('Error finding User.');
@@ -257,7 +251,6 @@ router.post('/update', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
 
       user.updateTemplate(req.body.id, req.body.template, function (err, template) {
           if (err) {
