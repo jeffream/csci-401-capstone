@@ -320,7 +320,9 @@ function saveTemplate() {
       $.ajax({
           url: 'http://128.125.100.147:80/template-editor/create',
           data: {
-            template: template
+            name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
+            text: letter,
+            questions: getQuestions()
           },
           type: 'POST',
           complete: function () {
