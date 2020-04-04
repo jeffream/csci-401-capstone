@@ -321,9 +321,10 @@ function saveTemplate() {
           url: 'http://128.125.100.147:80/template-editor/create',
           data: {
             //template: template
+            questions: getQuestions(),
             name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
             text: letter,
-            questions: getQuestions()
+
           },
           type: 'POST',
           complete: function () {
@@ -673,7 +674,7 @@ function validate(template) {
             }
         }
     }
-
+    console.log('******* IS VALID PASSED ************');
     return isValid;
 }
 
