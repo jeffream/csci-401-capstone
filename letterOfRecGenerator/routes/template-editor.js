@@ -220,7 +220,7 @@ router.post('/create', verify, function (req, res, next) {
       var body = JSON.parse(string);
       console.log('NEW BODY IS: ', body);
 
-      user.addTemplate(req.body.template, function (err, id) {
+      user.addTemplate(body.template, function (err, id) {
           console.log("IN ADD TEMPLATE");
           if (err) {
               if(err.message == "DUPLICATE NAME") {
