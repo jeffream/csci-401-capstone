@@ -25,6 +25,8 @@ module.exports = function (req, res, next) {
     token = obj.token;
   }
 
+  console.log('USER IN VERFIY: ', user);
+
   if(token == null) return res.sendStatus(401)
 
   // Verify token and pass on user
