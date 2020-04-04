@@ -10,6 +10,11 @@ router.get('/', verify, function (req, res, next) {
   // get UserID
   var userID = req.user._id;
 
+  var temps = req.user.templates;
+  var temp = temps[0];
+
+  console.log('TEMP IS: ', temp);
+
   User.findUser(userID, function (err, user) {
     if (err) {
       console.log('Error finding User.');
