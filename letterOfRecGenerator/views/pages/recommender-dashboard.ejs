@@ -44,7 +44,7 @@
                     <input class="input-text" type="text" name="email" placeholder="Enter email address" autofocus>
                     <select class="input-dropdown" name="templateId">
                         <% for (var template of templates) { %>
-                        <option value=<%= template._id %>><%= template.name %></option>
+                        <option value="<%= template._id %>"> <%= template.name %></option>
                         <% } %>
                     </select>
                 </div>
