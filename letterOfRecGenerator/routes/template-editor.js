@@ -224,23 +224,25 @@ router.post('/create', verify, function (req, res, next) {
     } else {
       console.log('Got em! (in RD): ', user.email);
 
-    user.addTemplate(req.body.template, function (err, id) {
-        console.log("IN ADD TEMPLATE");
-        if (err) {
-            if(err.message == "DUPLICATE NAME") {
-                console.log("error is duplicate name");
-                res.status(500).send({error: 'Duplicate Name'});
-            }
-        } else {
-          console.log('Successful')
-            res.json({
-                success: "Created Successfully",
-                status: 200,
-                id: id
-            });
-        }
-      });
-    }
+      console.log('BODY IS: ', req.body);
+
+      user.addTemplate(req.body.template, function (err, id) {
+          console.log("IN ADD TEMPLATE");
+          if (err) {
+              if(err.message == "DUPLICATE NAME") {
+                  console.log("error is duplicate name");
+                  res.status(500).send({error: 'Duplicate Name'});
+              }
+          } else {
+            console.log('Successful')
+              res.json({
+                  success: "Created Successfully",
+                  status: 200,
+                  id: id
+              });
+          }
+        });
+      }
   });
 });
 
