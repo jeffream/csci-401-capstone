@@ -13,11 +13,13 @@ module.exports = function (req, res, next) {
 
   if(string == undefined) {
 
-    var sessionString = JSON.stringify(req.sessionStore.sessions);
-    var tokenIndex = sessionString.search('token') + 10;
-    console.log('SESH STRING: ', sessionString);
-    var endIndex = sessionString.search('}"}') - 2;
-    token = sessionString.slice(tokenIndex, endIndex);
+    token = req.user.token;
+
+    // var sessionString = JSON.stringify(req.sessionStore.sessions);
+    // var tokenIndex = sessionString.search('token') + 10;
+    // console.log('SESH STRING: ', sessionString);
+    // var endIndex = sessionString.search('}"}') - 2;
+    // token = sessionString.slice(tokenIndex, endIndex);
     console.log('Token is: ', token);
 
   } else {
