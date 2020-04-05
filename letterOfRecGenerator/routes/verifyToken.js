@@ -15,10 +15,10 @@ module.exports = function (req, res, next) {
 
     var sessionString = JSON.stringify(req.sessionStore.sessions);
     var tokenIndex = sessionString.search('token') + 10;
-    console.log('SESH STRING: ', sessionString);
+    //console.log('SESH STRING: ', sessionString);
     var endIndex = sessionString.search('"}"') - 1;
     token = sessionString.slice(tokenIndex, endIndex);
-    console.log('Token is: ', token);
+    //console.log('Token is: ', token);
 
   } else {
     obj = JSON.parse(string);
@@ -35,7 +35,7 @@ module.exports = function (req, res, next) {
       }
       req.user = user
       user.accessToken = token;
-      console.log('USER IN VERFIY: ', user);
+      //console.log('USER IN VERFIY: ', user);
       next()
   })
 };
