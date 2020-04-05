@@ -12,9 +12,6 @@ router.get('/', verify, function (req, res, next) {
         currLetterTemplate = '';
     }
 
-    var temps = req.user.templates;
-    var temp = temps[0];
-
     res.render('pages/template-dashboard', {
         title: 'Templates',
         templates: req.user.templates,
@@ -25,30 +22,28 @@ router.get('/', verify, function (req, res, next) {
 
 router.post('/delete', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
 
-      req.user.deactivateTemplate(req.body.id, function (err) {
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+
+
+      user.deactivateTemplate(req.body.id, function (err) {
           if (err) {
               console.log(err);
           } else {
               res.render('pages/template-dashboard', {
                   title: 'Templates',
-                  templates: req.user.getTemplates(),
-                  emailtemplates: req.user.getEmailTemplates(),
+                  templates: user.getTemplates(),
+                  emailtemplates: user.getEmailTemplates(),
               });
           }
       });
-  //   }
-  // });
+    }
+  });
 });
 
 router.post('/delete-email', verify, function (req, res, next) {
