@@ -14,6 +14,7 @@ var Docxtemplater = require('docxtemplater');
 var fs = require('fs');
 var path = require('path');
 var User = require('../models/user');
+const verify = require('./verifyToken');
 
 
 //const Readable = require('stream').Readable;
@@ -27,7 +28,7 @@ const request = require('request');
 const { Document, Paragraph, Packer } = docx;
 
 
-router.get('/', function (req, res, next) {
+router.get('/', verify, function (req, res, next) {
 
     // // Searching through session info to find User ID number
     // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -55,7 +56,7 @@ router.get('/', function (req, res, next) {
     // });
 });
 
-router.get('/form', function (req, res, next) {
+router.get('/form', verify, function (req, res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -80,7 +81,7 @@ router.get('/form', function (req, res, next) {
 });
 
 
-router.post('/save', function (req, res, next) {
+router.post('/save', verify, function (req, res, next) {
 
     Form.completeForm(req.body.id, req.body.letter, function (err, form) {
         if (err) {
@@ -95,7 +96,7 @@ router.post('/save', function (req, res, next) {
     });
 });
 
-router.post('/templateUpload', function (req,res, next) {
+router.post('/templateUpload', verify, function (req,res, next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
@@ -257,7 +258,7 @@ router.post('/templateUpload', function (req,res, next) {
   // });
 });
 
-router.post('/drive', function(req,res,next) {
+router.post('/drive', verify, function(req,res,next) {
 
   // // Searching through session info to find User ID number
   // var sessionString = JSON.stringify(req.sessionStore.sessions);
