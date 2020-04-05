@@ -76,16 +76,16 @@ UserSchema.statics.findOrCreate = function (id, cb) {
 
 UserSchema.methods.addTemplate = function (template, cb) {
     var errorFlag = false;
+    
+    console.log("IN ADD TEMPLATE")
+    console.log('TEMPLATE: ', template.name);
+
     for(var i=0; i < this.templates.length; i++) {
-
-      console.log('TEMPLATE: ', template.name);
-
         if(this.templates[i].name == template.name) {
             cb(new Error("DUPLICATE NAME"));
             errorFlag = true;
         }
     }
-    console.log("IN ADD TEMPLATE")
     if(!errorFlag) {
         this.templates.push(template);
         var newTemplate = this.templates[this.templates.length - 1];

@@ -39,8 +39,6 @@ router.get('/', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
-
       user.getForms(function (err, forms) {
           if (err) {
               console.log(`error: ${err}`);
@@ -70,7 +68,6 @@ router.post('/', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
 
       var currentUser = user;
       var userId = currentUser._id;
@@ -149,9 +146,6 @@ router.post('/delete', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
-
-
 
       user.removeForm(req.body.id, function (err) {
           if (err) {
@@ -182,7 +176,6 @@ router.post('/update', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      console.log('Got em! (in RD): ', user.email);
 
       user.update_linkTemplate_subject(req.body.subject, function (err) {
           if (err) {
