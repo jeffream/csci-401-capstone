@@ -267,14 +267,14 @@ function addQuestion() {
 function saveTemplate() {
     updateQuestions();
 
-    var questions = [getQuestions()];
+    var questions = getQuestions();
 
-    console.log('Questions! in Ajax: ', questions[0]);
+    console.log('Questions! in Ajax: ', questions);
 
     var template = {
         name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
         text: letter,
-        questions: questions
+        questions: [questions]
     };
 
     if (!validate(template)) {
