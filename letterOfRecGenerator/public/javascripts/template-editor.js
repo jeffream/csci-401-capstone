@@ -274,7 +274,7 @@ function saveTemplate() {
     var template = {
         name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
         text: letter,
-        questions: [questions]
+        questions: questions
     };
 
     if (!validate(template)) {
@@ -326,7 +326,7 @@ function saveTemplate() {
           data: {
             name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
             text: letter,
-            questions: questions
+            questions: [questions]
           },
           type: 'POST',
           complete: function () {
