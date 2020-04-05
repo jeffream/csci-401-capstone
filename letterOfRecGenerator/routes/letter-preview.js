@@ -30,18 +30,15 @@ const { Document, Paragraph, Packer } = docx;
 
 router.get('/', verify, function (req, res, next) {
 
-    // // Searching through session info to find User ID number
-    // var sessionString = JSON.stringify(req.sessionStore.sessions);
-    // var id_index = sessionString.search('id') + 7;
-    // var id_index_lastNum = id_index + 24;
-    // var userID = sessionString.slice(id_index, id_index_lastNum);
-    //
-    // User.findUser(userID, function (err, user) {
-    //   if (err) {
-    //     console.log('Error finding User.');
-    //   } else {
+  // get UserID
+  var userID = req.user._id;
 
-        req.user.getForm(req.query.id, function (err, form) {
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+
+        user.getForm(req.query.id, function (err, form) {
             if (err) {
                 console.log("get /  error in letter-preivew: " + err );
             } else {
@@ -52,32 +49,29 @@ router.get('/', verify, function (req, res, next) {
                 });
             }
         });
-    //   }
-    // });
+      }
+    });
 });
 
 router.get('/form', verify, function (req, res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
 
-      req.user.getForm(req.query.id, function (err, form) {
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
+
+      user.getForm(req.query.id, function (err, form) {
           if (err) {
               console.log(err);
           } else {
               res.json(form);
           }
       });
-  //   }
-  // });
+    }
+  });
 });
 
 
@@ -98,16 +92,13 @@ router.post('/save', verify, function (req, res, next) {
 
 router.post('/templateUpload', verify, function (req,res, next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
+
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
 
       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
       const filePath = __dirname + '/uploads/' + 'letterTemplate';
@@ -126,7 +117,7 @@ router.post('/templateUpload', verify, function (req,res, next) {
               //console.log(req);
               console.log("^^^^^^^");
 
-              req.user.getForm(req.body.formID, function (err, form) {
+              user.getForm(req.body.formID, function (err, form) {
               if (err) {
                   console.log(err);
               } else {
@@ -196,7 +187,7 @@ router.post('/templateUpload', verify, function (req,res, next) {
           var pulled_text; //text that were getting and moving to docxtemplater
 
           //console.log(req.body.formID);
-          req.user.getForm(req.body.formID, function (err, form) {
+          user.getForm(req.body.formID, function (err, form) {
           if (err) {
               console.log(err);
           } else {
@@ -254,25 +245,22 @@ router.post('/templateUpload', verify, function (req,res, next) {
       } catch(err){
           console.log(err);
       }
-  //   }
-  // });
+    }
+  });
 });
 
 router.post('/drive', verify, function(req,res,next) {
 
-  // // Searching through session info to find User ID number
-  // var sessionString = JSON.stringify(req.sessionStore.sessions);
-  // var id_index = sessionString.search('id') + 7;
-  // var id_index_lastNum = id_index + 24;
-  // var userID = sessionString.slice(id_index, id_index_lastNum);
-  //
-  // User.findUser(userID, function (err, user) {
-  //   if (err) {
-  //     console.log('Error finding User.');
-  //   } else {
+  // get UserID
+  var userID = req.user._id;
+
+  User.findUser(userID, function (err, user) {
+    if (err) {
+      console.log('Error finding User.');
+    } else {
 
       console.log("DRIVE DRIVE DRIVE DRIVE DRIVE DRIVE")
-      req.user.getForm(req.body.id, function(err, form) {
+      user.getForm(req.body.id, function(err, form) {
           if(err){
               console.log(err)
           } else {
@@ -365,8 +353,8 @@ router.post('/drive', verify, function(req,res,next) {
               res.redirect('/recommender-dashboard');
           }
       });
-  //   }
-  // });
+    }
+  });
 });
 
 router.get('/downloads', function(req, res) {
