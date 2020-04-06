@@ -155,7 +155,7 @@ UserSchema.methods.addTemplate = function (template, cb) {
               opObject.option = value;
           } else if (opNum == 2 && opString == 'tag') {
               opObject.tag = value;
-              temp.questions.options.push(opObject);
+              qObject.options.push(opObject);
           }
       }
 
