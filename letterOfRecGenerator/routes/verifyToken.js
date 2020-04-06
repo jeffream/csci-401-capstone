@@ -4,7 +4,7 @@ module.exports = function (req, res, next) {
 
   var seshID = req.sessionID;
   //console.log('seshID: ', seshID);
-  console.log('Sessions: ', req.sessionStore);
+  //console.log('Sessions: ', req.sessionStore);
   string = req.sessionStore.sessions[seshID];
   //console.log('STRING V IS: ', typeof(string));
 
@@ -15,12 +15,9 @@ module.exports = function (req, res, next) {
 
     var sessionString = JSON.stringify(req.sessionStore.sessions);
     var tokenIndex = sessionString.search('token') + 10;
-    var temp1 = sessionString.search('length') + 9;
-    var temp2 = temp1 + 5;
-    var tokenLength = sessionString.slice(temp1, temp2);
-    console.log('TLENGTH: ', tokenLength);
-    var lastIndex = tokenIndex + tokenLength - 5;
-    token = sessionString.slice(tokenIndex, lastIndex);
+    //console.log('SESH STRING: ', sessionString);
+    var endIndex = sessionString.search('"}"') - 1;
+    token = sessionString.slice(tokenIndex, endIndex);
     console.log('Token is: ', token);
 
   } else {
