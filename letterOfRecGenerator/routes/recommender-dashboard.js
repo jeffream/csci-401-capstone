@@ -127,7 +127,7 @@ router.post('/', verify, function (req, res, next) {
             console.log('Message sent: %s', info.messageId);
             console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-            res.render('contact', {msg:'Email has been sent'});
+            //res.render('contact', {msg:'Email has been sent'});
         });
 
         res.redirect('/recommender-dashboard');
