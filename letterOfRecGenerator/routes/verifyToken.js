@@ -23,7 +23,7 @@ module.exports = function (req, res, next) {
     var periodIndex2 = slicedString.indexOf('.');
     var slicedString2 = sessionString.slice(periodIndex2 + 1, sessionString.length);
     console.log('SS 2: ', slicedString2);
-    var quoteIndex = sessionString.search('"');
+    var quoteIndex = sessionString.indexOf('"');
     token = sessionString.slice(tokenIndex, quoteIndex);
     console.log('Token is: ', token);
 
