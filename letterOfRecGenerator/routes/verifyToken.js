@@ -18,7 +18,7 @@ module.exports = function (req, res, next) {
     //console.log('SESH STRING: ', sessionString);
     var endIndex = sessionString.search('"}\'') - 1;
     token = sessionString.slice(tokenIndex, endIndex);
-    //console.log('Token is: ', token);
+    console.log('Token is: ', token);
 
   } else {
     obj = JSON.parse(string);
