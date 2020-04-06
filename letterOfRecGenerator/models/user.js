@@ -84,6 +84,10 @@ UserSchema.methods.addTemplate = function (template, cb) {
     console.log('START ARRAY');
 
     for (let [key, value] of Object.entries(template)) {
+
+      var split = key.split("[");
+      console.log('Split is: ', typeof(split));
+
       console.log(`${key}: ${value}`);
     }
 
