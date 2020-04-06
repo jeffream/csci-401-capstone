@@ -77,7 +77,7 @@ UserSchema.statics.findOrCreate = function (id, cb) {
 UserSchema.methods.addTemplate = function (template, cb) {
     var errorFlag = false;
 
-    var temp = new TemplateSchema {
+    var temp = new Template {
       name: template.name,
       text: template.text,
       questions: [],
