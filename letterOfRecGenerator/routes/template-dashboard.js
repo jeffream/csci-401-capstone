@@ -12,6 +12,9 @@ router.get('/', verify, function (req, res, next) {
         currLetterTemplate = '';
     }
 
+    var temps = req.user.templates;
+    console.log('TEMP[0] DASH:  ', temps[0]);
+
     res.render('pages/template-dashboard', {
         title: 'Templates',
         templates: req.user.templates,
