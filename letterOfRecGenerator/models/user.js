@@ -77,9 +77,27 @@ UserSchema.statics.findOrCreate = function (id, cb) {
 UserSchema.methods.addTemplate = function (template, cb) {
     var errorFlag = false;
 
-    console.log('TEMPLATE: ', template.name);
-    var array = [];
-    array = Object.values(template);
+    var temp = {
+      name: template.name,
+      text: template.text,
+      questions: [{
+          number: Number,
+          type: String,
+          question: String,
+          tag: String,
+          options: [{
+              option: String,
+              fill: String,
+              tag: String
+          }],
+          optional: Boolean,
+          organizationFlag: Boolean
+      }],
+    }
+
+    console.log('TEMPLATE: ', temp.name);
+    // var array = [];
+    // array = Object.values(template);
 
     console.log('START ARRAY');
 
@@ -91,13 +109,27 @@ UserSchema.methods.addTemplate = function (template, cb) {
 
       //Split string into last half
       var length = key.length;
-      var lastIndex = length - 2;
+      var lastIndex = length - 1;
       var string = key.substring(13, lastIndex);
       console.log('STRING IS: ', string);
 
+      if (string == 'number') {
+        temp.questions.number = string;
+      } else if (string == 'type') {
+          temp.questions.type = string;
+      } else if (string == 'question'){
+          temp.questions.question = string;
+      } else if (string == 'tag'){
+          temp.questions.tag = string;
+      } else if (string == 'optional'){
+          temp.questions.optional = string;
+      } else if (string == 'organizationFlag'){
+          temp.questions.organizationFlag = string;
+      } else if (string == 'options'){
+          // do more for options
+      }
 
-
-
+      console.log('Number is: ', temp.questions.number);
       console.log(`${key}: ${value}`);
     }
 
