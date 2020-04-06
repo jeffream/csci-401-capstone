@@ -85,8 +85,8 @@ UserSchema.methods.addTemplate = function (template, cb) {
 
     for (let [key, value] of Object.entries(template)) {
 
-      var split = key.split("[");
-      console.log('Split is: ', typeof(split));
+      var questionNum = key.charAt(11);
+      console.log('NUM IS: ', questionNum);
 
       console.log(`${key}: ${value}`);
     }
