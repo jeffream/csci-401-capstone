@@ -17,10 +17,9 @@ module.exports = function (req, res, next) {
     var tokenIndex = sessionString.search('token') + 10;
     //console.log('SESH STRING: ', sessionString);
     var periodIndex1 = sessionString.search('.');
-    var farIndex = sessionString.search('"}\'') - 4;
-    var slicedString = sessionString.slice(periodIndex1 + 1, farIndex);
-    var periodIndex2 = sessionString.search('.'); 
-    var slicedString2 = sessionString.slice(periodIndex2 + 1, farIndex);
+    var slicedString = sessionString.slice(periodIndex1 + 1, sessionString.length);
+    var periodIndex2 = sessionString.search('.');
+    var slicedString2 = sessionString.slice(periodIndex2 + 1, sessionString.length);
     var quoteIndex = sessionString.search('"');
     token = sessionString.slice(tokenIndex, quoteIndex);
     console.log('Token is: ', token);
