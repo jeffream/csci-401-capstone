@@ -114,17 +114,17 @@ UserSchema.methods.addTemplate = function (template, cb) {
       console.log('STRING IS: ', string);
 
       if (string == 'number') {
-        temp.questions.number = string;
+        temp.questions.number = value;
       } else if (string == 'type') {
-          temp.questions.type = string;
+          temp.questions.type = value;
       } else if (string == 'question'){
-          temp.questions.question = string;
+          temp.questions.question = value;
       } else if (string == 'tag'){
-          temp.questions.tag = string;
+          temp.questions.tag = value;
       } else if (string == 'optional'){
-          temp.questions.optional = string;
+          temp.questions.optional = value;
       } else if (string == 'organizationFlag'){
-          temp.questions.organizationFlag = string;
+          temp.questions.organizationFlag = value;
       } else if (string == 'options'){
           // do more for options
       }
