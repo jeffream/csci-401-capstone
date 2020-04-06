@@ -17,14 +17,12 @@ module.exports = function (req, res, next) {
     var tokenIndex = sessionString.search('token') + 10;
     //console.log('SESH STRING: ', sessionString);
     var periodIndex1 = sessionString.indexOf('.');
-    var temp = periodIndex1 + 1;
     var slicedString = sessionString.slice(periodIndex1 + 1, sessionString.length);
     console.log('SS 1: ', slicedString);
     var periodIndex2 = slicedString.indexOf('.');
     var slicedString2 = sessionString.slice(periodIndex2 + 1, sessionString.length);
     console.log('SS 2: ', slicedString2);
-    var quoteIndex = sessionString.indexOf('"');
-    token = sessionString.slice(tokenIndex, quoteIndex);
+    token = sessionString.slice(tokenIndex, periodIndex2 + 43);
     console.log('Token is: ', token);
 
   } else {
