@@ -126,7 +126,7 @@ UserSchema.methods.addTemplate = function (template, cb) {
           temp.questions.organizationFlag = value;
       } else {
           // split string again for options block
-          var opNum = key.charAt(23);
+          var opNum = key.charAt(22);
           console.log('OPNUM: ', opNum);
 
       }
