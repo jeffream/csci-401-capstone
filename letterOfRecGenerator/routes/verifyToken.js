@@ -4,7 +4,7 @@ module.exports = function (req, res, next) {
 
   var seshID = req.sessionID;
   //console.log('seshID: ', seshID);
-  //console.log('Sessions: ', req.sessionStore);
+  console.log('Sessions: ', req.sessionStore);
   string = req.sessionStore.sessions[seshID];
   //console.log('STRING V IS: ', typeof(string));
 
