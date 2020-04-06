@@ -15,7 +15,7 @@ module.exports = function (req, res, next) {
 
     var sessionString = JSON.stringify(req.sessionStore.sessions);
     var tokenIndex = sessionString.search('token') + 10;
-    var lastindex = sessionString.search("}'");
+    var lastIndex = sessionString.search("}'");
     //console.log('SESH STRING: ', sessionString);
     var periodIndex1 = sessionString.indexOf('.');
     var slicedString = sessionString.slice(periodIndex1 + 1, sessionString.length);
