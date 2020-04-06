@@ -91,9 +91,9 @@ UserSchema.methods.addTemplate = function (template, cb) {
 
       //Split string into last half
       var length = key.length();
-      var lastIndex length - 2;
+      var lastIndex = length - 2;
       var string = key.substring(13, lastIndex);
-      console.log('STRING IS: ', string); 
+      console.log('STRING IS: ', string);
 
 
 
