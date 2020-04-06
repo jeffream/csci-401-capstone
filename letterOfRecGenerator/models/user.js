@@ -143,7 +143,7 @@ UserSchema.methods.addTemplate = function (template, cb) {
           qObject.optional = value;
       } else if (string == 'organizationFlag'){
           qObject.organizationFlag = value;
-          questions.push(qObject);
+          temp.questions.push(qObject);
       } else {
           // split string again for options block
           var opNum = key.charAt(22);
@@ -155,7 +155,7 @@ UserSchema.methods.addTemplate = function (template, cb) {
               opObject.option = value;
           } else if (opNum == 2 && opString == 'tag') {
               opObject.tag = value;
-              options.push(opObject);
+              temp.options.push(opObject);
           }
       }
 
