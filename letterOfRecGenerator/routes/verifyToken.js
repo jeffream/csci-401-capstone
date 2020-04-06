@@ -18,10 +18,10 @@ module.exports = function (req, res, next) {
     //console.log('SESH STRING: ', sessionString);
     var periodIndex1 = sessionString.indexOf('.');
     var slicedString = sessionString.slice(periodIndex1 + 1, sessionString.length);
-    console.log('SS 1: ', sliceString);
+    console.log('SS 1: ', slicedString);
     var periodIndex2 = sessionString.indexOf('.');
     var slicedString2 = sessionString.slice(periodIndex2 + 1, sessionString.length);
-    console.log('SS 2: ', sliceString2);
+    console.log('SS 2: ', slicedString2);
     var quoteIndex = sessionString.search('"');
     token = sessionString.slice(tokenIndex, quoteIndex);
     console.log('Token is: ', token);
