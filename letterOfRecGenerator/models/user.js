@@ -105,13 +105,12 @@ UserSchema.methods.addTemplate = function (template, cb) {
 
       // get Question Number
       var questionNum = key.charAt(10);
-      console.log('NUM IS: ', questionNum);
 
       //Split string into last half
       var length = key.length;
       var lastIndex = length - 1;
       var string = key.substring(13, lastIndex);
-      console.log('STRING IS: ', string);
+      //console.log('STRING IS: ', string);
 
       if (string == 'number') {
         temp.questions.number = value;
@@ -125,12 +124,14 @@ UserSchema.methods.addTemplate = function (template, cb) {
           temp.questions.optional = value;
       } else if (string == 'organizationFlag'){
           temp.questions.organizationFlag = value;
-      } else if (string == 'options'){
-          // do more for options
+      } else {
+          // split string again for options block
+          var opNum = key.charAt(23);
+          console.log('OPNUM: ', opNum);
+
       }
 
-      console.log('Number is: ', temp.questions.number);
-      console.log(`${key}: ${value}`);
+      //console.log(`${key}: ${value}`);
     }
 
 
@@ -138,13 +139,13 @@ UserSchema.methods.addTemplate = function (template, cb) {
     //console.log('ARRAY: ', array);
 
     for(var i=0; i < this.templates.length; i++) {
-        if(this.templates[i].name == template.name) {
+        if(this.templates[i].name == temp.name) {
             cb(new Error("DUPLICATE NAME"));
             errorFlag = true;
         }
     }
     if(!errorFlag) {
-        this.templates.push(template);
+        this.templates.push(temp);
         var newTemplate = this.templates[this.templates.length - 1];
         this.save(function (err) {
             cb(err, newTemplate.getId());
