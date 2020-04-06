@@ -158,13 +158,10 @@ UserSchema.methods.addTemplate = function (template, cb) {
               qObject.options.push(opObject);
           }
       }
-
       //console.log(`${key}: ${value}`);
     }
 
-
-
-    //console.log('ARRAY: ', array);
+    console.log('TEMP IS: ', temp);
 
     for(var i=0; i < this.templates.length; i++) {
         if(this.templates[i].name == temp.name) {
