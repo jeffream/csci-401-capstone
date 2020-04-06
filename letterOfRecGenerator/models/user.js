@@ -208,6 +208,8 @@ UserSchema.methods.updateTemplate = function (id, template, cb) {
     var user = this;
     var updatedTemplate = this.templates.id(id);
 
+    console.log('UPDATE TEMP: ', template);
+
     updatedTemplate.name = template.name;
     updatedTemplate.text = template.text;
     updatedTemplate.questions = template.questions;
