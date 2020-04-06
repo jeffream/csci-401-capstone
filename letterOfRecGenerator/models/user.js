@@ -78,6 +78,10 @@ UserSchema.methods.addTemplate = function (template, cb) {
     var errorFlag = false;
 
     console.log('TEMPLATE: ', template.name);
+    var array = [];
+    array = Object.values(template);
+
+    console.log('ARRAY: ', array);
 
     for(var i=0; i < this.templates.length; i++) {
         if(this.templates[i].name == template.name) {
