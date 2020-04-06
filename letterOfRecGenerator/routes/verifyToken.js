@@ -17,11 +17,11 @@ module.exports = function (req, res, next) {
     var tokenIndex = sessionString.search('token') + 10;
     //console.log('SESH STRING: ', sessionString);
     var periodIndex1 = sessionString.indexOf('.');
-    console.log('PERIOD 1: ', sessionString.charAt(periodIndex1));
     var slicedString = sessionString.slice(periodIndex1 + 1, sessionString.length);
+    console.log('SS 1: ', sliceString);
     var periodIndex2 = sessionString.indexOf('.');
-    console.log('PERIOD 2: ', sessionString.charAt(periodIndex2));
     var slicedString2 = sessionString.slice(periodIndex2 + 1, sessionString.length);
+    console.log('SS 2: ', sliceString2);
     var quoteIndex = sessionString.search('"');
     token = sessionString.slice(tokenIndex, quoteIndex);
     console.log('Token is: ', token);
