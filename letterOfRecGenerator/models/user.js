@@ -99,7 +99,25 @@ UserSchema.methods.addTemplate = function (template, cb) {
     // var array = [];
     // array = Object.values(template);
 
-    console.log('START ARRAY');
+    var qObject = {
+      number: Number,
+      type: String,
+      question: String,
+      tag: String,
+      options: [{
+          option: String,
+          fill: String,
+          tag: String
+      }],
+      optional: Boolean,
+      organizationFlag: Boolean
+    };
+
+    var opObject = {
+      option: String,
+      fill: String,
+      tag: String
+    };
 
     for (let [key, value] of Object.entries(template)) {
 
@@ -110,25 +128,35 @@ UserSchema.methods.addTemplate = function (template, cb) {
       var length = key.length;
       var lastIndex = length - 1;
       var string = key.substring(13, lastIndex);
-      //console.log('STRING IS: ', string);
+      //console.log('STRING IS: ', string
+
 
       if (string == 'number') {
-        temp.questions.number = value;
+        qObject.number = value;
       } else if (string == 'type') {
-          temp.questions.type = value;
+          qObject.type = value;
       } else if (string == 'question'){
-          temp.questions.question = value;
+          qObject.question = value;
       } else if (string == 'tag'){
-          temp.questions.tag = value;
+          qObject.tag = value;
       } else if (string == 'optional'){
-          temp.questions.optional = value;
+          qObject.optional = value;
       } else if (string == 'organizationFlag'){
-          temp.questions.organizationFlag = value;
+          qObject.organizationFlag = value;
+          questions.push(qObject);
       } else {
           // split string again for options block
           var opNum = key.charAt(22);
-          console.log('OPNUM: ', opNum);
+          var opString = key.substring(25, lastIndex);;
 
+          if (opNum == 0 && opString == 'fill') {
+              opObject.fill = value;
+          } else if (opNum == 1 && opString == 'option') {
+              opObject.option = value;
+          } else if (opNum == 2 && opString == 'tag') {
+              opObject.tag = value;
+              options.push(opObject);
+          }
       }
 
       //console.log(`${key}: ${value}`);

@@ -219,7 +219,6 @@ router.post('/create', verify, function (req, res, next) {
       var string = JSON.stringify(req.body);
       var body = JSON.parse(string);
       console.log('NEW BODY IS: ', body);
-      console.log('BODY [2]: ', body[2]);
 
       user.addTemplate(req.body, function (err, id) {
           console.log("IN ADD TEMPLATE");
