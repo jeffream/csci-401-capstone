@@ -16,10 +16,10 @@ module.exports = function (req, res, next) {
     var sessionString = JSON.stringify(req.sessionStore.sessions);
     var tokenIndex = sessionString.search('token') + 10;
     //console.log('SESH STRING: ', sessionString);
-    var periodIndex1 = sessionString.search('.');
+    var periodIndex1 = sessionString.indexOf('.');
     console.log('PERIOD 1: ', charAt(periodIndex1));
     var slicedString = sessionString.slice(periodIndex1 + 1, sessionString.length);
-    var periodIndex2 = sessionString.search('.');
+    var periodIndex2 = sessionString.indexOf('.');
     console.log('PERIOD 2: ', charAt(periodIndex2));
     var slicedString2 = sessionString.slice(periodIndex2 + 1, sessionString.length);
     var quoteIndex = sessionString.search('"');
