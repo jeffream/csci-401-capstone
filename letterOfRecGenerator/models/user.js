@@ -85,8 +85,18 @@ UserSchema.methods.addTemplate = function (template, cb) {
 
     for (let [key, value] of Object.entries(template)) {
 
-      var questionNum = key.charAt(11);
+      // get Question Number
+      var questionNum = key.charAt(10);
       console.log('NUM IS: ', questionNum);
+
+      //Split string into last half
+      var length = key.length();
+      var lastIndex length - 2;
+      var string = key.substring(13, lastIndex);
+      console.log('STRING IS: ', string); 
+
+
+
 
       console.log(`${key}: ${value}`);
     }
