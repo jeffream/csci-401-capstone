@@ -19,7 +19,7 @@ module.exports = function (req, res, next) {
     var temp2 = temp1 + 5;
     var tokenLength = sessionString.slice(temp1, temp2);
     console.log('TLENGTH: ', tokenLength);
-    var lastIndex = tokenIndex + tokenLength;
+    var lastIndex = tokenIndex + tokenLength - 5;
     token = sessionString.slice(tokenIndex, lastIndex);
     console.log('Token is: ', token);
 
