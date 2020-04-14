@@ -95,17 +95,20 @@ router.post('/', verify, async function (req, res, next) {
                 }
             });
 
-        var url = encodeURI('http://localhost:8085/form-entry/' + form.getLink());
-
-        // create reusable transporter object using the default SMTP transport
-        let transporter = await nodemailer.createTransport({
-          service: "gmail", 
-          host: "smtp.gmail.com", 
-          auth: {
-              user: "testdemotest11@gmail.com",
-              pass: "testeresfera.11"
-          }
-        });
+            var url = encodeURI('http://128.125.100.147:80/form-entry/' + form.getLink());
+            // create reusable transporter object using the default SMTP transport
+            let transporter = nodemailer.createTransport({
+              host: 'smtp.gmail.com',
+              port: 465,
+              secure: true, // true for 465, false for other ports
+              auth: {
+                  user: 'letterofrecgenerator@gmail.com', // generated ethereal user
+                  pass: 'siqtam-3dabqa-pepxaV'  // generated ethereal password
+              },
+              tls:{
+                rejectUnauthorized:false
+              }
+            });
 
         // setup email data with unicode symbols
         let mailOptions = {
