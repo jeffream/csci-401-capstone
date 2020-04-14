@@ -267,6 +267,8 @@
             }
         }
         // redirects to form-completed page on success, sends responseArray to server
+        responseArray=JSON.stringify(responseArray);
+        
         $.ajax({
             url: appRoot+'/form-entry',
             data: {

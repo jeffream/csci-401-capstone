@@ -4,6 +4,7 @@ var Form = require('../models/form');
 
 /* GET form entry page. */
 router.get('/:hash', function (req, res, next) {
+    console.log(req.headers.host);
     Form.findFromLink(req.params.hash, function (err, form) {
         if (err) {
             res.send("Form not found.");
@@ -21,14 +22,20 @@ router.get('/:hash', function (req, res, next) {
                 });
             }
         }
-    });
+    }); 
 });
 
 /**
  * From form-entry submitForm
  */
 router.post('/', function (req, res, next) {
-    Form.submitForm(req.body.id, req.body.responseData, function (err) {
+
+    console.log(req.body.id);
+    var obj=[];
+    var body = JSON.parse(req.body.responseData);
+    obj.responseData=body;
+    console.log(obj); 
+    Form.submitForm(req.body.id, obj.responseData, function (err) {
         if (err) {
             res.send("unable to update responses of user form");
         } else {
