@@ -8,7 +8,7 @@ var errorScrollCoordinates = {
     y: 0
 };
 
-
+var appRoot=window.location.origin;
 window.onload = function () {
 
 };
@@ -33,7 +33,7 @@ function saveEmailTemplate() {
     if (id) {
 
         $.ajax({
-            url: 'http://128.125.100.147:80/email-template-editor/update',
+            url: appRoot+'/email-template-editor/update',
             data: {
                 id: id,
                 Email: Email
@@ -45,7 +45,7 @@ function saveEmailTemplate() {
             success: function (data) {
                 id = data.id;
                 console.log('success');
-                window.location.href = 'http://128.125.100.147:80/template-dashboard'
+                window.location.href = appRoot+'/template-dashboard'
             },
             error: function () {
                 console.log('error');
@@ -56,7 +56,7 @@ function saveEmailTemplate() {
     } else {
 
         $.ajax({
-            url: 'http://128.125.100.147:80/email-template-editor/addEmailTemplate',
+            url: appRoot+'/email-template-editor/addEmailTemplate',
             data: {
                 id: id,
                 Email: Email
@@ -68,7 +68,7 @@ function saveEmailTemplate() {
             success: function (data) {
                 id = data.id;
                 console.log('success');
-                window.location.href = 'http://128.125.100.147:80/template-dashboard'
+                window.location.href = appRoot+'/template-dashboard'
             },
             error: function () {
                 console.log('error');

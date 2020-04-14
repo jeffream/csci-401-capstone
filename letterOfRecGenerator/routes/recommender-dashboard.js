@@ -34,15 +34,16 @@ router.get('/', verify, function (req, res, next) {
 
   // get UserID
   var userID = req.user._id;
-
   User.findUser(userID, function (err, user) {
     if (err) {
       console.log('Error finding User.');
     } else {
-      user.getForms(function (err, forms) {
+      //console.log(userID);
+      // console.log(user);
+      user.getForms(userID,function (err, forms) {
           if (err) {
               console.log(`error: ${err}`);
-          } else {
+          } else { 
 
             var temp = user.getTemplates();
 
@@ -59,12 +60,12 @@ router.get('/', verify, function (req, res, next) {
   });
 });
 
-router.post('/', verify, function (req, res, next) {
+router.post('/', verify, async function (req, res, next) {
 
   // get User ID
   var userID = req.user._id;
 
-  User.findUser(userID, function (err, user) {
+  User.findUser(userID, async function (err, user) {
     if (err) {
       console.log('Error finding User.');
     } else {
@@ -83,7 +84,7 @@ router.post('/', verify, function (req, res, next) {
           return;
       }
 
-      Form.createForm(toEmail, user.getTemplate(req.body.templateId), userId, function (err, form) {
+      Form.createForm(toEmail, user.getTemplate(req.body.templateId), userId, async function (err, form) {
         if (err) {
             console.log(`error: ${err}`);
         } else {
@@ -94,19 +95,15 @@ router.post('/', verify, function (req, res, next) {
                 }
             });
 
-        var url = encodeURI('http://128.125.100.147:80/form-entry/' + form.getLink());
+        var url = encodeURI('http://localhost:8085/form-entry/' + form.getLink());
 
         // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure: true, // true for 465, false for other ports
+        let transporter = await nodemailer.createTransport({
+          service: "gmail", 
+          host: "smtp.gmail.com", 
           auth: {
-              user: 'letterofrecgenerator@gmail.com', // generated ethereal user
-              pass: 'siqtam-3dabqa-pepxaV'  // generated ethereal password
-          },
-          tls:{
-            rejectUnauthorized:false
+              user: "testdemotest11@gmail.com",
+              pass: "testeresfera.11"
           }
         });
 
@@ -126,6 +123,8 @@ router.post('/', verify, function (req, res, next) {
             }
             console.log('Message sent: %s', info.messageId);
             console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+            res.render('contact', {msg:'Email has been sent'});
         });
 
         res.redirect('/recommender-dashboard');

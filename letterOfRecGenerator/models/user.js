@@ -9,7 +9,7 @@ var UserSchema = new Schema({
     id: String,
     username: String,
     displayName: String,
-    accessToken: String,
+    accessToken: String, 
     username: String,
     templates: [Template.schema],
     deactivatedTemplates: [Template.schema],
@@ -56,7 +56,19 @@ UserSchema.statics.findUser = function (id, cb) {
         }
     });
 };
+UserSchema.statics.getUser = function (id,cb) {
+    db.model('User').findOne({'_id': id}, function (err, user) {
 
+        if(user) {
+          // console.log(user);
+          cb(err, user);
+          // return user;
+        }
+        else {
+          console.log('NOPE no user.');
+        }
+    });
+};
 UserSchema.statics.createUser = function (id, cb) {
     User.create({
         id: id,
@@ -77,90 +89,25 @@ UserSchema.statics.findOrCreate = function (id, cb) {
 UserSchema.methods.addTemplate = function (template, cb) {
     var errorFlag = false;
 
-    var temp = new Template ({
-      name: template.name,
-      text: template.text,
-      questions: [],
-      letterheadImg: null,
-      footerImg: null
-    });
+    // console.log('TEMPLATE: ', template);
 
-    console.log('TEMPLATE: ', temp.name);
-    // var array = [];
-    // array = Object.values(template);
-
-    var qObject = {
-      number: Number,
-      type: String,
-      question: String,
-      tag: String,
-      options: [{
-          option: String,
-          fill: String,
-          tag: String
-      }],
-      optional: Boolean,
-      organizationFlag: Boolean
-    };
-
-    var opObject = {
-      option: String,
-      fill: String,
-      tag: String
-    };
-
-    for (let [key, value] of Object.entries(template)) {
-
-      // get Question Number
-      var questionNum = key.charAt(10);
-
-      //Split string into last half
-      var length = key.length;
-      var lastIndex = length - 1;
-      var string = key.substring(13, lastIndex);
-      //console.log('STRING IS: ', string
-
-
-      if (string == 'number') {
-        qObject.number = value;
-      } else if (string == 'type') {
-          qObject.type = value;
-      } else if (string == 'question'){
-          qObject.question = value;
-      } else if (string == 'tag'){
-          qObject.tag = value;
-      } else if (string == 'optional'){
-          qObject.optional = value;
-      } else if (string == 'organizationFlag'){
-          qObject.organizationFlag = value;
-          temp.questions.push(qObject);
-      } else {
-          // split string again for options block
-          var opNum = key.charAt(22);
-          var opString = key.substring(25, lastIndex);;
-
-          if (opNum == 0 && opString == 'fill') {
-              opObject.fill = value;
-          } else if (opNum == 1 && opString == 'option') {
-              opObject.option = value;
-          } else if (opNum == 2 && opString == 'tag') {
-              opObject.tag = value;
-              qObject.options.push(opObject);
-          }
-      }
-      //console.log(`${key}: ${value}`);
-    }
-
-    console.log('TEMP IS: ', temp);
-
+    var arr=[];
+    arr=template;
     for(var i=0; i < this.templates.length; i++) {
-        if(this.templates[i].name == temp.name) {
+        if(this.templates[i].name == template.name) {
             cb(new Error("DUPLICATE NAME"));
             errorFlag = true;
         }
+        // console.log(this.templates[i].name);
+        // arr[i]["name"]=this.templates[i].name;
     }
+    
+    var ca=Object.entries(arr);
+    // console.log(ca);
     if(!errorFlag) {
-        this.templates.push(temp);
+        // this.templates.push(ca);
+        this.templates.push(template);
+        console.log(this.templates);
         var newTemplate = this.templates[this.templates.length - 1];
         this.save(function (err) {
             cb(err, newTemplate.getId());
@@ -207,16 +154,20 @@ UserSchema.methods.updateEmailTemplate = function (id, email, cb) {
 UserSchema.methods.updateTemplate = function (id, template, cb) {
     var user = this;
     var updatedTemplate = this.templates.id(id);
-
-    console.log('UPDATE TEMP: ', template);
-
+    var string = JSON.stringify(template);
+      // console.log('String [2]: ', string);
+    var body = JSON.parse(string);
+    // console.log('NEW BODY IS: ', body.name);
+    // return;
+    // console.log(updatedTemplate); return;
     updatedTemplate.name = template.name;
     updatedTemplate.text = template.text;
     updatedTemplate.questions = template.questions;
     updatedTemplate.letterheadImg = template.letterheadImg;
     updatedTemplate.footerImg = template.footerImg;
     updatedTemplate.optional = template.optional;
-
+    
+    // return;
     User.findOneAndUpdate({
         "id": user.id,
         "templates._id": id
@@ -332,14 +283,16 @@ UserSchema.methods.activateEmailTemplate = function (id, cb) {
     this.save(cb);
 };
 
-UserSchema.methods.addForm = function (form, cb) {
+UserSchema.methods.addForm = function (form, cb) { 
     this.forms.push(form._id);
     this.save(cb);
 };
 
-UserSchema.methods.getForms = function (cb) {
+UserSchema.methods.getForms = function (id,cb) {
     // try getting all forms under this user id
-    User.findOne({id: this.id}).populate('forms').exec(function (err, user) {
+    console.log(id);
+    User.findOne({_id: id}).populate('forms').exec(function (err, user) {
+        console.log(user._id);
         cb(err, user.forms);
     })
 };

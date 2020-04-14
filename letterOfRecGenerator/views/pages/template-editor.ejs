@@ -23,8 +23,7 @@
         <div class="error-container">
             <div id="name-container">
                 <h2 class="section-header">Template Name</h2>
-                <input id="name-container-text-field" type="text" class="text-field" placeholder="Enter a template name here..."
-                       value="<%= templateName %>"/>
+                <input id="name-container-text-field" type="text" class="text-field" placeholder="Enter a template name here..." value="<%= templateName %>"/>
             </div>
         </div>
 
@@ -77,6 +76,7 @@
         </div>
 
         <script>
+        var appRoot=window.location.origin;
         function sendFile(){
         // Form Data
         var formData = new FormData();
@@ -89,7 +89,7 @@
 
         // Http Request
         var request = new XMLHttpRequest();
-        request.open('POST', "http://128.125.100.147:80/template-dashboard/uploadLetterTemplate");
+        request.open('POST', appRoot+"/template-dashboard/uploadLetterTemplate");
         request.send(formData);
 
         //Submit success

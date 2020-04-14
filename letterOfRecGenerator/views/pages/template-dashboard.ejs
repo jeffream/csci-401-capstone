@@ -86,16 +86,17 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>\
 <script>
+    var appRoot=window.location.origin;
     var current_page = [1,1];
     var records_per_page = 5;
-
+    // generateTable('0');
     var string = <%- JSON.stringify(templates) %>;
     var string2 = JSON.stringify(string);
     var data = [
       JSON.parse(string2)
     ];
 
-    console.log('Data is: ', data);
+    console.log('Data isasd: ', string);
     // Get the modal
     var modal = document.getElementById('myModal');
 
@@ -124,13 +125,13 @@
 
     function editTemplate(id) {
         $.ajax({
-            url: 'http://128.125.100.147:80/template-editor/edit',
+            url: appRoot+'/template-editor/edit',
             data: {id},
             type: 'GET',
             complete: function (data) {
                 var params = data.responseJSON;
                 console.log('complete');
-                window.location.href = getDestinationRoute('http://128.125.100.147:80/template-editor', params);
+                window.location.href = getDestinationRoute(appRoot+'/template-editor', params);
             },
             error: function () {
                 console.log('error');
@@ -140,13 +141,13 @@
 
     function editEmailTemplate(id) {
         $.ajax({
-            url: 'http://128.125.100.147:80/email-template-editor/edit',
+            url: appRoot+'/email-template-editor/edit',
             data: {id},
             type: 'GET',
             complete: function (data) {
                 var params = data.responseJSON;
                 console.log('complete');
-                window.location.href = getDestinationRoute('http://128.125.100.147:80/email-template-editor', params);
+                window.location.href = getDestinationRoute(appRoot+'/email-template-editor', params);
             },
             error: function () {
                 console.log('error');
@@ -157,7 +158,7 @@
     // On click for trash icon
     function deleteRow(id) {
         $.ajax({
-            url: 'http://128.125.100.147:80/template-dashboard/delete',
+            url: appRoot+'/template-dashboard/delete',
             data: {id},
             type: 'POST',
             complete: function () {
@@ -172,7 +173,7 @@
 
      function deleteEmailRow(id) {
         $.ajax({
-            url: 'http://128.125.100.147:80/template-dashboard/delete-email',
+            url: appRoot+'/template-dashboard/delete-email',
             data: {id},
             type: 'POST',
             complete: function () {
@@ -288,7 +289,7 @@
         var table = document.getElementById("templates-table0");
         var row = table.insertRow(row_count);
         var cells = [row.insertCell(0), row.insertCell(1)];
-
+        console.log('hello');
         cells[0].innerHTML = data[0][i].name;
         cells[1].innerHTML =  "<img class='icon' src='/images/pencil.png' onclick='editTemplate(\"" + data[0][i]._id + "\")'/>";
         cells[1].innerHTML += "<img class='icon' src='/images/delete.png' onclick='deleteRow(\"" + data[0][i]._id + "\")'/>";
@@ -298,7 +299,7 @@
         var table = document.getElementById("templates-table1");
         var row = table.insertRow(row_count);
         var cells = [row.insertCell(0), row.insertCell(1)];
-
+        console.log('hello');
         cells[0].innerHTML = data[1][i].title;
         cells[1].innerHTML =  "<img class='icon' src='/images/pencil.png' onclick='editEmailTemplate(" + JSON.stringify(data[1][i]) + ")'/>";
         cells[1].innerHTML += "<img class='icon' src='/images/delete.png' onclick='deleteEmailRow(\"" + data[1][i]._id + "\")'/>"

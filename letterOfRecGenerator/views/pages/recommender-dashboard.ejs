@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
     <title>Letter of Recommendation Generator</title>
     <link rel="stylesheet" href="/stylesheets/style.css"/>
@@ -96,6 +96,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+    var appRoot=window.location.origin;
     var current_page = [1];
     var records_per_page = 10;
     var string = <%- JSON.stringify(forms) %>;
@@ -254,7 +255,7 @@
         var subject = document.getElementById('subject').value;
         var body = document.getElementById('body-text').value;
         $.ajax({
-                url: 'http://128.125.100.147:80/recommender-dashboard/update',
+                url: appRoot+'/recommender-dashboard/update',
                 data: {
                     subject: subject,
                     body: body
@@ -285,7 +286,7 @@
         if(status === 'Sent'){
             window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
         } else {
-            window.location.href = getDestinationRoute('http://128.125.100.147:80/letter-preview', params);
+            window.location.href = getDestinationRoute(appRoot+'/letter-preview', params);
 
         }
     }
@@ -293,7 +294,7 @@
     // On click for trash icon
     function deleteRow(id) {
         $.ajax({
-            url: 'http://128.125.100.147:80/recommender-dashboard/delete',
+            url: appRoot+'/recommender-dashboard/delete',
             data: {id},
             type: 'POST',
             complete: function () {
@@ -308,7 +309,7 @@
 
     function openHistory(params) {
         // Check to see if the status is green, if not then show error dialog
-        window.location.href = getDestinationRoute('http://128.125.100.147:80/history', params);
+        window.location.href = getDestinationRoute(appRoot+'/history', params);
     }
 
     function openResponses(params) {
@@ -316,7 +317,7 @@
         if(status === 'Sent'){
             window.alert("Responses cannot be seen because the recommendee has not filled out the form!");
         }else {
-            window.location.href = getDestinationRoute('http://128.125.100.147:80/response', params);
+            window.location.href = getDestinationRoute(appRoot+'/response', params);
         }
     }
 
@@ -326,7 +327,7 @@
         if(status === 'Sent'){
             window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
         } else {
-            window.location.href = getDestinationRoute('http://128.125.100.147:80/email-letter-preview', params);
+            window.location.href = getDestinationRoute(appRoot+'/email-letter-preview', params);
         }
     }
 

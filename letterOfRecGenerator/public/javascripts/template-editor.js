@@ -10,7 +10,7 @@ var letterheadImgData = parseAttribute('letterheadImgData');
 var footerImgData = parseAttribute('footerImgData');
 var saveSwitchData = parseAttribute('saveSwitchData');
 const TRIX_EDITOR = "trix-editor";
-
+var appRoot=window.location.origin;
 //var User = require('../models/user');
 
 
@@ -75,7 +75,7 @@ window.onload = function () {
 
     if (id) {
         $.ajax({
-            url: 'http://128.125.100.147:80/template-editor/template',
+            url: appRoot+'/template-editor/template',
             data: {id, saveSwitchData},
             type: 'GET',
             success: function (data) {
@@ -100,7 +100,7 @@ window.onload = function () {
     }
 
 };
-
+ 
 // creates default questions
 function loadDefaultQuestions() {
     var default0 = new Question("Text", "What is your first name?", "<!FNAME>");
@@ -119,7 +119,7 @@ function loadDefaultQuestions() {
     var orgQuestion = new Question("Custom", "What organizations are you applying to?", "<!ORGANIZATION>");
     orgQuestion.options = [constructOptionObject("Organization", "", "<!ORG>")];
     questions.push(orgQuestion);
-
+ 
 }
 
 function changeText() {
@@ -270,7 +270,7 @@ function saveTemplate() {
     var questions = getQuestions();
 
     console.log('Questions! in Ajax: ', questions);
-
+    // questions=JSON.stringify(questions);
     var template = {
         name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
         text: letter,
@@ -290,14 +290,22 @@ function saveTemplate() {
     if (footerImgData) {
         template.footerImg = footerImgData;
     }
-
+    var appRoot=window.location.origin; 
     if (id) {
-
+        questions=JSON.stringify(questions);
+        var template = {
+            name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
+            text: letter,
+            questions: questions
+        };
+        template=JSON.stringify(template);
         $.ajax({
-            url: 'http://128.125.100.147:80/template-editor/update',
+            url: appRoot+'/template-editor/update',
             data: {
                 id: id,
-                template: template
+                text:letter,
+                name:document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
+                questions: questions
             },
             type: 'POST',
             // cache: false,
@@ -306,7 +314,7 @@ function saveTemplate() {
             },
             success: function (data) {
                 console.log('success in SaveTemplate');
-                window.location.href = 'http://128.125.100.147:80/template-dashboard'
+                window.location.href = appRoot+'/template-dashboard'
             },
             error: function (err){
                 console.log('error in saveTemplate:' + err);
@@ -321,9 +329,12 @@ function saveTemplate() {
 
       console.log("TEMPLATE AJAX IS: ", template);
       //
+      console.log(questions);
+      var appRoot=window.location.origin;
+      questions=JSON.stringify(questions);
       $.ajax({
-          url: 'http://128.125.100.147:80/template-editor/create',
-          data: {
+          url: appRoot+'/template-editor/create',
+          data: { 
             name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
             text: letter,
             questions: questions
@@ -335,7 +346,7 @@ function saveTemplate() {
           success: function (data) {
               id = data.id;
               console.log('success in Creating Template');
-              window.location.href = 'http://128.125.100.147:80/template-dashboard'
+              window.location.href = appRoot+'/template-dashboard'
           },
           error: function (err) {
               //console.log('data in saveTemplate: ', data);
@@ -382,7 +393,7 @@ function getQuestions() {
     }));
 
     console.log('DB QUESTIONS: ', dbQuestions);
-
+    console.log(dbQuestions);
     return dbQuestions;
 }
 

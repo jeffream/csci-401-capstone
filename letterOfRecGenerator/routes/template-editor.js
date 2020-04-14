@@ -12,13 +12,14 @@ router.get('/', verify, function (req, res, next) {
 
   User.findUser(userID, function (err, user) {
     if (err) {
-      console.log('Error finding User.');
+      // console.log('Error finding User.');
     } else {
 
       var letterheadImg;
       var footerImg;
       var saveStatus = req.query.saveSwitch;
       var questions;
+      // console.log(questions+"asdas");
       if (req.query.id) {
           if(saveStatus=="true"){
               letterheadImg = user.getTemplate(req.query.id).letterheadImg;
@@ -210,17 +211,23 @@ router.post('/create', verify, function (req, res, next) {
 
   // get UserID
   var userID = req.user._id;
-
   User.findUser(userID, function (err, user) {
     if (err) {
       console.log('Error finding User.');
     } else {
 
-      var string = JSON.stringify(req.body);
-      var body = JSON.parse(string);
-      console.log('NEW BODY IS: ', body);
+      var obj={};
 
-      user.addTemplate(req.body, function (err, id) {
+      var string = JSON.stringify(req.body);
+      // console.log('String [2]: ', string);
+      var body = JSON.parse(req.body.questions);
+      console.log('NEW BODY IS: ', body);
+      obj.name=req.body.name;
+      obj.text=req.body.text;
+      obj.questions=body;
+
+      console.log('String [2]: ', obj);
+      user.addTemplate(obj, function (err, id) {
           console.log("IN ADD TEMPLATE");
           if (err) {
               if(err.message == "DUPLICATE NAME") {
@@ -229,6 +236,7 @@ router.post('/create', verify, function (req, res, next) {
               }
           } else {
             console.log('Successful')
+            // return;
               res.json({
                   success: "Created Successfully",
                   status: 200,
@@ -249,8 +257,15 @@ router.post('/update', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
+      var obj={};
+      var body = JSON.parse(req.body.questions);
+      console.log('NEW BODY IS: ', body);
+      obj.name=req.body.name;
+      obj.text=req.body.text;
+      obj.questions=body;
 
-      user.updateTemplate(req.body.id, req.body.template, function (err, template) {
+      console.log(obj);      
+      user.updateTemplate(req.body.id, obj, function (err, template) {
           if (err) {
               console.log(err);
           } else {

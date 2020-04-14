@@ -11,10 +11,7 @@ router.get('/', verify, function (req, res, next) {
     if(!fs.existsSync(currLetterTemplate)){
         currLetterTemplate = '';
     }
-
-    var temps = req.user.templates;
-    console.log('TEMP[0] DASH:  ', temps[0]);
-
+    // console.log(req.user.templates);
     res.render('pages/template-dashboard', {
         title: 'Templates',
         templates: req.user.templates,
@@ -32,11 +29,13 @@ router.post('/delete', verify, function (req, res, next) {
     if (err) {
       console.log('Error finding User.');
     } else {
+      //console.log(user); return;
       user.deactivateTemplate(req.body.id, function (err) {
           if (err) {
               console.log(err);
           } else {
-              res.render('pages/template-dashboard', {
+            // res.redirect('template-dashboard');
+              res.render('pages/', {
                   title: 'Templates',
                   templates: user.getTemplates(),
                   emailtemplates: user.getEmailTemplates(),

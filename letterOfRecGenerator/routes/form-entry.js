@@ -10,7 +10,7 @@ router.get('/:hash', function (req, res, next) {
         } else {
             if (!form.meta.submitted) {
                 res.render('pages/form-entry', {
-                    title: 'Form: ' + form.getTemplate().getName() + ', created ' + form.getSent() + '.',
+                     title: 'Form: ' + form.getTemplate().getName() + ', created ' + form.getSent() + '.',
                     questions: form.getTemplate().getQuestions(),
                     form: form,
                 });

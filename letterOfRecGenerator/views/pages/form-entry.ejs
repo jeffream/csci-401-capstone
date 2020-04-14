@@ -101,6 +101,7 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+    var appRoot=window.location.origin;
     // adds a new organization row
     function addOrganizationRowHTML(numOptions, qNum) {
         let myTable = document.getElementById("customTable");
@@ -267,7 +268,7 @@
         }
         // redirects to form-completed page on success, sends responseArray to server
         $.ajax({
-            url: 'http://128.125.100.147:80/form-entry',
+            url: appRoot+'/form-entry',
             data: {
                 id: id,
                 responseData: responseArray

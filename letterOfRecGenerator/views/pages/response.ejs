@@ -49,9 +49,9 @@
     </div>
 </body>
 <script>
-
+var appRoot=window.location.origin;
     function saveEditedAnswers(){
-
+        //128.125.100.147
         var id = document.getElementById("formId").innerHTML;
         var responseHTML = document.querySelectorAll("[id=responses-container]");
         var editedResponses = [];
@@ -59,7 +59,7 @@
             editedResponses.push(responseHTML[i].innerHTML.trim());
         }
         $.ajax({
-                url: 'http://128.125.100.147:80/response/update',
+                url: appRoot+'/response/update',
                 data: {
                     editedResponses: editedResponses,
                     id: id
@@ -67,7 +67,7 @@
                 type: 'GET',
                 complete: function() {
                     console.log('worked for saveEditedAnswers')
-                    window.location.href = 'http://128.125.100.147:80/recommender-dashboard';
+                    window.location.href = appRoot+'/recommender-dashboard';
                 },
                 error: function () {
                     console.log('error in saveEditedAnswers')
