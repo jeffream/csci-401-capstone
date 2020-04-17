@@ -43,7 +43,7 @@ router.get('/', verify, function (req, res, next) {
       user.getForms(userID,function (err, forms) {
           if (err) {
               console.log(`error: ${err}`);
-          } else { 
+          } else {
 
             var temp = user.getTemplates();
 
@@ -99,11 +99,11 @@ router.post('/', verify, async function (req, res, next) {
 
         // create reusable transporter object using the default SMTP transport
         let transporter = await nodemailer.createTransport({
-          service: "gmail", 
-          host: "smtp.gmail.com", 
+          service: "gmail",
+          host: "smtp.gmail.com",
           auth: {
-              user: "testdemotest11@gmail.com",
-              pass: "testeresfera.11"
+              user: "letterofrecgenerator@gmail.com",
+              pass: "USC*summer!"
           }
         });
 
