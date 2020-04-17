@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
     <title>Letter of Recommendation Generator</title>
     <link rel="stylesheet" href="/stylesheets/style.css"/>
@@ -55,7 +55,6 @@
                         <p class="subject-text"> Subject: </p>
                         <input class="input-text" id="subject" type="text" name="subject_text" value="<%= subject%>" >
                         <!-- <button id = "Edit"> Edit </button> -->
-                        <button id = "Save" type="button" onclick="openSaveDefaultEmailModal()" > Save </button>
                     </div>
                     <br>
                     <textarea id="body-text" name="body_text" value = "<%= body%>" ><%= body %></textarea>
@@ -444,18 +443,18 @@
             cells[4].innerHTML = '<img class="icon" src="/images/green_checkmark.png">';
         }
         cells[4].classList.add("center");
-        cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
-            + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
-            + ")'>";
-        if (data[0][i].email_sent == false) {
-            cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_incomplete.png' onclick='openEmailPreview("
-                + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
-                + ", \"" + data[0][i].status + "\")'>";
-        } else {
-            cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_complete.png' onclick='openEmailPreview("
-                + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
-                + ", '" + data[0][i].status + "\")'>";
-        }
+        // cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
+        //     + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+        //     + ")'>";
+        // if (data[0][i].email_sent == false) {
+        //     cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_incomplete.png' onclick='openEmailPreview("
+        //         + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+        //         + ", \"" + data[0][i].status + "\")'>";
+        // } else {
+        //     cells[5].innerHTML += "<img class='icon clickable' title='Preview Email' src='/images/email_complete.png' onclick='openEmailPreview("
+        //         + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+        //         + ", '" + data[0][i].status + "\")'>";
+        // }
         cells[5].innerHTML += "<img class='icon clickable' title='View Responses' src='/images/response.png' onclick='openResponses("
             + JSON.stringify({id: data[0][i]._id})
             + ", \"" + data[0][i].status + "\")'>";
