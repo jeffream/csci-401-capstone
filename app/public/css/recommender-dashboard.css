@@ -118,11 +118,12 @@
 }
 
 .input-submit {
-    background-color: #FF473A;
+    background-image: radial-gradient(#CC0000, #990000);
     font-size: 20px;
     margin-top: 20px;
     width: 200px;
     height: 50px;
+    color: white;
 }
 
 img.icon {

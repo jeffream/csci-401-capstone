@@ -3,7 +3,7 @@
 }
 
 .convert-pdf {
-    background-color: #FF473A;
+    background-image: radial-gradient(#CC0000, #990000);
     font-size: 20px;
     margin-top: 20px;
     width: 200px;
@@ -58,12 +58,12 @@
     max-width: 800px;
     overflow: auto;
     opacity: 1.0;
-    padding: 30px 10px; 
+    padding: 30px 10px;
 }
 
 #letter-text:hover {
-    opacity: 0.5; 
-    transition:0.4s; 
+    opacity: 0.5;
+    transition:0.4s;
 }
 
 
@@ -97,7 +97,7 @@
 }
 
 #email-subject-container{
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 #email-subject-text-area{
@@ -123,19 +123,19 @@
 }
 
 #email-body-container {
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 #email-preview-container {
-    margin: 10px 30px; 
+    margin: 10px 30px;
 }
 
 .flex-display {
-    display: flex; 
+    display: flex;
 }
 
 .flex1 {
-    flex: 1; 
+    flex: 1;
 }
 
 #sendEmail {
@@ -154,16 +154,16 @@
     margin-top: 30px;
     margin-left: auto;
     margin-right: 70px;
-    transition: 0.6s; 
+    transition: 0.6s;
 }
 .date-comment, #theDate {
-    margin-left: 60px; 
+    margin-left: 60px;
 }
 
 #downloadButton, #saveButton {
     width: 200px;
     height: 40px;
-    background-color: #FF473A;
+    background-image: radial-gradient(#CC0000, #990000);
     font-size: 12px;
     border-radius: 20px;
     border: none;
@@ -176,7 +176,7 @@
     margin-bottom: 30px;
     margin-left: 60px;
     margin-right: auto;
-    transition: 0.6s; 
+    transition: 0.6s;
 }
 
 #downloadButton {
@@ -205,14 +205,14 @@
 }
 
 #date-picker {
-    margin-top: 40px; 
+    margin-top: 40px;
     margin-left: 35px;
-    margin-bottom: 40px; 
+    margin-bottom: 40px;
 }
 
 #add-heading {
-    font-size: 20px; 
-    margin-bottom: 5px; 
+    font-size: 20px;
+    margin-bottom: 5px;
 }
 
 #sendEmail:hover {
@@ -224,25 +224,25 @@
 
 
 .background {
-    padding-bottom: 150px; 
+    padding-bottom: 150px;
 }
 
 
 trix-toolbar {
     white-space: initial;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 trix-editor {
     border: 2px solid black;
-    padding: 20px; 
+    padding: 20px;
     font-family: "Times New Roman";
 }
 
 
 #letter-preview-heading {
     margin-top: 40px;
-    padding-bottom: 5px; 
+    padding-bottom: 5px;
 }
 
 .letter-preview-subheading {
@@ -250,8 +250,8 @@ trix-editor {
 }
 
 #edit-heading {
-    margin-top: 50px; 
-    font-size: 20px; 
+    margin-top: 50px;
+    font-size: 20px;
 }
 
 #letter-preview-modal {
@@ -286,10 +286,11 @@ trix-editor {
 }
 
 .flex-row {
-    display: flex; 
+    display: flex;
 }
 
 #save-btn {
     margin-left: auto;
-}
+    background-image: radial-gradient(#CC0000, #990000);
 
+}
