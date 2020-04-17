@@ -1,0 +1,151 @@
+#rec-header {
+    display: flex;
+    background-color: white;
+}
+
+#table0 td {
+    height: 60px;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+}
+
+#page0 {
+    padding: 20px;
+    display: flex;
+}
+
+#buttons0 {
+    display: flex;
+    margin: auto;
+}
+
+.recommendations{
+    background-color: #FFFFFF;
+}
+
+#recommendations-modal {
+    height: 600px;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-btn {
+    background-color: #990000;
+    color: white;
+    cursor: pointer;
+    /* display: table-cell; */
+    font-size: 15px;
+    height: 20px;
+    width:180px;
+    /* border: 0.1px solid black; */
+    position: relative;
+    float: right;
+    right: 8px;
+    padding: 9px 0px 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-btn:hover {
+    color: #FFCC00;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close-container {
+    height: 20px;
+}
+
+.icons {
+    width: 200px;
+}
+
+.input-form {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.input-text {
+    margin-left: 20px;
+    font-size: 20px;
+    line-height: 10px;
+    width: 75%;
+}
+
+.subject-text{
+    height: 5px;
+}
+
+.email-container{
+    margin-left : 20px;
+}
+
+#body-text{
+    height: 300px;
+    width: 95%;
+    font-size: 13px;
+    padding-bottom: 5px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.input-dropdown {
+    font-size: 20px;
+    margin-left: 8px;
+    width: 25%;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.input-submit {
+    background-color: #FF473A;
+    font-size: 20px;
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+}
+
+img.icon {
+    height: 25px;
+    width: 25px;
+    opacity: 1.0;
+
+    margin-left: 5px;
+}
+
+img.clickable {
+    cursor: pointer;
+    transition: 0.8s;
+}
+
+img.clickable:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.template-name {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -36,14 +36,14 @@ router.get('/', verify, function (req, res, next) {
   var userID = req.user._id;
   User.findUser(userID, function (err, user) {
     if (err) {
-      console.log('Error finding User.'); 
+      console.log('Error finding User.');
     } else {
       //console.log(userID);
       // console.log(user);
       user.getForms(userID,function (err, forms) {
           if (err) {
               console.log(`error: ${err}`);
-          } else {
+          } else { 
 
             var temp = user.getTemplates();
 
@@ -95,20 +95,17 @@ router.post('/', verify, async function (req, res, next) {
                 }
             });
 
-            var url = encodeURI('http://recommendation.usc.edu/form-entry/' + form.getLink());
-            // create reusable transporter object using the default SMTP transport
-            let transporter = nodemailer.createTransport({
-              host: 'smtp.gmail.com',
-              port: 465,
-              secure: true, // true for 465, false for other ports
-              auth: {
-                  user: 'letterofrecgenerator@gmail.com', // generated ethereal user
-                  pass: 'siqtam-3dabqa-pepxaV'  // generated ethereal password
-              },
-              tls:{
-                rejectUnauthorized:false
-              }
-            });
+        var url = encodeURI('http://'+req.headers.host+'/form-entry/' + form.getLink());
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = await nodemailer.createTransport({
+          service: "gmail", 
+          host: "smtp.gmail.com", 
+          auth: {
+              user: "testdemotest11@gmail.com",
+              pass: "testeresfera.11"
+          }
+        });
 
         // setup email data with unicode symbols
         let mailOptions = {
@@ -151,16 +148,20 @@ router.post('/delete', verify, function (req, res, next) {
           if (err) {
               console.log(err);
           } else {
-              user.getForms(function (err, forms) {
-                  if (err) {
-                      console.log(`error: ${err}`);
-                  } else {
-                      res.render('pages/recommender-dashboard', {
-                          title: 'Welcome ' + user.displayName + '!',
-                          templates: user.getTemplates(),
-                          forms: forms,
-                      });
-                  }
+              // user.getForms(function (err, forms) {
+              //     if (err) {
+              //         console.log(`error: ${err}`);
+              //     } else {
+              //         res.render('pages/recommender-dashboard', {
+              //             title: 'Welcome ' + user.displayName + '!',
+              //             templates: user.getTemplates(),
+              //             forms: forms,
+              //         });
+              //     }
+              // });
+              res.render('pages/recommender-dashboard', {
+                  title: 'Welcome ' + user.displayName + '!',
+                  templates: user.getTemplates()
               });
           }
       });

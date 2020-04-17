@@ -1,0 +1,130 @@
+#templates-page0, #templates-page1 {
+    padding: 20px;
+    display: flex;
+}
+
+#templates-buttons0, #templates-buttons1 {
+    display: flex;
+    margin: auto;
+}
+
+#templates-table0 td, #templates-table1 td {
+    height: 60px;
+}
+
+.templates{
+    background-color: #FFFFFF;
+}
+
+.addBtn{
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    font-size: 16px;
+    outline-style: none;
+}
+
+.add-btn {
+    background-color: #990000;
+    color: white;
+    cursor: pointer;
+    /* display: table-cell; */
+    font-size: 15px;
+    height: 20px;
+    width:180px;
+    /* border: 0.1px solid black; */
+    position: relative;
+    float: right;
+    right: 8px;
+    padding: 9px 0px 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-btn:hover {
+    color: #FFCC00;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close-container {
+    height: 20px;
+}
+
+.input-form {
+    padding-top: 25px;
+    text-align: center;
+}
+
+.input-submit {
+    background-color: #990000;
+    font-size: 18px;
+    margin-top: 50px;
+    width: 100px;
+    height: 40px;
+    transition: 0.6s;
+    border-radius: 0;
+    border: none;
+    color: white;
+    float: right;
+    opacity: 1.0;
+}
+
+.input-submit:hover {
+    cursor: pointer;
+    color: #FFCC00;
+    /* opacity: 0.6; */
+}
+
+
+
+.image-container {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+img.icon {
+    height: 25px;
+    width: 25px;
+    opacity: 1;
+    transition: 0.6s;
+    float: right;
+    padding-right: 45px;
+}
+
+img.icon:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.subtitle {
+    font-size: 20px;
+}
+
+.subtitle_cont {
+    padding-bottom: 10px;
+}
+
+.template-modal {
+    margin-top: 15%;
+    height: 230px;
+}
