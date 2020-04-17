@@ -3,7 +3,7 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 
 /* GET form entry page. */
-router.get('/', function(req, res, next) {
+router.get('/', verify, function(req, res, next) {
     res.render('pages/form-completed', {
         title: 'Form Completed!',
     });
