@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+const verify = require('./verifyToken');
 
 /* GET form entry page. */
 router.get('/', verify, function(req, res, next) {
