@@ -117,15 +117,15 @@
             var timeA, timeB;
 
             if (a.meta.submitted) {
-                timeA = a.meta.submitted;
+                timeB = a.meta.submitted;
             } else {
-                timeA = a.meta.sent;
+                timeB = a.meta.sent;
             }
 
             if (b.meta.submitted) {
-                timeB = b.meta.submitted;
+                timeA = b.meta.submitted;
             } else {
-                timeB = b.meta.sent;
+                timeA = b.meta.sent;
             }
 
             if (timeA == timeB)
