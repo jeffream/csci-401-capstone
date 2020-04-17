@@ -25,14 +25,13 @@ router.get('/', verify, function(req, res, next) {
 
     var email = req.user.email;
     console.log("Email is: ", email);
-    console.log("Form data: ", req.body.responseData);
 
     // setup email data with unicode symbols
     let mailOptions = {
         from: '"Letter of Rec Generator" <letterofrecgenerator@gmail.com>', // sender address
         to: email, // list of receivers
         subject: 'Letter of Recommendation - Form Completed', // Subject line
-        text: req.body.email + ' has completed your recommendation request.', // plain text body
+        text: 'Recommendee (' + email + ') has completed your recommendation request.', // plain text body
         // html: '<p>' + req.body.body_text + ' ' + url + '</p>'// html body
     };
 
