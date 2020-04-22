@@ -177,7 +177,7 @@
         // creates dummy node to find cursor position
         var target = document.createTextNode("\u0001");
         document.getSelection().getRangeAt(0).insertNode(target);
-        var position = letterContent.innerHTML.indexOf("\u0001");
+        var position = letterContent.innerHTML.indexOf("\u0003");
         target.parentNode.removeChild(target);
 
         letterContentCursorPos = position;
@@ -247,7 +247,7 @@
                 var entire = firstHalf + "&lt;!" + tagValue + "&gt;" + secondHalf;
                 letterContent.innerHTML = entire;
 
-                letterContentCursorPos = this.entire.length;
+                letterContentCursorPos = -1;
                 firstHalf = "";
                 secondHalf = "";
             }
