@@ -240,6 +240,7 @@
             if (letterContentCursorPos === -1) {
 
                 var val = $(this).val();
+                console.log('VAL IS: ', val);
                 var theDiv = document.getElementById("letter-text-area");
                 var content = document.createTextNode(" " + val);
                 theDiv.appendChild(content);
@@ -247,7 +248,7 @@
                 var entire = firstHalf + "&lt;!" + tagValue + "&gt;" + secondHalf;
                 letterContent.innerHTML = entire;
 
-                letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
+                letterContentCursorPos = -1;
                 firstHalf = "";
                 secondHalf = "";
             }
