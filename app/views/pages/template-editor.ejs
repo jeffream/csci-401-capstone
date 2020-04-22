@@ -175,9 +175,9 @@
 
     letterContent.onclick = function () {
         // creates dummy node to find cursor position
-        var target = document.createTextNode("\u0001");
+        var target = document.createTextNode("\u0003");
         document.getSelection().getRangeAt(0).insertNode(target);
-        var position = letterContent.innerHTML.indexOf("\u0001");
+        var position = letterContent.innerHTML.indexOf("\u0003");
         target.parentNode.removeChild(target);
 
         letterContentCursorPos = position;
@@ -187,7 +187,7 @@
     };
 
     letterContent.onkeyup = function () {
-        letterContentCursorPos = letterContent.innerHTML.indexOf("\u0004");
+        letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
     }
 
     // so you can click tags directly after typing
