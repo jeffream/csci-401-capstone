@@ -9,7 +9,7 @@ var UserSchema = new Schema({
     id: String,
     username: String,
     displayName: String,
-    accessToken: String, 
+    accessToken: String,
     username: String,
     templates: [Template.schema],
     deactivatedTemplates: [Template.schema],
@@ -101,7 +101,7 @@ UserSchema.methods.addTemplate = function (template, cb) {
         // console.log(this.templates[i].name);
         // arr[i]["name"]=this.templates[i].name;
     }
-    
+
     var ca=Object.entries(arr);
     // console.log(ca);
     if(!errorFlag) {
@@ -166,7 +166,7 @@ UserSchema.methods.updateTemplate = function (id, template, cb) {
     updatedTemplate.letterheadImg = template.letterheadImg;
     updatedTemplate.footerImg = template.footerImg;
     updatedTemplate.optional = template.optional;
-    
+
     // return;
     User.findOneAndUpdate({
         "id": user.id,
@@ -260,6 +260,7 @@ UserSchema.methods.getLinkTemplateBody = function () {
 /* This removes a specified template from templates array
 and moves it to deactivatedTemplates array */
 UserSchema.methods.deactivateTemplate = function (id, cb) {
+    console.log('********IN DEACTIVATE TEMPLATE*********');
     this.deactivatedTemplates.push(this.getTemplate(id));
     this.templates.pull(this.getTemplate(id));
     this.save(cb);
@@ -283,7 +284,7 @@ UserSchema.methods.activateEmailTemplate = function (id, cb) {
     this.save(cb);
 };
 
-UserSchema.methods.addForm = function (form, cb) { 
+UserSchema.methods.addForm = function (form, cb) {
     this.forms.push(form._id);
     this.save(cb);
 };
@@ -341,6 +342,7 @@ UserSchema.methods.getDeactivatedForm = function (id, cb) {
 };
 
 UserSchema.methods.removeForm = function (id, cb) {
+    console.log('********IN REMOVE FORM*********');
     this.forms.pull(id);
     this.deactivatedForms.push(id);
     this.save(cb);
