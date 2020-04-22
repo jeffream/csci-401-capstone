@@ -153,6 +153,11 @@
         var records_per_page = 10;
         var string = <%- JSON.stringify(forms) %>;
         console.log('Forms is: ', string);
+        console.log('User email is: ', <%- email %>);
+        for (var i = 0, i < forms.length, i++) {
+            console.log('Email is: ', string[i].email);
+        };
+
         var string2 = JSON.stringify(string);
         console.log('String 2 is: ', string2);
         string = '';
