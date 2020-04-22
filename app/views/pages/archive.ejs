@@ -154,9 +154,10 @@
         var string = <%- JSON.stringify(forms) %>;
         console.log('Forms length is: ', string.length);
 
-        // for (var i = 0, i < string.length, i++) {
-        //     console.log('Email is: ', string[i].email);
-        // };
+        for (var i = 0, i < string.length, i++) {
+            var temp = string[i];
+            console.log('Email is: ', temp);
+        };
 
         var string2 = JSON.stringify(string);
         console.log('String 2 is: ', string2);
