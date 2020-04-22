@@ -18,7 +18,7 @@ router.get('/', verify, function (req, res, next) {
           if (err) {
               console.log(err);
           } else {
-              var temp = user.getDeactivatedForms().length;
+              var temp = user.deactivatedForms.length;
               var temp2 = user.getDeactivatedTemplates().length;
               console.log('Getting forms: ', temp);
               console.log('Getting templates: ', temp2);
