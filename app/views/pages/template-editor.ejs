@@ -187,7 +187,7 @@
     };
 
     letterContent.onkeyup = function () {
-        letterContentCursorPos = letterContent.innerHTML.length;
+        letterContentCursorPos = letterContent.innerHTML.indexOf("EOL");
     }
 
     // so you can click tags directly after typing
