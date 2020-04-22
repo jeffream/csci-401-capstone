@@ -562,13 +562,14 @@
                 cells[4].innerHTML = '<img class="icon" src="/images/green_checkmark.png">';
             }
             cells[4].classList.add("center");
-            cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
-                + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
-                + ")'>";
-            cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' onclick='openLetterPreview("
-                + JSON.stringify({id: data[0][i]._id})
-                + ", \"" + data[0][i].status + "\")'>";
-
+            // cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
+            //     + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+            //     + ")'>";
+            cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' >";
+            // cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' onclick='openLetterPreview("
+            //     + JSON.stringify({id: data[0][i]._id})
+            //     + ", \"" + data[0][i].status + "\")'>";
+            cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' >";
             cells[5].classList.add("center");
         }
 
