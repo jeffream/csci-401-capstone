@@ -152,7 +152,9 @@
         var current_page = [1,1,1];
         var records_per_page = 10;
         var string = <%- JSON.stringify(forms) %>;
+        console.log('String is: ', string);
         var string2 = <%- JSON.stringify(string) %>;
+        console.log('String 2 is: ', string2);
         string = <%- JSON.stringify(templates) %>;
         var string3 = <%- JSON.stringify(string) %>;
         string = <%- JSON.stringify(emailtemplates) %>;
