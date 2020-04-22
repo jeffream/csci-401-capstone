@@ -100,7 +100,7 @@ window.onload = function () {
     }
 
 };
- 
+
 // creates default questions
 function loadDefaultQuestions() {
     var default0 = new Question("Text", "What is your first name?", "<!FNAME>");
@@ -119,7 +119,7 @@ function loadDefaultQuestions() {
     var orgQuestion = new Question("Custom", "What organizations are you applying to?", "<!ORGANIZATION>");
     orgQuestion.options = [constructOptionObject("Organization", "", "<!ORG>")];
     questions.push(orgQuestion);
- 
+
 }
 
 function changeText() {
@@ -290,7 +290,7 @@ function saveTemplate() {
     if (footerImgData) {
         template.footerImg = footerImgData;
     }
-    var appRoot=window.location.origin; 
+    var appRoot=window.location.origin;
     if (id) {
         questions=JSON.stringify(questions);
         var template = {
@@ -334,7 +334,7 @@ function saveTemplate() {
       questions=JSON.stringify(questions);
       $.ajax({
           url: appRoot+'/template-editor/create',
-          data: { 
+          data: {
             name: document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID).value,
             text: letter,
             questions: questions
@@ -575,8 +575,6 @@ function parseAttribute(attr) {
 function validate(template) {
     clearErrors();
     var isValid = true;
-
-    console.log('TEMPLATE IS: ', template);
 
     if (isNotValid(template.name)) {
         var textField = document.getElementById(NAME_CONTAINER_TEXT_FIELD_ID);
