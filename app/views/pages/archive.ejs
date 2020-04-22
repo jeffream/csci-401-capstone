@@ -153,7 +153,7 @@
         var records_per_page = 10;
         var string = <%- JSON.stringify(forms) %>;
         console.log('Forms length is: ', string.length);
-        var email = <%- email %>;
+        var email = <%- JSON.stringify(email) %>;
         console.log('User email: ', email);
         var matches = [];
 
