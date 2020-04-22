@@ -99,12 +99,13 @@
     var current_page = [1];
     var records_per_page = 10;
     var string = <%- JSON.stringify(forms) %>;
-    console.log('Forms is: ', string);
     var string2 = JSON.stringify(string);
     console.log('STRING IS: ', typeof(string2));
     var data = [
       JSON.parse(string2)
     ];
+    console.log('Data Rec is: ', data);
+
     var timeSortOrder = -1;
     var emailSortOrder = -1;
     var orgSortOrder = -1;
