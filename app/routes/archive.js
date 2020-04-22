@@ -34,7 +34,7 @@ router.get('/', verify, function (req, res, next) {
   });
 });
 
-router.post('/restore-template', function (req, res, next) {
+router.post('/restore-template', verify, function (req, res, next) {
 
   // find User ID
   var userID = req.user._id;
@@ -65,7 +65,7 @@ router.post('/restore-template', function (req, res, next) {
     });
 });
 
-router.post('/restore-email-template', function (req, res, next) {
+router.post('/restore-email-template', verify, function (req, res, next) {
 
   // find User ID
   var userID = req.user._id;
