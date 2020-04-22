@@ -195,6 +195,7 @@
         var letterContentInnerHTML = letterContent.innerHTML;
         firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos);
         secondHalf = letterContentInnerHTML.substring(letterContentCursorPos);
+        letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
     });
 
     $(window).click(function (e) {
