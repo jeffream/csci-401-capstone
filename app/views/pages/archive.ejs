@@ -155,17 +155,16 @@
         console.log('String is: ', string);
         var string2 = <%- JSON.stringify(string) %>;
         console.log('String 2 is: ', string2);
+        string = '';
         string = <%- JSON.stringify(templates) %>;
         var string3 = <%- JSON.stringify(string) %>;
-        string = <%- JSON.stringify(emailtemplates) %>;
-        var string4 = <%- JSON.stringify(string) %>;
         var data = [
-            JSON.parse(string)
+            JSON.parse(string2),
+            JSON.parse(string3)
         ];
         console.log('Data is: ', data);
         console.log('String2 is: ', JSON.parse(string2));
         console.log('String3 is: ', JSON.parse(string3));
-        console.log('String4 is: ', JSON.parse(string4));
         var timeSortOrder = -1;
         var emailSortOrder = -1;
         var orgSortOrder = -1;
