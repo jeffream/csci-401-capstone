@@ -187,7 +187,7 @@
     };
 
     letterContent.onkeyup = function () {
-        letterContentCursorPos = letterContent.innerHTML.lastIndexOf(">", "\u0003");
+        letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
     }
 
     // so you can click tags directly after typing
@@ -247,7 +247,7 @@
                 var entire = firstHalf + "&lt;!" + tagValue + "&gt;" + secondHalf;
                 letterContent.innerHTML = entire;
 
-                letterContentCursorPos = -1;
+                letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
                 firstHalf = "";
                 secondHalf = "";
             }
