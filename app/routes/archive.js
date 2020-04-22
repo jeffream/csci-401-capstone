@@ -20,6 +20,7 @@ router.get('/', verify, function (req, res, next) {
           } else {
               res.render('pages/archive', {
                   title: 'Archive',
+                  email: user.email,
                   forms: deactivatedForms,
                   emailtemplates: user.getDeactivatedEmailTemplates(),
                   templates: user.getDeactivatedTemplates(),
