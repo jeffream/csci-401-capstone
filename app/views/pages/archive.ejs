@@ -578,8 +578,10 @@
             var cells = [row.insertCell(0), row.insertCell(1)];
 
             cells[0].innerHTML = data[1][i].name;
-            cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' onclick='editTemplate(\"" + data[1][i]._id + "\")'/>";
-            cells[1].innerHTML += "<img class='icon' src='/images/restore.png' onclick='restoreTemplate(\"" + data[1][i]._id + "\")'/>";
+            //cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' onclick='editTemplate(\"" + data[1][i]._id + "\")'/>";
+            cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' />";
+            //cells[1].innerHTML += "<img class='icon' src='/images/restore.png' onclick='restoreTemplate(\"" + data[1][i]._id + "\")'/>";
+            cells[1].innerHTML += "<img class='icon' src='/images/restore.png' />";
         }
 
         function generateEmailTemplateRow(row_count, i) {
