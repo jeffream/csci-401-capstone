@@ -153,12 +153,12 @@
         var records_per_page = 10;
         var string = <%- JSON.stringify(forms) %>;
         console.log('Forms is: ', string);
-        var string2 = <%- JSON.stringify(string) %>;
+        var string2 = JSON.stringify(string);
         console.log('String 2 is: ', string2);
         string = '';
         string = <%- JSON.stringify(templates) %>;
         console.log('Temps is: ', string);
-        var string3 = <%- JSON.stringify(string) %>;
+        var string3 = JSON.stringify(string);
         var data = [
             JSON.parse(string2),
             JSON.parse(string3)
