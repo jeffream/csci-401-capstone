@@ -180,14 +180,14 @@
         var position = letterContent.innerHTML.indexOf("\u0001");
         target.parentNode.removeChild(target);
 
-        letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
+        letterContentCursorPos = position;
         var letterContentInnerHTML = letterContent.innerHTML;
         firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos);
         secondHalf = letterContentInnerHTML.substring(letterContentCursorPos);
     };
 
     letterContent.onkeyup = function () {
-        letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
+        letterContentCursorPos = letterContent.innerHTML.indexOf("\u0004");
     }
 
     // so you can click tags directly after typing
