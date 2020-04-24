@@ -19,58 +19,60 @@
     <div class="About">
 
         <table id="about-table">
-          <td>
-              <p class="title"><%= title %></p>
+          <tr>
+            <p class="title"><%= title %></p>
+            <br>
+            <p id="description"> In academia and industry, writing letters of recommendation is a very
+                important task. Many faculty and professionals have a standard template
+                that is merely customized for each request. Others may ask the person to
+                write the recommendation himself, then verify it is accurate before signing.
+                Although this may work, it would be much better if the person requesting
+                the recommendation could help structure the recommendation.
+            <br><br>
+                This application allows a person requesting a recommendation to submit all
+                of the information he wants included through a form, and the person
+                writing the recommendation can then automatically pull that information
+                into a template that he has created. After the letter has been generated,
+                the recommender can download it and ensure it is accurate. After the
+                recommender approves it, the original person can also download the
+                electronic version of the letter.
+            </p>
+            <br>
+          </tr>
+          <tr>
+            <p class="title">Tutorials</p>
+          </tr>
+          <br><br><br>
+          <tr>
+            <td>
+              <h2 id="subtitle"> Recommender Dashboard </h2>
               <br>
-              <p id="description"> In academia and industry, writing letters of recommendation is a very
-                  important task. Many faculty and professionals have a standard template
-                  that is merely customized for each request. Others may ask the person to
-                  write the recommendation himself, then verify it is accurate before signing.
-                  Although this may work, it would be much better if the person requesting
-                  the recommendation could help structure the recommendation.
-              <br><br>
-                  This application allows a person requesting a recommendation to submit all
-                  of the information he wants included through a form, and the person
-                  writing the recommendation can then automatically pull that information
-                  into a template that he has created. After the letter has been generated,
-                  the recommender can download it and ensure it is accurate. After the
-                  recommender approves it, the original person can also download the
-                  electronic version of the letter.
+              <p id="tutorial"> Here are all the recommendation requests a professor receives. <br>
+                When the survey has been completed by the student, the form status icon will <br>
+                update to a green checkmark, and the professor can download the output file. <br>
               </p>
-              <br>
-              <table>
-                <p class="title">Tutorials</p>
-                <br><br><br>
-                <tr>
-                  <td>
-                    <h2 id="subtitle"> Recommender Dashboard </h2>
-                    <br>
-                    <p id="tutorial"> Here are all the recommendation requests a professor receives. <br>
-                      When the survey has been completed by the student, the form status icon will <br>
-                      update to a green checkmark, and the professor can download the output file. <br>
-                    </p>
-                  </td>
-                  <td>
-                    <img src="/images/USC_logo.png" />
-                  </td>
-                </tr>
-                <tr>
-                  <div id="vid-box">
-                    <td>
-                      <div id="subtitle1"> Create Template </div>
-                      <video id ="vid1" width="320" height="240" controls>
-                        <source src="/public/images/create-temp.mov" type="video/mov">
-                      </video>
-                    </td>
-                    <td>
-                      <div id="subtitle2"> Create Recommendation </div>
-                      <video id="vid2" width="320" height="240" controls>
-                        <source src="/public/images/create-temp.mp4" type="video/mp4">
-                      </video>
-                    </td>
-                  </div>
-                </tr>
-              </table>
+            </td>
+            <td>
+              <img src="/images/USC_logo.png" />
+            </td>
+          </tr>
+          <br><br><br>
+          <tr>
+            <div id="vid-box">
+              <td>
+                <div id="subtitle1"> Create Template </div>
+                <video id ="vid1" width="320" height="240" controls>
+                  <source src="/public/images/create-temp.mov" type="video/mov">
+                </video>
+              </td>
+              <td>
+                <div id="subtitle2"> Create Recommendation </div>
+                <video id="vid2" width="320" height="240" controls>
+                  <source src="/public/images/create-temp.mp4" type="video/mp4">
+                </video>
+              </td>
+            </div>
+          </tr>
             </td>
         </table>
     </div>
