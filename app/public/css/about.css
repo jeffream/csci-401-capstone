@@ -16,22 +16,6 @@ table {
   padding-top: 60px;
 }
 
-#vid-box {
-  padding: 0px;
-}
-
-#vid1 {
-  float: left;
-  padding-left: 70px;
-  padding-bottom: 200px;
-}
-
-#vid2 {
-  float: right;
-  padding-right: 70px;
-  padding-bottom: 200px;
-}
-
 #tutorial {
   font-size: 16px;
   margin: auto;
