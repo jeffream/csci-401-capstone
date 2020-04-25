@@ -35,12 +35,14 @@ table {
 
 #inputimg {
     float: left;
-    padding-left: 170px;
+    padding-left: 130px;
     padding-bottom: 200px;
+    border: 1px gray;
 }
 
 #outputimg {
     float: right;
-    padding-right: 170px;
+    padding-right: 130px;
     padding-bottom: 200px;
+    border: 1px gray;
 }
