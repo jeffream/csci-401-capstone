@@ -36,7 +36,16 @@ table {
   padding-left: 70px;
   padding-right: 70px;
   font-size: 16px;
-  margin: auto; 
+  margin: auto;
+  width: 25%;
+}
+
+#tutorial1 {
+  padding-left: 70px;
+  padding-right: 70px;
+  font-size: 16px;
+  margin: auto;
+  width: 50%;
 }
 
 #subtitle {
