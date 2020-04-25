@@ -32,26 +32,11 @@ table {
   padding-bottom: 200px;
 }
 
-#subtitle1 {
-  font-style: italic;
-  font-size: 16px;
-  float: left;
-  padding-left: 70px;
-  padding-bottom: 20px;
-}
-
-#subtitle2 {
-  font-style: italic;
-  font-size: 16px;
-  float: right;
-  padding-right: 230px;
-  padding-bottom: 20px;
-}
-
 #tutorial {
   padding-left: 70px;
   padding-right: 70px;
   font-size: 16px;
+  margin: auto; 
 }
 
 #subtitle {
