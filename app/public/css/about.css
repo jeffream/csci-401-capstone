@@ -18,8 +18,8 @@ table {
 
 #tutorial {
   font-size: 16px;
-  margin: auto;
-  width: 60%;
+  float: left;
+  width: 50%;
 }
 
 #subtitle {
