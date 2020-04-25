@@ -37,14 +37,10 @@ table {
     float: left;
     padding-left: 100px;
     padding-bottom: 200px;
-    border-style: solid;
-    border-color: grey;
 }
 
 #outputimg {
     float: right;
     padding-right: 100px;
     padding-bottom: 200px;
-    border-style: solid;
-    border-color: grey;
 }
