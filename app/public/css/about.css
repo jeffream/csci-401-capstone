@@ -1,7 +1,7 @@
 table {
     background-color: #FFFFFF;
     border-collapse: collapse;
-    width: 1200px;
+    width: 1300px;
     margin-left:auto;
     margin-right:auto;
 }
@@ -30,7 +30,7 @@ table {
 
 #image {
   float: right;
-  padding-right: 60px;
+  padding-right: 50px;
 }
 
 #inputimg {
