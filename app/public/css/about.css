@@ -30,5 +30,15 @@ table {
 
 #image {
   float: right;
-  padding-right: 60px; 
+  padding-right: 60px;
+}
+
+#inputimg {
+    float: left;
+    padding-left: 100px;
+}
+
+#outputimg {
+    float: right;
+    padding-left: 100px;
 }
