@@ -8,17 +8,14 @@
     margin: 0;
     padding: 20px 35px;
     padding-left: 10px;
+    padding-top: 70px;
 }
 
-header {
-  float: left;
-}
-
-body {
+/* body {
     background-color: #F2F2F2;
     margin-left: 15%;
     margin-right: 15%;
-}
+} */
 
 
 /* Table Management */
