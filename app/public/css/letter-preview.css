@@ -189,9 +189,9 @@
     width:190px;
     /* border: 0.1px solid black; */
     position: relative;
-    float: right;
+    float: left;
     right: 8px;
-    padding: 9px 0px 5px;
+    padding: 20px 0px 5px;
     text-align: center;
     margin-top: 20px;
 }
