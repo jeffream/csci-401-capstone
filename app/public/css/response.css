@@ -84,9 +84,9 @@ table tbody tr:last-child {
     color: white;
     cursor: pointer;
     /* display: table-cell; */
-    font-size: 15px;
-    height: 60px;
-    width:200px;
+    font-size: 17px;
+    height: 50px;
+    width:190px;
     /* border: 0.1px solid black; */
     position: relative;
     float: right;
