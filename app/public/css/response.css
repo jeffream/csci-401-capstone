@@ -13,10 +13,6 @@
     padding-bottom: 50px;
 }
 
-body {
-    background-color: #F2F2F2;
-}
-
 
 /* Table Management */
 
@@ -27,7 +23,7 @@ table {
     width: 900px;
     position: center;
     align-content: center;
-    /* padding-left: 50px; */
+    padding-left: 50px;
 }
 
 th,td{
@@ -82,7 +78,7 @@ table tbody tr:last-child {
     right: 8px;
     padding: 9px 0px 5px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 #save-button:hover {
