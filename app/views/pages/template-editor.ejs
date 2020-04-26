@@ -187,6 +187,7 @@
 
     letterContent.onkeyup = function () {
         letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
+        letterContentCursorPos = letterContentCursorPos + 5;
     }
 
     // so you can click tags directly after typing
