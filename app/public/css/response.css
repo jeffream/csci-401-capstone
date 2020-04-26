@@ -54,7 +54,7 @@ td.center {
 
 table tbody tr:last-child {
     border-bottom: none;
-}  
+}
 
 .flex-row {
     display: flex;
@@ -63,7 +63,7 @@ table tbody tr:last-child {
     align-items: center;
     width: 100%;
 }
-
+/*
 #save-button {
     flex-basis: auto;
     width: 350px;
@@ -77,4 +77,25 @@ table tbody tr:last-child {
 
 #save-button:hover {
     background-color: rgb(248, 61, 47);
+} */
+
+#save-button {
+    background-color: #990000;
+    color: white;
+    cursor: pointer;
+    /* display: table-cell; */
+    font-size: 15px;
+    height: 20px;
+    width:180px;
+    /* border: 0.1px solid black; */
+    position: relative;
+    float: right;
+    right: 8px;
+    padding: 9px 0px 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#save-button:hover {
+    color: #FFCC00;
 }
