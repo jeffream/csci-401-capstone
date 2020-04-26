@@ -7,16 +7,14 @@
     background-color: #FFFFFF;
     font-size: 20px;
     margin: 0;
-    padding: 20px 35px;
-    padding-left: 10px;
-    padding-top: 70px;
+    padding-left: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-/* body {
+body {
     background-color: #F2F2F2;
-    margin-left: 15%;
-    margin-right: 15%;
-} */
+}
 
 
 /* Table Management */
@@ -28,6 +26,7 @@ table {
     width: 900px;
     position: center;
     align-content: center;
+    padding-left: 50px;
 }
 
 th,td{
