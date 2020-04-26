@@ -274,7 +274,7 @@ trix-editor {
 #edit-heading {
     margin-top: 50px;
     font-size: 20px;
-    margin-left: 50px;
+    margin-left: auto;
 }
 
 #letter-preview-modal {
