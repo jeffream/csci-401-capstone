@@ -191,9 +191,10 @@
     position: relative;
     float: left;
     right: 8px;
-    padding: 20px 0px 5px;
+    padding: 9px 0px 5px;
     text-align: center;
     margin-top: 20px;
+    margin-left: 30px;
 }
 
 #downloadButton:hover, #saveButton:hover {
