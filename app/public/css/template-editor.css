@@ -138,8 +138,6 @@
     width: 100%;
     margin: 30px 30px 20px 30px;
     /*justify-content: center; */
-    flex-direction: column;
-    align-items: center;
 }
 
 #letter-container #letter-text-area {
@@ -519,12 +517,12 @@
 
 .flex1 {
     flex: 1;
+    flex-direction: column;
+    align-items: center;
 }
 
 .flex-display {
     display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .upload-cont, .all-tags-cont {
