@@ -1,6 +1,7 @@
 .response {
     background-color: #FFFFFF;
     align-items: center;
+    align-content: center;
 }
 
 .title {
@@ -26,7 +27,7 @@ table {
     width: 900px;
     position: center;
     align-content: center;
-    padding-left: 50px;
+    /* padding-left: 50px; */
 }
 
 th,td{
