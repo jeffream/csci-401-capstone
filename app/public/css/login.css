@@ -108,7 +108,8 @@ body {
 
 
 .title {
-    padding-top: -30px;
+    padding-top: 0px;
+    vertical-align: text-top;
     font-family: National;
     font-weight: 200;
     font-style: normal;
