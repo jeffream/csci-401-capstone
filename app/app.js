@@ -12,7 +12,7 @@ const passport = require('passport');
 require('./config/passport');
 //require('./config/passport')(passport); <-- similar line to above, see which one to use
 //var LocalStrategy = require('passport-local').Strategy;
- 
+
 // Other variables
 var session = require('express-session');
 var {google} = require('googleapis');
@@ -101,7 +101,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 
 // file upload handler
 app.use(fileUpload());
- 
+
 
 // Routes Variables
 var createTemplate = require('./routes/template-editor');
@@ -164,7 +164,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('pages/error');
 });
-var port = process.env.PORT || 8085;
+var port = process.env.PORT || 80;
 app.listen(port, function() {
   console.log('Express server running on:' + port);
 });
