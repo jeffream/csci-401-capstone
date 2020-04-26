@@ -137,9 +137,9 @@
     display: flex;
     width: 100%;
     margin: 30px 30px 20px 30px;
-    /*justify-content: center;
+    /*justify-content: center; */
     flex-direction: column;
-    align-items: center;*/
+    align-items: center;
 }
 
 #letter-container #letter-text-area {
@@ -519,11 +519,12 @@
 
 .flex1 {
     flex: 1;
-    align-content: center;
 }
 
 .flex-display {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .upload-cont, .all-tags-cont {
