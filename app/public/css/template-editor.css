@@ -1,9 +1,8 @@
 .section-header {
-    color: #000000;
+    color: black;
     /*text-align: center;*/
     font-size: 15px;
     width: 200px;
-
 }
 
 .templates{
@@ -122,9 +121,8 @@
     height: 50px;
     width:190px;
     /* border: 0.1px solid black; */
-    position: relative;
     float: right;
-    right: 80px;
+    right: 8px;
     padding: 9px 0px 5px;
     text-align: center;
     margin-top: 20px;
