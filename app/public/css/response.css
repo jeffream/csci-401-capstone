@@ -1,5 +1,6 @@
 .response {
     background-color: #FFFFFF;
+    align-items: center;
 }
 
 .title {
@@ -17,9 +18,6 @@
     margin-right: 15%;
 } */
 
-body {
-  align-content: center; 
-}
 
 /* Table Management */
 
@@ -29,6 +27,7 @@ table {
     font-size: 20px;
     width: 900px;
     position: center;
+    align-content: center;
 }
 
 th,td{
