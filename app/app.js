@@ -164,7 +164,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('pages/error');
 });
-var port = process.env.PORT || 8085;
+var port = process.env.PORT || 80;
 app.listen(port, function() {
   console.log('Express server running on:' + port);
 });
