@@ -162,12 +162,18 @@
         var content = document.createTextNode(val);
         theDiv.appendChild(content);
 
-        var element = document.querySelector("trix-editor");
-        element.editor.moveCursorInDirection("forward");
-        element.editor.moveCursorInDirection("forward");
-        element.editor.moveCursorInDirection("forward");
-        element.editor.moveCursorInDirection("forward");
-        element.editor.moveCursorInDirection("forward");
+        var letterContent = document.getElementById("letter-text-area");
+        var letterContentCursorPos = -1;
+        letterContent.onkeyup = function () {
+            letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
+        }
+
+        // so you can click tags directly after typing
+       $("#letter-text-area").focusout(function () {
+            var letterContentInnerHTML = letterContent.innerHTML;
+            firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos);
+            secondHalf = letterContentInnerHTML.substring(letterContentCursorPos);
+        });
     });
 </script>
 
