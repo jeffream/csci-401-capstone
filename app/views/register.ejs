@@ -10,14 +10,6 @@
     <% include ./partials/messages %>
     <form  class="login-form" action="/auth/register" method="POST">
         <input
-          type="text"
-          id="name"
-          name="name"
-          class="form-control"
-          placeholder="Username"
-          value="<%= typeof name != 'undefined' ? name : '' %>"
-        />
-        <input
           type="email"
           id="email"
           name="email"
