@@ -160,7 +160,7 @@
     margin-left: 60px;
 }
 
-#downloadButton, #saveButton {
+/* #downloadButton, #saveButton {
     width: 200px;
     height: 40px;
     background-image: radial-gradient(#CC0000, #990000);
@@ -177,6 +177,27 @@
     margin-left: 60px;
     margin-right: auto;
     transition: 0.6s;
+} */
+
+#downloadButton, #saveButton {
+    background-color: #990000;
+    color: white;
+    cursor: pointer;
+    /* display: table-cell; */
+    font-size: 17px;
+    height: 50px;
+    width:190px;
+    /* border: 0.1px solid black; */
+    position: relative;
+    float: right;
+    right: 8px;
+    padding: 9px 0px 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#downloadButton:hover, #saveButton:hover {
+    color: #FFCC00;
 }
 
 #downloadButton {
@@ -190,10 +211,10 @@
 	margin: 0 auto;
 }
 
-#downloadButton:hover, #saveButton:hover {
+/* #downloadButton:hover, #saveButton:hover {
     cursor: pointer;
     opacity: 0.6;
-}
+} */
 
 #template-picker {
 	margin-top: 40px;

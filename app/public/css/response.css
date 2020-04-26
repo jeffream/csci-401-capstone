@@ -63,21 +63,6 @@ table tbody tr:last-child {
     align-items: center;
     width: 100%;
 }
-/*
-#save-button {
-    flex-basis: auto;
-    width: 350px;
-    height: 40px;
-    background-color: #FF473A;
-    color: black;
-    text-align: center;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#save-button:hover {
-    background-color: rgb(248, 61, 47);
-} */
 
 #save-button {
     background-color: #990000;
