@@ -121,6 +121,7 @@
     height: 50px;
     width:190px;
     /* border: 0.1px solid black; */
+    position: relative;
     float: right;
     right: 8px;
     padding: 9px 0px 5px;
@@ -518,6 +519,7 @@
 
 .flex1 {
     flex: 1;
+    align-content: center;
 }
 
 .flex-display {
