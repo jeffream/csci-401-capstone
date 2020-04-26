@@ -164,6 +164,20 @@
 
         var letterContent = document.getElementById("letter-text-area");
         var letterContentCursorPos = -1;
+
+        letterContent.onclick = function () {
+            // creates dummy node to find cursor position
+            var target = document.createTextNode("\u0003");
+            document.getSelection().getRangeAt(0).insertNode(target);
+            var position = letterContent.innerHTML.indexOf("\u0003");
+            target.parentNode.removeChild(target);
+
+            letterContentCursorPos = position;
+            var letterContentInnerHTML = letterContent.innerHTML;
+            firstHalf = letterContentInnerHTML.substring(0, letterContentCursorPos);
+            secondHalf = letterContentInnerHTML.substring(letterContentCursorPos);
+        };
+
         letterContent.onkeyup = function () {
             letterContentCursorPos = letterContent.innerHTML.indexOf("\u0003");
         }
