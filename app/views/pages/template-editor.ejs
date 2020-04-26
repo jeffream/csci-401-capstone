@@ -161,6 +161,12 @@
         var theDiv = document.getElementById("letter-text-area");
         var content = document.createTextNode(val);
         theDiv.appendChild(content);
+
+        $("letter-text-area").focus(function() {
+            var theVal = $(this).val();
+            $(this).val(theVal);
+        });
+
     });
 </script>
 
