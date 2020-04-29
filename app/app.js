@@ -29,7 +29,6 @@ var docx = require('docx');
 var fs = require('fs');
 var request = require('request');
 const flash = require('connect-flash');
-<<<<<<< HEAD:letterOfRecGenerator/app.js
 
 var createTemplate = require('./routes/template-editor');
 var createEmailTemplate = require('./routes/email-template-editor');
@@ -47,10 +46,7 @@ var response = require('./routes/response');
 var emailLetterPreview = require('./routes/email-letter-preview');
 var docxVar = require('./routes/docx');
 var about = require('./routes/about');
-=======
 const jwt = require('jsonwebtoken');
-
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/app.js
 
 
 var app = express();
