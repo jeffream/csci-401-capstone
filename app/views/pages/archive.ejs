@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/history.css"/>  <!-- for modal -->
+    <link rel="stylesheet" type="text/css" href="/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/table.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/modal.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/archive.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<div id="myModal" class="modal">
+    <div class="modal-content archive-modal">
+        <div class="close-container">
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+
+        <p id="email-template-name" class="modal-title"></p>
+
+        <div class="archive-modal-div">
+            <label class="input-label"> Subject Line: </label>
+            <input class="modal-input input-text" id="modal-subject" readonly="readonly">
+        </div>
+
+        <div class="archive-modal-div">
+            <label class="input-label"> Email Body: </label>
+            <textarea class="modal-input input-textarea archive-email-modal-textarea" id='modal-body' readonly="readonly"> </textarea>
+        </div>
+    </div>
+</div>
+
+<body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div class="body">
+        <div class = "archive">
+
+        <p class="title"><%= title %></p>
+        <br>
+        <br>
+
+        <table class="archive-table">
+            <thead>
+                <td class="center"><p class="archive-title">Archived Recommendations</p></td>
+                <button id ="button-show-hide0" onclick="showTable(0)">+</button>
+            </thead>
+        </table>
+        <div id="table0-div" style="display: none;">
+            <table id="table0" class="archive-table">
+                <thead>
+                    <tr>
+                        <td><a href="javascript:sortByTime(0)">Timestamp</a></td>
+                        <td><a href="javascript:sortByEmail(0)">Name</a></td>
+                        <td><a href="javascript:sortByOrg(0)">Organization</a></td>
+                        <td><a href="javascript:sortByTemplate(0)">Template</a></td>
+                        <td class="center"><a href="javascript:sortByStatus(0)">Form Status</a></td>
+                        <td class="icons"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (!forms.length) { %>
+                    <tr>
+                        <td colspan="6" style="text-align: center;">No Archived Recommendations</td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <div id="page0">
+                <div id="buttons0">
+                    <button onclick="javascript:prevPage(0)" id="button-prev0">Prev</button>
+                    <div id="page-numbers0"></div>
+                    <button onclick="javascript:nextPage(0)" id="button-next0">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+       <table class="archive-table">
+            <thead>
+                <td class="center"><p class="archive-title">Archived Recommendation Templates</p></td>
+                <button id ="button-show-hide1" onclick="showTable(1)">+</button>
+            </thead>
+        </table>
+        <div id = "table1-div" style="display: none;">
+            <table id="table1" class="archive-table">
+                <thead>
+                    <tr>
+                        <td><a href="javascript:sortByName(1)">Name</a></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (!templates.length) { %>
+                    <tr>
+                        <td colspan="6" style="text-align: center;"><div class="template-name">No Archived Recommendation Templates</div></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <div id="page1">
+                <div id="buttons1">
+                    <button onclick="javascript:prevPage(1)" id="button-prev1">Prev</button>
+                    <div id="page-numbers1"></div>
+                    <button onclick="javascript:nextPage(1)" id="button-next1">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+    <!--    <table class="archive-table">
+            <thead>
+                <td class="center"><p class="archive-title">Archived Email Templates</p></td>
+                <button id ="button-show-hide2" onclick="showTable(2)">+</button>
+            </thead>
+        </table>
+        <div id="table2-div" style="display: none;">
+            <table id="table2" class="archive-table">
+                <thead>
+                    <tr>
+                        <td><a href="javascript:sortByTitle(2)">Name</a></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                <% if (!emailtemplates.length) { %>
+                    <tr>
+                        <td>
+                            <div class="template-name">No Existing letter Template</div>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+            <div id="page2">
+                <div id="buttons2">
+                    <button onclick="javascript:prevPage(2)" id="button-prev2">Prev</button>
+                    <div id="page-numbers2"></div>
+                    <button onclick="javascript:nextPage(2)" id="button-next2">Next</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <script>
+        var current_page = [1,1,1];
+        var records_per_page = 10;
+        var string = <%- JSON.stringify(forms) %>;
+        console.log('Forms length is: ', string.length);
+        var email = <%- JSON.stringify(email) %>;
+        console.log('User email: ', email);
+        var matches = [];
+
+        for (var i = 0; i < string.length; i++) {
+            var temp = string[i].email;
+            console.log('Email is: ', temp);
+
+            if(temp == email) {
+              matches.push(string[i]);
+            }
+        };
+
+        console.log('Matches array: ', matches);
+
+        var string2 = JSON.stringify(matches);
+        console.log('String 2 is: ', string2);
+        string = '';
+        string = <%- JSON.stringify(templates) %>;
+        console.log('Temps is: ', string);
+        var string3 = JSON.stringify(string);
+        var data = [
+            JSON.parse(string2),
+            JSON.parse(string3)
+        ];
+        console.log('Data Archived is: ', data);
+
+        var timeSortOrder = -1;
+        var emailSortOrder = -1;
+        var orgSortOrder = -1;
+        var templateSortOrder = -1;
+        var statusSortOrder = -1;
+        var nameSortOrder = -1;
+        var titleSortOrder = -1;
+
+        function sortByTime(tableNumber) {
+            timeSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                var timeA, timeB;
+
+                if (a.meta.submitted) {
+                    timeA = a.meta.submitted;
+                } else {
+                    timeA = a.meta.sent;
+                }
+
+                if (b.meta.submitted) {
+                    timeB = b.meta.submitted;
+                } else {
+                    timeB = b.meta.sent;
+                }
+
+                if (timeA == timeB)
+                    return 0;
+                if (timeA < timeB)
+                    return -1 * timeSortOrder;
+                if (timeA > timeB)
+                    return 1 * timeSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByEmail(tableNumber) {
+            emailSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.email == b.email)
+                    return 0;
+                if (a.email < b.email)
+                    return -1 * emailSortOrder;
+                if (a.email > b.email)
+                    return 1 * emailSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByOrg(tableNumber) {
+            orgSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.organization == b.organization)
+                    return 0;
+                if (a.organization < b.organization)
+                    return -1 * orgSortOrder;
+                if (a.organization > b.organization)
+                    return 1 * orgSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByTemplate(tableNumber) {
+            templateSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.template.name == b.template.name)
+                    return 0;
+                if (a.template.name < b.template.name)
+                    return -1 * templateSortOrder;
+                if (a.template.name > b.template.name)
+                    return 1 * templateSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByStatus(tableNumber) {
+            statusSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                var statusA, statusB;
+
+                if (a.status == 'Complete') {
+                    statusA = 1;
+                } else if (a.status == 'Submitted') {
+                    statusA = 2;
+                } else if (a.status == 'Sent') {
+                    statusA = 3;
+                }
+
+                if (b.status == 'Complete') {
+                    statusB = 1;
+                } else if (b.status == 'Submitted') {
+                    statusB = 2;
+                } else if (b.status == 'Sent') {
+                    statusB = 3;
+                }
+
+
+                if (statusA == statusB)
+                    return 0;
+                if (statusA < statusB)
+                    return -1 * statusSortOrder;
+                if (statusA > statusB)
+                    return 1 * statusSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByName(tableNumber) {
+            nameSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.name == b.name)
+                    return 0;
+                if (a.name < b.name)
+                    return -1 * nameSortOrder;
+                if (a.name > b.name)
+                    return 1 * nameSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        function sortByTitle(tableNumber) {
+            titleSortOrder *= -1;
+
+            data[tableNumber].sort(function(a, b) {
+                if (a.title == b.title)
+                    return 0;
+                if (a.title < b.title)
+                    return -1 * titleSortOrder;
+                if (a.title > b.title)
+                    return 1 * titleSortOrder;
+            });
+
+            clearTable(tableNumber);
+            generateTable(tableNumber);
+        }
+
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // When the user clicks on the button, open the modal
+        function openModal(email) {
+            var emailNameEle = document.getElementById("email-template-name");
+            emailNameEle.innerHTML = email.title;
+
+            $('#modal-subject',$('#myModal')).val(email.subject);
+            $('#modal-body',$('#myModal')).val(email.body_text);
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function openHistory(params) {
+            // Check to see if the status is green, if not then show error dialog
+            window.location.href = getDestinationRoute('http://128.125.100.147:80/history', params);
+        }
+
+        // When the user clicks the preview icon, take them to the letter preview page.
+        function openLetterPreview(params, status) {
+            // Check to see if the status is green, if not then show error dialog
+            if(status === 'Sent'){
+                window.alert("This letter cannot be previewed because the recommendee has not filled out the form!");
+            } else {
+                window.location.href = getDestinationRoute('http://128.125.100.147:80/letter-preview', params);
+            }
+        }
+
+        function editTemplate(id) {
+            $.ajax({
+                url: 'http://128.125.100.147:80/template-editor/deactivated-edit',
+                data: {id},
+                type: 'GET',
+                complete: function (data) {
+                    var params = data.responseJSON;
+                    console.log('complete');
+                    window.location.href = getDestinationRoute('http://128.125.100.147:80/template-editor', params);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+        function restoreTemplate(id) {
+            $.ajax({
+                url: 'http://128.125.100.147:80/archive/restore-template',
+                data: {id},
+                type: 'POST',
+                complete: function () {
+                    console.log('complete');
+                    window.location.reload(false);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+        function restoreEmailTemplate(id) {
+            $.ajax({
+                url: 'http://128.125.100.147:80/archive/restore-email-template',
+                data: {id},
+                type: 'POST',
+                complete: function () {
+                    console.log('complete');
+                    window.location.reload(false);
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        }
+
+        function getDestinationRoute(address, params) {
+            return address + '?' + $.param(params);
+        }
+
+        function showTable(tableNumber){
+            var tableDiv = document.getElementById('table' + tableNumber + '-div');
+            var button = document.getElementById('button-show-hide' + tableNumber);
+            if (tableDiv.style.display === "none") {
+                tableDiv.style.display = "block";
+                button.innerHTML = '–';
+            } else {
+                tableDiv.style.display = "none";
+                button.innerHTML = '+';
+            }
+        }
+
+        // Decrement page number
+        function prevPage(tableNumber)
+        {
+            if (current_page[tableNumber] > 1) {
+                changePage(tableNumber, current_page[tableNumber] - 1);
+            }
+        }
+
+        // Increment page number
+        function nextPage(tableNumber)
+        {
+            if (current_page[tableNumber] < numPages(tableNumber)) {
+                changePage(tableNumber, current_page[tableNumber] + 1);
+            }
+        }
+
+        // Return total number of pages
+        function numPages(tableNumber)
+        {
+            return Math.ceil(data[tableNumber].length / records_per_page);
+        }
+
+        // Change to the page number specified by the page parameter
+        function changePage(tableNumber, page)
+        {
+            // Validate page
+            if (page < 1) page = 1;
+            if (page > numPages(tableNumber)) page = numPages(tableNumber);
+
+            current_page[tableNumber] = page;
+
+            // Enable/disable buttons
+            setPageButtons(tableNumber);
+
+            if (!data[tableNumber].length) {
+                // Exit function if there are no recommendations to show
+                return;
+            }
+
+            // Clear old table
+            clearTable(tableNumber);
+
+            // Generate new table
+            generateTable(tableNumber);
+        }
+
+        function clearTable(tableNumber) {
+            var table = document.getElementById("table" + tableNumber);
+
+            for (var i = table.rows.length - 1; i > 0; i--)
+            {
+                table.deleteRow(i);
+            }
+        }
+
+        function generateTable(tableNumber) {
+            var row_count = 1;
+
+            for (var i = (current_page[tableNumber] - 1) * records_per_page;
+                    i < (current_page[tableNumber] * records_per_page); i++) {
+                generateRow(row_count, i, tableNumber);
+                row_count++;
+            }
+        }
+
+        function generateRow(row_count, i, tableNumber) {
+            if (i < data[tableNumber].length) {
+                if (tableNumber == 0) {
+                    generateRecRow(row_count, i);
+                } else if (tableNumber == 1) {
+                    generateRecTemplateRow(row_count, i);
+                } else if (tableNumber == 2) {
+                    generateEmailTemplateRow(row_count, i);
+                }
+            } else {
+                generateBlankRow(row_count, tableNumber);
+            }
+        }
+
+        function generateBlankRow(row_count, tableNumber) {
+            var table = document.getElementById("table" + tableNumber);
+            var row = table.insertRow(row_count);
+            var cells = [];
+
+            if (tableNumber == 0) {
+                for (var j = 0; j < 6; j++) {
+                    cells.push(row.insertCell(j));
+                    cells[j].innerHTML = "";
+                }
+            } else {
+                for (var j = 0; j < 2; j++) {
+                    cells.push(row.insertCell(j));
+                    cells[j].innerHTML = "";
+                }
+            }
+        }
+
+        function generateRecRow(row_count, i) {
+            var table = document.getElementById("table0");
+            var row = table.insertRow(row_count);
+            var cells = [row.insertCell(0)];
+
+            for (var j = 1; j < 6; j++) {
+                cells.push(row.insertCell(j));
+            }
+
+            if (!data[0][i].meta.submitted) {
+                cells[0].innerHTML =
+                    (new Date(data[0][i].meta.sent)).toDateString()
+                    +"<br>"
+                    +(new Date(data[0][i].meta.sent)).toLocaleTimeString('en-US');
+            } else {
+                cells[0].innerHTML =
+                    (new Date(data[0][i].meta.submitted)).toDateString()
+                    +"<br>"
+                    +(new Date(data[0][i].meta.sent)).toLocaleTimeString('en-US');
+            }
+
+            cells[1].innerHTML = data[0][i].email;
+            cells[2].innerHTML = data[0][i].organization;
+            cells[3].innerHTML = data[0][i].template.name;
+            if (data[0][i].status == 'Sent') {
+                cells[4].innerHTML = '<img class="icon" src="/images/red_x.png">';
+            } else {
+                cells[4].innerHTML = '<img class="icon" src="/images/green_checkmark.png">';
+            }
+            cells[4].classList.add("center");
+            // cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' onclick='openHistory("
+            //     + JSON.stringify({id: data[0][i]._id, email: data[0][i].email})
+            //     + ")'>";
+            cells[5].innerHTML = "<img class='icon clickable' title='View History' src='/images/history.png' >";
+            // cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' onclick='openLetterPreview("
+            //     + JSON.stringify({id: data[0][i]._id})
+            //     + ", \"" + data[0][i].status + "\")'>";
+            cells[5].innerHTML += "<img class='icon clickable' title='Preview Letter' src='/images/preview.png' >";
+            cells[5].classList.add("center");
+        }
+
+        function generateRecTemplateRow(row_count, i) {
+            var table = document.getElementById("table1");
+            var row = table.insertRow(row_count);
+            var cells = [row.insertCell(0), row.insertCell(1)];
+
+            cells[0].innerHTML = data[1][i].name;
+            //cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' onclick='editTemplate(\"" + data[1][i]._id + "\")'/>";
+            cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' />";
+            //cells[1].innerHTML += "<img class='icon' src='/images/restore.png' onclick='restoreTemplate(\"" + data[1][i]._id + "\")'/>";
+            cells[1].innerHTML += "<img class='icon' src='/images/restore.png' />";
+        }
+
+        function generateEmailTemplateRow(row_count, i) {
+            var table = document.getElementById("table2");
+            var row = table.insertRow(row_count);
+            var cells = [row.insertCell(0), row.insertCell(1)];
+
+            cells[0].innerHTML = data[2][i].title;
+            cells[1].innerHTML =  "<img class='icon' src='/images/preview.png' onclick='openModal(" + JSON.stringify(data[2][i]) + ")'/>";
+            cells[1].innerHTML += "<img class='icon' src='/images/restore.png' onclick='restoreEmailTemplate(\"" + data[2][i]._id + "\")'/>"
+        }
+
+        function setPageButtons(tableNumber) {
+            var btn_prev = document.getElementById("button-prev" + tableNumber);
+            var btn_next = document.getElementById("button-next" + tableNumber);
+
+            if (current_page[tableNumber] == 1 || !data[tableNumber].length) {
+                btn_prev.disabled = true;
+            } else {
+                btn_prev.disabled = false;
+            }
+
+            if (current_page[tableNumber] == numPages(tableNumber) || !data[tableNumber].length) {
+                btn_next.disabled = true;
+            } else {
+                btn_next.disabled = false;
+            }
+
+            for (var i = 1; i <= numPages(tableNumber); i++) {
+                if (i == current_page[tableNumber]) {
+                    document.getElementById("page-" + tableNumber + '-' + i).disabled = true;
+                } else {
+                    document.getElementById("page-" + tableNumber + '-' + i).disabled = false;
+                }
+            }
+
+        }
+
+        function createPageButtons(tableNumber) {
+            var page_numbers = document.getElementById("page-numbers" + tableNumber);
+
+            page_numbers.innerHTML = '';
+
+            for (var i = 1; i <= numPages(tableNumber); i++) {
+                page_numbers.innerHTML +=
+                    '<button id="page-' + tableNumber + '-' + i + '" onclick="javascript:changePage('
+                        + tableNumber + ', ' + i + ')">' + i + '</button>';
+            }
+        }
+
+        createPageButtons(0);
+        createPageButtons(1);
+        // createPageButtons(2);
+
+        // Show page 1 initially
+        changePage(0, 1);
+        changePage(1, 1);
+        // changePage(2, 1);
+    </script>
+</body>
+</html>

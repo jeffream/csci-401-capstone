@@ -1,0 +1,44 @@
+table {
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    font-size: 10px;
+    width: 892px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+th,td{
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    /* padding-left: 12px; */
+    font-size: 15px;
+}
+
+table thead tr {
+    border-bottom: solid 1px black;
+}
+
+table tbody tr {
+    border-bottom: solid 1px black;
+    height: 120px;
+}
+
+table tbody tr td {
+    position: relative;
+}
+
+td.center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.icons {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table tbody tr:last-child {
+    border-bottom: none;
+}

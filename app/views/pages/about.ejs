@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title><%= title %></title>
+      <link rel="stylesheet" href="/stylesheets/style.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/all.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/about.css"/>
+      <style type="text/css"></style>
+  </head>
+  <body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div class="About">
+
+        <table id="about-table">
+          <td>
+              <p class="title"><%= title %></p>
+              <br>
+              <p id="description"> In academia and industry, writing letters of recommendation is a very
+                  important task. Many faculty and professionals have a standard template
+                  that is merely customized for each request. Others may ask the person to
+                  write the recommendation himself, then verify it is accurate before signing.
+                  Although this may work, it would be much better if the person requesting
+                  the recommendation could help structure the recommendation.
+                  <br><br>
+                  This application streamlines the process of writing these letters. The professor sends a
+                  survey to the student requesting a recommendation letter, and the contents of that survey
+                  will automatically populate into a custom letter template. After the letter has been generated,
+                  the recommender still has the ability to add more details regarding that specific candidate, and
+                  then the letter is ready to be distributed.
+              </p>
+              <br>
+              <table>
+                <p class="title">Tutorial</p>
+                <div>
+                  <h2 id="subtitle"> Step 1: Create a Template </h2>
+                  <p id="tutorial">
+                    The first step is to create a template. Navigate to
+                    the Templates page, and click the "Create Template"
+                    button towards the right side of the page. Different
+                    templates can serve different purposes. For example,
+                    a letter for an internship position, full-time position,
+                    and scholarship award all may look different.
+                  </p>
+                  <img id="image" src="/images/temp-dashboard.png" width="490" height="290"/>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <div>
+                  <p id="tutorial">
+                    First, you will see a list of standardized questions that are likely
+                    to appear in every template you create (First name, last name, & personal pronouns).
+                    We encourage that you create additional questions based on the type of letter you are
+                    writing. If you wish to create an internship recommendation letter, then create a question
+                    asking which position the student is applying for. Once the proper questions are in place,
+                    write the body of the letter in the text editor area. Be sure to include a "tag" wherever
+                    is appropriate (see example on right).
+                    <br><br>
+                    The last step is to upload an input document if you wish for the letter to have
+                    your own custom header and footer. Just make sure that the input document is a .docx file
+                    named "input.docx" and that {description} is typed in where you'd like the body of the
+                    letter to be (see example input document below).
+                  </p>
+                  <img id="image" src="/images/temp-editor.png" width="490" height="295"/>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <div>
+                  <h2 id="subtitle"> Step 2: Create a Recommendation </h2>
+                  <br>
+                  <p id="tutorial">
+                    Now that you have a template, you may start fulfilling recommendation letter requests.
+                    When a recommendee asks you for a letter, start the
+                    process by clicking the "Create Recommendation" button. This will send a
+                    survey to the recommendee via email, prompting them to fill out the appropriate
+                    questions based on your selected template. Once the survey is complete you
+                    will receive an email notification, however, you can always check the status of the survey
+                    by refreshing the page and seeing whether the status icon is a red X or green
+                    checkmark. A green checkmark signifies that the survey has been completed and
+                    that the letter is ready to be downloaded and distributed.
+                  </p>
+                  <img id="image" src="/images/rec-dashboard1.png" width="490" height="270"/>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <div>
+                  <h2 id="subtitle"> Step 3: Download the letter </h2>
+                  <br>
+                  <p id="tutorial">
+                    Once the survey is complete, click the "View Responses" button on the recommender dashboard
+                    to check for any typos in the student's responses. If there is a small typo, you may edit
+                    the response yourself instead of having to resend the survey and wait for its completion.
+                    If there are no typos, go back to the recommender dashboard and click the "Preview Letter"
+                    button. Here you can review the letter, save it, and download it. The output file is a
+                    .docx file and will be called "output.docx".
+                  </p>
+                  <img id="image" src="/images/rec-dashboard2.png" width="490" height="270"/>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <div>
+                  <h2 id="subtitle"> Input document to Output document </h2>
+                  <br><br>
+                  <img id="inputimg" src="/images/input.png" width="490" height="635"/>
+                  <img id="outputimg" src="/images/output.png" width="490" height="635"/>
+                </div>
+              </table>
+            </td>
+        </table>
+    </div>
+  </body>
+</html>

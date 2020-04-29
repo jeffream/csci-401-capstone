@@ -1,0 +1,82 @@
+.response {
+    background-color: #FFFFFF;
+    padding-left: 100px;
+}
+
+.title {
+    background-color: #FFFFFF;
+    font-size: 20px;
+    margin: 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
+/* Table Management */
+
+table {
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    font-size: 20px;
+    width: 900px;
+    position: center;
+    align-content: center;
+}
+
+th,td{
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    padding-left: 8px;
+    font-size: 14px;
+}
+
+table thead tr {
+    border-bottom: solid 1px black;
+}
+
+table tbody tr {
+    border-bottom: solid 1px black;
+    height: 40px;
+}
+
+table tbody tr td {
+    position: relative;
+}
+
+td.center {
+    text-align: center;
+}
+
+table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#save-button {
+    background-color: #990000;
+    color: white;
+    cursor: pointer;
+    /* display: table-cell; */
+    font-size: 17px;
+    height: 50px;
+    width:190px;
+    /* border: 0.1px solid black; */
+    position: relative;
+    right: 8px;
+    padding: 9px 0px 5px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#save-button:hover {
+    color: #FFCC00;
+}
