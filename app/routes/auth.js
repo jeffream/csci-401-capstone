@@ -14,10 +14,6 @@ router.get('/login', (req, res) => res.render('login'));
 // Get Register page
 router.get('/register', (req, res) => res.render('register'));
 
-<<<<<<< HEAD:letterOfRecGenerator/routes/users.js
-// Get Login page
-router.get('/login', (req, res) => res.render('login'));
-=======
 /* POST login. */
 router.post('/login', function (req, res, next) {
 
@@ -49,7 +45,6 @@ router.post('/login', function (req, res, next) {
     })
     (req, res);
 });
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/routes/auth.js
 
 //Register handle
 router.post('/register', (req, res) => {
@@ -113,11 +108,8 @@ router.post('/register', (req, res) => {
                   'success_msg',
                   'You are now registered and can log in'
                 );
-<<<<<<< HEAD:letterOfRecGenerator/routes/users.js
                 res.redirect('/users/login');
-=======
                 res.redirect('/auth/login');
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/routes/auth.js
               })
               .catch(err => console.log(err));
           });
@@ -127,27 +119,11 @@ router.post('/register', (req, res) => {
   }
 });
 
-<<<<<<< HEAD:letterOfRecGenerator/routes/users.js
-// Login handle
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/recommender-dashboard',
-    failureRedirect: '/users/login',
-    failureFlash: true
-  })(req, res, next);
-});
-
-=======
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/routes/auth.js
 // Logout handle
 router.get('/logout', (req, res) => {
   req.logOut();
   req.flash('success_msg', 'You are logged out');
-<<<<<<< HEAD:letterOfRecGenerator/routes/users.js
-  res.redirect('/users/login');
-=======
   res.redirect('/auth/login');
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/routes/auth.js
 });
 
 module.exports = router;

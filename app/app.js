@@ -141,13 +141,6 @@ var docxVar = require('./routes/docx');
 var about = require('./routes/about');
 var auth = require('./routes/auth');
 
-<<<<<<< HEAD:letterOfRecGenerator/app.js
-app.use('/logout', (req, res) => {
-    req.logOut();
-    res.redirect('/login');
-});
-=======
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/app.js
 
 // Routes
 app.use('/', index);
@@ -164,12 +157,7 @@ app.use('/history', history);
 app.use('/archive', archive);
 app.use('/response', response);
 app.use('/docx', docxVar);
-<<<<<<< HEAD:letterOfRecGenerator/app.js
-app.use('/about', isAuthenticated, about);
-
-=======
 app.use('/about', about);
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/app.js
 
 
 // catch 404 and forward to error handler
@@ -196,21 +184,10 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('pages/error');
 });
-<<<<<<< HEAD:letterOfRecGenerator/app.js
 
-function isAuthenticated(req, res, next) {
-    if (req.user) {
-        return next();
-    }
-
-    res.redirect('/login');
-}
-
-
-=======
 var port = process.env.PORT || 8085;
 app.listen(port, function() {
   console.log('Express server running on:' + port);
 });
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/app.js
+
 module.exports = app;
