@@ -25,11 +25,7 @@ module.exports = {
       return next();
     }
     req.flash('error_msg', 'Please log in to view that resource');
-<<<<<<< HEAD:letterOfRecGenerator/config/auth.js
-    res.redirect('/users/login');
-=======
     res.redirect('/auth/login');
->>>>>>> 8912f3dc87304c7b0983955dac40b8ae5e2cc2ea:app/config/auth.js
   },
   forwardAuthenticated: function(req, res, next) {
     if (!req.isAuthenticated()) {
