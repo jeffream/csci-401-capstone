@@ -31,7 +31,7 @@ router.get('/', verify, function(req, res, next) {
         from: '"Letter of Rec Generator" <letterofrecgenerator@gmail.com>', // sender address
         to: email, // list of receivers
         subject: 'Letter of Recommendation - Form Completed', // Subject line
-        text: 'The recommendee has completed your recommendation request.', // plain text body
+        text: 'A recommendation survey has been completed.', // plain text body
         // html: '<p>' + req.body.body_text + ' ' + url + '</p>'// html body
     };
 
