@@ -6,7 +6,8 @@
 1. SSL Certificate
 
 2. Archive functionality 
-       a. Fix the ability to restore an archived recommendation letter or an archived template.
+
+    a. Fix the ability to restore an archived recommendation letter or an archived template.
     b. The buttons are there (in the archive tables), but they don’t do anything
     c. The functions are already written in “archive.js” in the “routes” folder, but they need to be fixed.
       
