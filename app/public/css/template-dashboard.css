@@ -16,25 +16,15 @@
     background-color: #FFFFFF;
 }
 
-.add-btn {
-    background-color: #990000;
-    color: white;
-    cursor: pointer;
-    /* display: table-cell; */
-    font-size: 15px;
-    height: 20px;
-    width:180px;
-    /* border: 0.1px solid black; */
-    position: relative;
-    float: right;
-    right: 8px;
-    padding: 9px 0px 5px;
+.addBtn{
+    background-color: transparent;
+    border: none;
     text-align: center;
-    margin-top: 20px;
-}
-
-.add-btn:hover {
-    color: #FFCC00;
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    font-size: 16px;
+    outline-style: none;
 }
 
 .add-btn {

@@ -29,24 +29,8 @@ var docx = require('docx');
 var fs = require('fs');
 var request = require('request');
 const flash = require('connect-flash');
-
-var createTemplate = require('./routes/template-editor');
-var createEmailTemplate = require('./routes/email-template-editor');
-var formCompleted = require('./routes/form-completed');
-var formEntry = require('./routes/form-entry');
-var index = require('./routes/login');
-var letterPreview = require('./routes/letter-preview');
-var login = require('./routes/login');
-var recommenderDashboard = require('./routes/recommender-dashboard');
-var templateDashboard = require('./routes/template-dashboard');
-var users = require('./routes/users');
-var history = require('./routes/history');
-var archive = require('./routes/archive');
-var response = require('./routes/response');
-var emailLetterPreview = require('./routes/email-letter-preview');
-var docxVar = require('./routes/docx');
-var about = require('./routes/about');
 const jwt = require('jsonwebtoken');
+
 
 
 var app = express();
@@ -180,10 +164,8 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('pages/error');
 });
-
 var port = process.env.PORT || 8085;
 app.listen(port, function() {
   console.log('Express server running on:' + port);
 });
-
 module.exports = app;
