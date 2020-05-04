@@ -309,7 +309,7 @@ UserSchema.methods.getForm = function (id, cb) {
         console.log(user);
         console.log(user.deactivatedForms.length);
         console.log(user.forms.length);
-        console.log('USER FORM ', user.forms);
+        console.log('USER IS: ', user);
         console.log('How many forms: ', user.forms.length);
         if(user.deactivatedForms.length == 1) {
             cb(err, user.deactivatedForms[0]);
