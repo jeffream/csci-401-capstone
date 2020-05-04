@@ -1,0 +1,19 @@
+.title {
+    background-color: #FFFFFF;
+    font-size: 30px;
+    margin: 0;
+    padding: 20px 50px;
+}
+
+body {
+    background-color: #F2F2F2;
+}
+
+.body {
+    margin: 0 auto;
+    max-width: 992px;
+}
+
+.background{
+    background-color: #FFFFFF;
+}

@@ -1,0 +1,80 @@
+.response {
+    background-color: #FFFFFF;
+}
+
+.title {
+    background-color: #FFFFFF;
+    font-size: 20px;
+    margin: 0;
+    padding: 20px 35px;
+    padding-left: 10px;
+}
+
+body {
+    background-color: #F2F2F2;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+
+/* Table Management */
+
+table {
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    font-size: 20px;
+    width: 100%;
+}
+
+th,td{
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    padding-left: 8px;
+    font-size: 14px;
+}
+
+table thead tr {
+    border-bottom: solid 1px black;
+}
+
+table tbody tr {
+    border-bottom: solid 1px black;
+    height: 40px;
+}
+
+table tbody tr td {
+    position: relative;
+}
+
+td.center {
+    text-align: center;
+}
+
+table tbody tr:last-child {
+    border-bottom: none;
+}  
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#save-button {
+    flex-basis: auto;
+    width: 350px;
+    height: 40px;
+    background-color: #FF473A;
+    color: black;
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#save-button:hover {
+    background-color: rgb(248, 61, 47);
+}
