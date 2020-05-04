@@ -14,14 +14,6 @@
     <% include ./partials/messages %>
     <form  class="login-form" action="/auth/register" method="POST">
         <input
-          type="username"
-          id="username"
-          name="username"
-          class="form-control"
-          placeholder="Enter username"
-          value="<%= typeof username != 'undefined' ? username : '' %>"
-        />
-        <input
           type="email"
           id="email"
           name="email"
