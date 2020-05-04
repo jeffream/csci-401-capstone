@@ -28,7 +28,6 @@ var UserSchema = new Schema({
     emailhistory: [Email.schema],
     name: {
       type: String,
-      required: true
     },
     email: {
       type: String,
