@@ -6,7 +6,7 @@ var Form = require('../models/form');
 var Link = require('../models/link');
 var credentials = require('../config/auth');
 var googleAuth = require('google-auth-library');
-var {google} = require('googleapis');
+var { google } = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 const fs = require('fs');
 var Docxtemplater = require('docxtemplater');
@@ -23,8 +23,8 @@ const verify = require('./verifyToken');
 "use strict";
 
 router.use(function (req, res, next) {
-    res.locals.statusMessage = null;
-    next();
+  res.locals.statusMessage = null;
+  next();
 });
 
 /**
@@ -40,21 +40,21 @@ router.get('/', verify, function (req, res, next) {
     } else {
       //console.log(userID);
       // console.log(user);
-      user.getForms(userID,function (err, forms) {
-          if (err) {
-              console.log(`error: ${err}`);
-          } else { 
+      user.getForms(userID, function (err, forms) {
+        if (err) {
+          console.log(`error: ${err}`);
+        } else {
 
-            var temp = user.getTemplates();
+          var temp = user.getTemplates();
 
-              res.render('pages/recommender-dashboard', {
-                  title: user._id,
-                  templates: user.getTemplates(),
-                  forms: forms,
-                  subject: user.getLinkTemplateSubject(),
-                  body: user.getLinkTemplateBody()
-              });
-          }
+          res.render('pages/recommender-dashboard', {
+            title: user._id,
+            templates: user.getTemplates(),
+            forms: forms,
+            subject: user.getLinkTemplateSubject(),
+            body: user.getLinkTemplateBody()
+          });
+        }
       });
     }
   });
@@ -77,60 +77,60 @@ router.post('/', verify, async function (req, res, next) {
       var body = req.body.body_text;
 
       if (!toEmail.length) {
-          res.render('pages/recommender-dashboard', {
-              title: 'Recommendations',
-              statusMessage: 'Please provide a valid email'
-          });
-          return;
+        res.render('pages/recommender-dashboard', {
+          title: 'Recommendations',
+          statusMessage: 'Please provide a valid email'
+        });
+        return;
       }
 
       Form.createForm(toEmail, user.getTemplate(req.body.templateId), userId, async function (err, form) {
         if (err) {
-            console.log(`error: ${err}`);
+          console.log(`error: ${err}`);
         } else {
-            user.addForm(form, function (err) {
-                if (err) {
-                    console.log(`error: ${err}`);
-                    return;
-                }
-            });
+          user.addForm(form, function (err) {
+            if (err) {
+              console.log(`error: ${err}`);
+              return;
+            }
+          });
 
-            var url = encodeURI('http://recommendation.usc.edu/form-entry/' + form.getLink());
-            // create reusable transporter object using the default SMTP transport
-            let transporter = nodemailer.createTransport({
-              host: 'smtp.gmail.com',
-              port: 465,
-              secure: true, // true for 465, false for other ports
-              auth: {
-                  user: 'letterofrecgenerator@gmail.com', // generated ethereal user
-                  pass: 'siqtam-3dabqa-pepxaV'  // generated ethereal password
-              },
-              tls:{
-                rejectUnauthorized:false
-              }
-            });
+          var url = encodeURI('http://recommendation.usc.edu/form-entry/' + form.getLink());
+          // create reusable transporter object using the default SMTP transport
+          let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+              user: 'letterofrecgenerator@gmail.com', // generated ethereal user
+              pass: 'USC*summer!'  // generated ethereal password
+            },
+            tls: {
+              rejectUnauthorized: false
+            }
+          });
 
-        // setup email data with unicode symbols
-        let mailOptions = {
+          // setup email data with unicode symbols
+          let mailOptions = {
             from: '"Letter of Rec Generator" <letterofrecgenerator@gmail.com>', // sender address
             to: req.body.email, // list of receivers
             subject: req.body.subject_text, // Subject line
             text: req.body.body_text + ' ' + url, // plain text body
             html: '<p>' + req.body.body_text + ' ' + url + '</p>'// html body
-        };
+          };
 
-        // send mail with defined transport object
-        transporter.sendMail(mailOptions, (error, info) => {
+          // send mail with defined transport object
+          transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                return console.log(error);
+              return console.log(error);
             }
             console.log('Message sent: %s', info.messageId);
             console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-            res.render('contact', {msg:'Email has been sent'});
-        });
+            res.render('contact', { msg: 'Email has been sent' });
+          });
 
-        res.redirect('/recommender-dashboard');
+          res.redirect('/recommender-dashboard');
         }
       });
     }
@@ -148,21 +148,25 @@ router.post('/delete', verify, function (req, res, next) {
     } else {
 
       user.removeForm(req.body.id, function (err) {
-          if (err) {
-              console.log(err);
-          } else {
-              user.getForms(function (err, forms) {
-                  if (err) {
-                      console.log(`error: ${err}`);
-                  } else {
-                      res.render('pages/recommender-dashboard', {
-                          title: 'Welcome ' + user.displayName + '!',
-                          templates: user.getTemplates(),
-                          forms: forms,
-                      });
-                  }
-              });
-          }
+        if (err) {
+          console.log(err);
+        } else {
+          // user.getForms(function (err, forms) {
+          //     if (err) {
+          //         console.log(`error: ${err}`);
+          //     } else {
+          //         res.render('pages/recommender-dashboard', {
+          //             title: 'Welcome ' + user.displayName + '!',
+          //             templates: user.getTemplates(),
+          //             forms: forms,
+          //         });
+          //     }
+          // });
+          res.render('pages/recommender-dashboard', {
+            title: 'Welcome ' + user.displayName + '!',
+            templates: user.getTemplates()
+          });
+        }
       });
     }
   });
@@ -178,22 +182,22 @@ router.post('/update', verify, function (req, res, next) {
     } else {
 
       user.update_linkTemplate_subject(req.body.subject, function (err) {
-          if (err) {
-              console.log("error in update_linkTemplate_subject: " + err);
+        if (err) {
+          console.log("error in update_linkTemplate_subject: " + err);
+          res.send(err);
+        } else {
+          user.update_linkTemplate_body(req.body.body, function (err) {
+            if (err) {
+              console.log("error in update_linkTemplate_body: " + err);
               res.send(err);
-          } else {
-              user.update_linkTemplate_body(req.body.body, function (err) {
-                  if (err) {
-                      console.log("error in update_linkTemplate_body: " + err);
-                      res.send(err);
-                  } else {
-                      res.json({
-                          success: "Updated Successfully",
-                          status: 200
-                      });
-                  }
+            } else {
+              res.json({
+                success: "Updated Successfully",
+                status: 200
               });
-          }
+            }
+          });
+        }
       });
     }
   });

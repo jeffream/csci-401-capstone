@@ -235,6 +235,8 @@ FormSchema.statics.submitForm = function (id, responseData, cb) {
             form['meta']['submitted'] = Date.now();
 
             form['responses'] = responses;
+            console.log(form);
+            // return;
             form.save().then(function (savedForm) {
                 // if there is more than one organization, then duplicate form
                     // for each other org, duplicate the form

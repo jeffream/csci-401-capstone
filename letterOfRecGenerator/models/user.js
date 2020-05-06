@@ -290,9 +290,9 @@ UserSchema.methods.addForm = function (form, cb) {
 
 UserSchema.methods.getForms = function (id,cb) {
     // try getting all forms under this user id
-    console.log(id);
+    console.log("hello bro"+id);
     User.findOne({_id: id}).populate('forms').exec(function (err, user) {
-        console.log(user._id);
+        console.log(user.forms);
         cb(err, user.forms);
     })
 };
@@ -306,6 +306,9 @@ UserSchema.methods.getForm = function (id, cb) {
         path: 'deactivatedForms',
         match: {_id: id}
     }).exec(function (err, user) {
+        console.log(user);
+        console.log(user.deactivatedForms.length);
+        console.log(user.forms.length);
         if(user.deactivatedForms.length == 1) {
             cb(err, user.deactivatedForms[0]);
         } else if (user.forms.length ==1 ){

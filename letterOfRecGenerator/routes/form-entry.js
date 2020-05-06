@@ -34,7 +34,9 @@ router.post('/', function (req, res, next) {
     var obj=[];
     var body = JSON.parse(req.body.responseData);
     obj.responseData=body;
-    console.log(obj); 
+    // console.log(obj); 
+    // console.log(obj.responseData);
+    // return;
     Form.submitForm(req.body.id, obj.responseData, function (err) {
         if (err) {
             res.send("unable to update responses of user form");
