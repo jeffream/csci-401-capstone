@@ -9,7 +9,7 @@ var UserSchema = new Schema({
     id: String,
     username: String,
     displayName: String,
-    accessToken: String, 
+    accessToken: String,
     username: String,
     templates: [Template.schema],
     deactivatedTemplates: [Template.schema],
@@ -101,7 +101,7 @@ UserSchema.methods.addTemplate = function (template, cb) {
         // console.log(this.templates[i].name);
         // arr[i]["name"]=this.templates[i].name;
     }
-    
+
     var ca=Object.entries(arr);
     // console.log(ca);
     if(!errorFlag) {
@@ -166,7 +166,7 @@ UserSchema.methods.updateTemplate = function (id, template, cb) {
     updatedTemplate.letterheadImg = template.letterheadImg;
     updatedTemplate.footerImg = template.footerImg;
     updatedTemplate.optional = template.optional;
-    
+
     // return;
     User.findOneAndUpdate({
         "id": user.id,
@@ -283,7 +283,7 @@ UserSchema.methods.activateEmailTemplate = function (id, cb) {
     this.save(cb);
 };
 
-UserSchema.methods.addForm = function (form, cb) { 
+UserSchema.methods.addForm = function (form, cb) {
     this.forms.push(form._id);
     this.save(cb);
 };
@@ -299,14 +299,19 @@ UserSchema.methods.getForms = function (id,cb) {
 
 UserSchema.methods.getForm = function (id, cb) {
     var flag = false;
-    User.findOne({id: this.id}).populate({
+    console.log(this.id)
+    console.log(id)
+    User.findOne({_id: id}).populate({
+    // User.findOne({_id: this.id}).populate({
+    /// OLD is below
+    // User.findOne({id: this.id}).populate({
         path: 'forms',
         match: {_id: id}
     }).populate({
         path: 'deactivatedForms',
         match: {_id: id}
     }).exec(function (err, user) {
-        console.log(user);
+        console.log(user.email);
         console.log(user.deactivatedForms.length);
         console.log(user.forms.length);
         if(user.deactivatedForms.length == 1) {
