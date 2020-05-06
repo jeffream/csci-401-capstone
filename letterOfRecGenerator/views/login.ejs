@@ -7,17 +7,16 @@
       <a href="https://www.usc.edu" target="_blank">
           <img id ="usc-logo" src="/images/usc_logo_big.png" alt="University of Southern California" style="height:100px;"/>
       </a>
-
   </head>
     <div class="login-page">
-      <% include ./partials/messages %>
       <div class="form">
-        <p align="center" class="title">Letter of Recommendation</p>
-        <form class="login-form" action="/users/login" method="POST">
+      <p align="center" class="title">Letter of Recommendation</p>
+      <% include ./partials/messages %>
+        <form class="login-form" action="/auth/login" method="POST">
           <input type="email" id="email" name="email" class="form-control" placeholder="email"/>
           <input type="password" id="password" name="password" class="form-control" placeholder="password"/>
           <button type="submit">Sign in</button>
-          <p class="message">Not registered? <a href="/users/register">Create an account</a></p>
+          <p class="message">Not registered? <a href="/auth/register">Create an account</a></p>
         </form>
       </div>
     </div>
