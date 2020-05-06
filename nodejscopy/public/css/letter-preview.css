@@ -1,0 +1,295 @@
+.title {
+    padding-left: 8px;
+}
+
+.convert-pdf {
+    background-color: #FF473A;
+    font-size: 20px;
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    display:block;
+    cursor: pointer;
+}
+
+.footer-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.resizable {
+    display: inline-block;
+    text-align: center;
+}
+
+#letter-text {
+    margin-top: 2px;
+}
+
+.resizable img {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: none;
+}
+
+
+#letter-container {
+    background-color: #e8e8e8;
+    border: thick solid black;
+    margin: 15px 35px;
+    overflow: auto;
+    font-family: "Times New Roman";
+}
+
+
+#letter-container #letter-text-area {
+    height: 300px;
+    width: 800px;
+    font-size: 13px;
+    padding-bottom: 5px;
+}
+
+#letter-text {
+    font-size: 12px;
+    font-family: "Times New Roman", Times, serif;
+    max-width: 800px;
+    overflow: auto;
+    opacity: 1.0;
+    padding: 30px 10px; 
+}
+
+#letter-text:hover {
+    opacity: 0.5; 
+    transition:0.4s; 
+}
+
+
+
+.footer-img {
+    margin-top: 10px;
+}
+
+
+#add-question-modal {
+	display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+#add-question-modal .inside{
+    margin: 100px auto; /* 15% from the top and centered */
+    background-color: white;
+    /*width: 50%;*/ /* Could be more or less, depending on screen size */
+    border: 1px solid black;
+}
+
+#add-question-modal .inside h1 {
+    color: #EB5757;
+    flex-basis: auto;
+}
+
+#email-subject-container{
+    margin-top: 20px; 
+}
+
+#email-subject-text-area{
+    width: 1000px;
+    font-size: 13px;
+    padding-bottom: 5px;
+}
+
+#email-body-container #email-body-text-area{
+    height: 300px;
+    width: 800px;
+    font-size: 13px;
+    padding-bottom: 5px;
+}
+
+#email-body-text-area{
+    height: 300px;
+    width: 800px;
+    flex-basis: auto;
+    border:solid, black;
+    font-size: 13px;
+    overflow-y: scroll;
+}
+
+#email-body-container {
+    margin-top: 20px; 
+}
+
+#email-preview-container {
+    margin: 10px 30px; 
+}
+
+.flex-display {
+    display: flex; 
+}
+
+.flex1 {
+    flex: 1; 
+}
+
+#sendEmail {
+    width: 200px;
+    height: 40px;
+    background-color: #FF473A;
+    font-size: 12px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    letter-spacing: 2px;
+    float: right;
+    opacity: 1.0;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    text-transform: uppercase;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: 70px;
+    transition: 0.6s; 
+}
+.date-comment, #theDate {
+    margin-left: 60px; 
+}
+
+#downloadButton, #saveButton {
+    width: 200px;
+    height: 40px;
+    background-color: #FF473A;
+    font-size: 12px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    letter-spacing: 2px;
+    opacity: 1.0;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 60px;
+    margin-right: auto;
+    transition: 0.6s; 
+}
+
+#downloadButton {
+	display: none;
+}
+
+
+
+#example-template {
+	border: 3px outset #c1c1c1;
+	margin: 0 auto;
+}
+
+#downloadButton:hover, #saveButton:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+#template-picker {
+	margin-top: 40px;
+	margin-left: 35px;
+}
+
+#example-template {
+	display: none;
+}
+
+#date-picker {
+    margin-top: 40px; 
+    margin-left: 35px;
+    margin-bottom: 40px; 
+}
+
+#add-heading {
+    font-size: 20px; 
+    margin-bottom: 5px; 
+}
+
+#sendEmail:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+
+
+
+.background {
+    padding-bottom: 150px; 
+}
+
+
+trix-toolbar {
+    white-space: initial;
+    margin-bottom: 20px; 
+}
+
+trix-editor {
+    border: 2px solid black;
+    padding: 20px; 
+    font-family: "Times New Roman";
+}
+
+
+#letter-preview-heading {
+    margin-top: 40px;
+    padding-bottom: 5px; 
+}
+
+.letter-preview-subheading {
+    padding-left: 35px;
+}
+
+#edit-heading {
+    margin-top: 50px; 
+    font-size: 20px; 
+}
+
+#letter-preview-modal {
+    background-color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 50px;
+    width: 60%; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+}
+
+.modal-btns {
+    width: 200px;
+    height: 40px;
+    background-color: #FF473A;
+    font-size: 12px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    letter-spacing: 2px;
+    opacity: 1.0;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    text-transform: uppercase;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    transition: 0.6s;
+}
+
+.modal-btns:hover {
+    opacity: 0.6;
+}
+
+.flex-row {
+    display: flex; 
+}
+
+#save-btn {
+    margin-left: auto;
+}
+

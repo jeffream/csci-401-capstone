@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><% title%></title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/history.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/archive.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/modal.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/table.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="close-container">
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <p class="modal-title">Subject: </p>
+            <input class="modal-input" id='modal-subject' readonly="readonly"></input>
+            <p class="modal-title">Body: </p>
+            <input class="modal-input-body" id='modal-body' readonly="readonly"></input>
+        
+        </div>
+</div>
+
+<body>
+<div class = "history">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    
+    <p class="title">History for <b> <%= title%> </b></p>
+    <br>
+    <br>
+    <table>
+        <thead>
+            <td class="center"><b>Email History</b></td>
+        </thead>
+    </table>
+    <table>
+        <thead>
+        <tr class="center">
+            <td width="40%">Date</td>
+            <td width="40%">Template</td>
+            <td class="icons" width="20%" class="center"></td>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (var email of emailHistory) { %>
+        <tr>
+            <td width="40%">
+               <div><%= email._id.getTimestamp().toString().substring(0,25) %></div> 
+            </td>
+            <td width="40%">
+                <div><%= email.title %></div>
+            </td>
+            <td width="20%">
+                <img class="icon" src="/images/preview.png" onclick="openModal( <%= JSON.stringify(email) %>)"/>
+            </td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+</body>
+</html> 
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // When the user clicks on the button, open the modal
+    function openModal(email) {
+        $('#modal-subject',$('#myModal')).val(email.subject);
+        $('#modal-body',$('#myModal')).val(email.body_text);
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+</script>

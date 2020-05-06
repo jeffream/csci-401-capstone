@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title><%= title %></title>
+      <link rel="stylesheet" href="/stylesheets/style.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/all.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/about.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/table.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/modal.css"/>
+      <style type="text/css">
+
+      </style>
+  </head>
+  <body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <div class="About">
+
+        <table id="about-table">
+          <td>
+              <p class="title"><%= title %></p>
+              <br>
+              <p id="description"> In academia and industry, writing letters of recommendation is a very
+                  important task. Many faculty and professionals have a standard template
+                  that is merely customized for each request. Others may ask the person to
+                  write the recommendation himself, then verify it is accurate before signing.
+                  Although this may work, it would be much better if the person requesting
+                  the recommendation could help structure the recommendation.
+              <br><br>
+                  This application allows a person requesting a recommendation to submit all
+                  of the information he wants included through a form, and the person
+                  writing the recommendation can then automatically pull that information
+                  into a template that he has created. After the letter has been generated,
+                  the recommender can download it and ensure it is accurate. After the
+                  recommender approves it, the original person can also download the
+                  electronic version of the letter.
+              </p>
+              <br>
+              <table>
+                <p class="title">Tutorials</p>
+                <br><br><br>
+                <td>
+                  <div id="vid-box">
+                    <td>
+                      <div id="subtitle1"> Create Template </div>
+                      <video id ="vid1" width="320" height="240" controls>
+                        <source src="/images/create-temp.mov" type="video/mov">
+                      </video>
+                    </td>
+                    <td>
+                      <div id="subtitle2"> Create Recommendation </div>
+                      <video id="vid2" width="320" height="240" controls>
+                        <source src="/images/create-temp.mp4" type="video/mp4">
+                      </video>
+                    </td>
+                  </div>
+                </td>
+              </table>
+            </td>
+        </table>
+    </div>
+  </body>
+</html>
