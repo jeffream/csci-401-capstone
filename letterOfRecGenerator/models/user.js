@@ -301,8 +301,9 @@ UserSchema.methods.getForm = function (id, cb) {
     var flag = false;
     console.log(this.id)
     console.log(id)
+    // User.findOne({_id: id}).populate({
     User.findOne({_id: id}).populate({
-    // User.findOne({_id: this.id}).populate({
+
     /// OLD is below
     // User.findOne({id: this.id}).populate({
         path: 'forms',
