@@ -261,14 +261,14 @@
                 } else {
                     responseArray.push(responseData[i + 1]);
                 }
-                
+
             } else {
                 responseArray.push('');
             }
         }
         // redirects to form-completed page on success, sends responseArray to server
         responseArray=JSON.stringify(responseArray);
-        
+
         $.ajax({
             url: appRoot+'/form-entry',
             data: {
@@ -281,7 +281,7 @@
             },
             success: function (form) {
                 console.log('success');
-                //window.location.href = ('/form-completed');
+                window.location.href = ('/form-completed');
             },
             error: function () {
                 console.log('error');
