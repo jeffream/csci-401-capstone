@@ -299,7 +299,7 @@ UserSchema.methods.getForms = function (id,cb) {
 
 UserSchema.methods.getForm = function (id, cb) {
     var flag = false;
-    User.findOne({id: this.id}).populate({
+    User.findOne({_id: this._id}).populate({
         path: 'forms',
         match: {_id: id}
     }).populate({
