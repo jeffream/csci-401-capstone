@@ -299,15 +299,15 @@ UserSchema.methods.getForms = function (id,cb) {
 
 UserSchema.methods.getForm = function (id, cb) {
     var flag = false;
-    console.log(this.id)
+    console.log(this.id)  // always undefined for some reason
     console.log(id)
     console.log(this._id)
 
     // User.findOne({_id: id}).populate({
     // User.findOne({id: id}).populate({
 
-      User.findOne({id: this._id}).populate({
-      // User.findOne({_id: this._id}).populate({
+      // User.findOne({id: this._id}).populate({
+      User.findOne({_id: this._id}).populate({
 
     /// OLD is below
     // User.findOne({id: this.id}).populate({
