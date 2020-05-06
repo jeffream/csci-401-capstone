@@ -95,7 +95,7 @@ router.post('/', verify, async function (req, res, next) {
                 }
             });
 
-            var url = encodeURI('http://recommendation.usc.edu/form-entry/' + form.getLink());
+            var url = encodeURI('http://128.125.100.147:80/form-entry/' + form.getLink());
             // create reusable transporter object using the default SMTP transport
             let transporter = nodemailer.createTransport({
               host: 'smtp.gmail.com',
