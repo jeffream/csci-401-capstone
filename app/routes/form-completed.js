@@ -24,7 +24,7 @@ router.get('/', verify, function(req, res, next) {
     });
 
     var email = req.user.email;
-    console.log("Email is: ", req);
+    console.log("Email is: ", email);
 
     // setup email data with unicode symbols
     let mailOptions = {
