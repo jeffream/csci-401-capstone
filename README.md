@@ -36,3 +36,6 @@ All the information you need is on the "LOR Onboarding" document.
     
     c. Template Editor page could be improved
 
+#### 8. Being able to delete accounts from the database
+
+#### 9. Giving the user the ability to change their password
